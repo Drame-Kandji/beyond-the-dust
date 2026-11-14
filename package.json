@@ -10,7 +10,8 @@
     "typecheck": "tsc -b --noEmit",
     "inspect-glb": "node scripts/inspect-glb.mjs",
     "docs": "node scripts/gen-docs.mjs",
-    "audio": "node scripts/gen-audio.mjs"
+    "audio": "node scripts/gen-audio.mjs",
+    "model": "node scripts/stl-to-glb.mjs"
   },
   "dependencies": {
     "@fontsource-variable/fraunces": "^5.3.0",
@@ -28,11 +29,15 @@
     "zustand": "^5.0.3"
   },
   "devDependencies": {
+    "@gltf-transform/core": "^4.1.1",
+    "@gltf-transform/extensions": "^4.1.1",
+    "@gltf-transform/functions": "^4.1.1",
     "@tailwindcss/vite": "^4.1.4",
     "@types/react": "^19.1.2",
     "@types/react-dom": "^19.1.2",
     "@types/three": "^0.175.0",
     "@vitejs/plugin-react": "^4.4.1",
+    "draco3dgltf": "^1.5.7",
     "esbuild": "^0.25.12",
     "tailwindcss": "^4.1.4",
     "typescript": "^5.8.3",

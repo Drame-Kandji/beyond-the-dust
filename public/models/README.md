@@ -1,23 +1,64 @@
-# 3D models
+# Modèles 3D — comment mettre VOS modèles sur le site
 
-The site loads `models/<id>.glb` automatically when present, otherwise it shows the built-in procedural model
-(nothing breaks). Ids: `apollo11lm`, `lrv`, `sojourner`, `opportunity`, `curiosity`, `pioneer10`.
+Le site cherche automatiquement ces fichiers dans ce dossier :
 
-## From SolidWorks (.SLDPRT / .SLDASM) to .glb
+| Engin | Nom du fichier attendu |
+|---|---|
+| Module lunaire Apollo 11 | `apollo11lm.glb` |
+| Rover lunaire | `lrv.glb` |
+| Sojourner | `sojourner.glb` |
+| Opportunity | `opportunity.glb` |
+| Curiosity | `curiosity.glb` |
+| Pioneer 10 | `pioneer10.glb` |
 
-Browsers cannot read SolidWorks files. Export them:
+S'il n'y a pas de fichier `.glb`, le site affiche le modèle construit en code (rien ne casse).
+**Un navigateur ne sait pas lire** `.SLDPRT`, `.SLDASM` ni `.blend` : il faut les convertir en `.glb`.
 
-1. Open the **assembly** (.SLDASM) with all its part files present (an assembly alone only references its parts).
-2. **File → Save As**:
-   - if your version lists **glTF Binary (*.glb)**, choose it → done;
-   - otherwise choose **STL (*.stl)** → *Options*: Output as **Binary**, Resolution **Fine**, unit **Meters**,
-     tick **"Save all components of an assembly in a single file"** unchecked to keep one file per part
-     (part names = file names), or **STEP (*.step)** for one file.
-3. In **Blender** (free): File → Import → STL (or STEP via an add-on) → rename each object after the part id
-   (`six-wheels`, `solar-panel`, `descent-engine`, `mastcam`… see `src/data/vehicles/<id>.ts` → `meshNames`)
-   → scale to **metres**, **+Y up**, front of the vehicle toward **+X**, wheels on the ground at Y = 0
-   → File → Export → **glTF 2.0 (.glb)** with **Compression (Draco)** ticked.
-4. Name it `<id>.glb` (e.g. `curiosity.glb`), keep it **under 5 MB**, put it in this folder.
-5. Check the mapping: `npm run inspect-glb -- public/models/curiosity.glb`
+---
 
-SolidWorks source files (*.SLDPRT, *.SLDASM) are ignored by git — keep them on your machine.
+## Cas 1 — Vous avez un fichier Blender (`.blend`) → le plus simple
+
+1. Ouvrir le fichier dans **Blender** (gratuit : https://www.blender.org/download/).
+2. Menu **File → Export → glTF 2.0 (.glb/.gltf)**.
+3. Dans le panneau de droite :
+   - **Format** : `glTF Binary (.glb)`
+   - **Include → Limit to** : rien de coché (tout exporter)
+   - **Transform → +Y Up** : coché
+   - **Data → Mesh → Apply Modifiers** : coché
+   - **Data → Compression** : coché (réduit la taille)
+4. Nommer le fichier exactement comme dans le tableau (ex. `curiosity.glb`) → **Export glTF 2.0**.
+5. Mettre le fichier dans ce dossier `public/models/`.
+
+## Cas 2 — Vous avez SolidWorks (`.SLDPRT` / `.SLDASM`)
+
+> Un `.SLDASM` (assemblage) ne contient PAS les pièces : il faut aussi tous les `.SLDPRT` qu'il utilise, dans le même dossier.
+
+1. Ouvrir l'assemblage (ou la pièce) dans SolidWorks.
+2. **Fichier → Enregistrer sous…** → Type : **STL (*.stl)** → bouton **Options…** :
+   - Format de sortie : **Binaire**
+   - Unité : **Millimètres** (le convertisseur passe automatiquement en mètres)
+   - Résolution : **Grossière** ou **Fine** (si le fichier final dépasse 5 Mo, choisir Grossière)
+   - **Décocher** « Enregistrer tous les composants d'un assemblage dans un seul fichier »
+     → SolidWorks crée **un fichier `.stl` par pièce**, nommé comme la pièce.
+3. Mettre tous ces `.stl` dans un dossier, par exemple `models-src/sojourner/`.
+4. Dans un terminal, à la racine du projet :
+
+   ```bash
+   npm run model -- sojourner models-src/sojourner
+   ```
+
+   Le script crée `public/models/sojourner.glb` (centré, à l'échelle, compressé) et affiche
+   quelles pièces du site il a reconnues.
+   Options utiles : `--rotate 90` (tourner pour que l'avant regarde +X), `--zup` (modèle dessiné avec Z vers le haut).
+
+## Pour que les pièces restent cliquables
+
+Le nom de chaque pièce/objet doit contenir un mot reconnu, par exemple `wheel`, `solar`, `mast`, `arm`, `drill`,
+`antenna`, `rtg`, `ramp`, `airbag`, `engine`, `leg`, `ladder`, `plaque`… (liste complète : `meshNames` dans
+`src/data/vehicles/<engin>.ts`). Renommez les objets dans Blender (double-clic dans la liste à droite) ou les
+fichiers `.stl` avant conversion.
+
+Vérifier : `npm run inspect-glb -- public/models/curiosity.glb`
+
+Les fichiers sources (`.SLDPRT`, `.SLDASM`, `.blend`) sont ignorés par git : gardez-les sur votre machine
+(de préférence dans `models-src/`, hors de `public/`).
