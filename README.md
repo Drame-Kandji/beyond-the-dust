@@ -117,8 +117,3 @@ listed in [`FACT_CHECK.md`](FACT_CHECK.md).
 - Any AI-generated image or video carries a visible **"AI-generated"** watermark.
 - No NASA logos, flags, insignia or mission patches are used anywhere.
 
-## Credits
-
-See [`CREDITS.md`](CREDITS.md).
-
-> NASA does not endorse any non-U.S. Government entity and is not responsible for information contained on non-U.S. Government websites.

@@ -1,10 +1,14 @@
 # Credits
 
 **Team (NASA Space Apps Challenge 2026 — Dakar)**
-Siga (team lead, CAD/3D, voice-over, video) · Aliou (lead dev, logic, 3D integration) · Rokheya (front-end, UI) ·
-Cheikhouna (aerospace, storytelling, probe model) · Mouhamed (robotics, rover models) · Ibrahima (telecom, radio data)
+Siga (team lead, CAD/3D, voice-over, video) ·
+Aliou (lead dev, logic, 3D integration) · 
+Rokheya (front-end, UI) ·
+Cheikhouna (aerospace, storytelling, probe model) · 
+Mouhamed (robotics, rover models) · 
+Ibrahima (telecom, radio data)
 
-**Data** — NASA NSSDCA, NASA Science / JPL, NASA Apollo Lunar Surface Journal (see README).
+**Data** : NASA NSSDCA, NASA Science / JPL, NASA Apollo Lunar Surface Journal (see README).
 
 **Open-source software**
 - React, React DOM — MIT
