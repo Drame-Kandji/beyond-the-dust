@@ -1,0 +1,472 @@
+/**
+ * Curiosity (Mars Science Laboratory) — content drafted with AI assistance
+ * from NASA Science / JPL / NSSDCA pages. `verify: true` = to be checked by the team (FACT_CHECK.md).
+ * Unlike the other machines, Curiosity is STILL ACTIVE (status as of November 2026).
+ * Coordinates: metres, +x = front of the rover, +y = up.
+ */
+import type { Vehicle } from '../types';
+
+const t = (en: string, fr: string) => ({ en, fr });
+
+export const curiosity: Vehicle = {
+  id: 'curiosity',
+  destination: 'mars',
+  name: t('Curiosity', 'Curiosity'),
+  category: t('Nuclear-powered Mars rover', 'Rover martien à énergie nucléaire'),
+  status: t('Still exploring Mount Sharp', 'Explore toujours le mont Sharp'),
+  hook: t('All the others fell silent. This one is still talking.', 'Tous les autres se sont tus. Celui-ci parle encore.'),
+  location: t('Mount Sharp, inside Gale Crater, Mars', 'Mont Sharp, dans le cratère Gale, Mars'),
+  teleportText: t('Teleporting to Gale Crater, Mars…', 'Téléportation vers le cratère Gale, sur Mars…'),
+  loadingText: t('Warming up the nuclear battery…', 'Réchauffage de la pile nucléaire…'),
+  intro: t(
+    "Hi! I'm Curiosity. I'm as big as a car and as tall as a basketball player. I landed on Mars in 2012… and guess what? I'm still working today. Touch my parts: each one has a story.",
+    'Salut ! Je suis Curiosity. Je suis grand comme une voiture et haut comme un basketteur. J’ai atterri sur Mars en 2012… et devine quoi ? Je travaille encore aujourd’hui. Touche mes pièces : chacune a une histoire.',
+  ),
+  twin: {
+    name: t('My little sibling: Perseverance', 'Mon petit frère : Perseverance'),
+    summary: t(
+      'Perseverance was built on the same body design as me, with new tools. It landed in 2021 in Jezero Crater, an ancient lake bed far from my home. It carried a small helicopter, Ingenuity, the first aircraft to make a powered, controlled flight on another planet. Perseverance collects rock samples and stores them in tubes. We are both still at work on Mars.',
+      'Perseverance a été construit sur le même modèle de corps que moi, avec de nouveaux outils. Il a atterri en 2021 dans le cratère Jezero, un ancien fond de lac loin de chez moi. Il transportait un petit hélicoptère, Ingenuity, le premier engin à réussir un vol motorisé et contrôlé sur une autre planète. Perseverance récolte des échantillons de roche et les range dans des tubes. Nous travaillons tous les deux encore sur Mars.',
+    ),
+    facts: [
+      { value: '2021-02-18', label: t('Perseverance lands in Jezero Crater', 'Perseverance atterrit dans le cratère Jezero'), sourceId: 'nasa-msl', verify: true },
+      { value: '72', label: t('flights by the Ingenuity helicopter', 'vols de l’hélicoptère Ingenuity'), sourceId: 'nasa-msl', verify: true },
+      { value: '≈ 3,700 km', label: t('between Jezero and my home, Gale Crater (2,300 miles)', 'entre Jezero et chez moi, le cratère Gale (2 300 milles)'), sourceId: 'nasa-msl', verify: true },
+    ],
+  },
+  keyDates: [
+    { date: '2011-11-26', kind: 'launch', label: t('Launch on an Atlas V rocket', 'Lancement sur une fusée Atlas V'), sourceId: 'nssdca-msl' },
+    { date: '2012-08-06', kind: 'feat', label: t('Sky-crane landing in Gale Crater (UTC; Aug 5 Pacific time)', 'Atterrissage par « grue céleste » dans le cratère Gale (UTC ; 5 août heure du Pacifique)'), sourceId: 'nasa-msl' },
+    { date: '2013-03-12', kind: 'feat', label: t('First drilled rock shows Mars once had a place fit for microbes', 'La première roche forée montre que Mars a eu un lieu propice aux microbes'), sourceId: 'nasa-msl', verify: true },
+    { date: '2013-12-01', kind: 'trouble', label: t('December 2013: worrying holes spotted in the wheels', 'Décembre 2013 : des trous inquiétants repérés dans les roues'), sourceId: 'nasa-msl', verify: true },
+    { date: '2014-09-11', kind: 'feat', label: t('Reaches the slopes of Mount Sharp and starts climbing', 'Atteint les pentes du mont Sharp et commence l’ascension'), sourceId: 'nasa-msl', verify: true },
+    { date: '2017-06-08', kind: 'feat', label: t('New "traction control" software to protect the wheels', 'Nouveau logiciel de « contrôle de traction » pour protéger les roues'), sourceId: 'nasa-msl', verify: true },
+    { date: '2026-08-26', kind: 'feat', label: t('1 km of elevation gained since the crater floor', '1 km de dénivelé gagné depuis le fond du cratère'), sourceId: 'nasa-msl' },
+    { date: '2026-11-15', kind: 'today', label: t('Still climbing Mount Sharp, still talking to Earth', 'Grimpe toujours le mont Sharp, parle toujours à la Terre'), sourceId: 'nasa-msl' },
+  ],
+  stats: [
+    { value: '899 kg', label: t('on Earth, like a small car', 'sur Terre, comme une petite voiture'), sourceId: 'nasa-msl' },
+    { value: '17', label: t('cameras', 'caméras'), sourceId: 'nasa-msl' },
+    { value: '10', label: t('science instruments', 'instruments scientifiques'), sourceId: 'nasa-msl' },
+    { value: '42', label: t('rock samples drilled', 'échantillons de roche forés'), sourceId: 'nasa-msl' },
+    { value: '1 km', label: t('climbed up Mount Sharp (Aug 2026)', 'grimpé sur le mont Sharp (août 2026)'), sourceId: 'nasa-msl' },
+    { value: '> 5,000', label: t('sols on Mars, and counting', 'sols sur Mars, et ça continue'), sourceId: 'nasa-msl' },
+  ],
+  chapters: [
+    {
+      id: 'who',
+      title: t('Who am I?', 'Qui suis-je ?'),
+      lead: t('A robot laboratory the size of a car.', 'Un laboratoire robot de la taille d’une voiture.'),
+      body: t(
+        'I am about 3 m long and 2.2 m tall, as tall as a basketball player. I weigh 899 kg on Earth. I have six wheels, a 2.2 m robotic arm with a drill, a laser, 17 cameras and 10 science instruments. Inside my body, I carry two small chemistry labs.',
+        'Je mesure environ 3 m de long et 2,2 m de haut, autant qu’un basketteur. Je pèse 899 kg sur Terre. J’ai six roues, un bras robotique de 2,2 m avec une perceuse, un laser, 17 caméras et 10 instruments scientifiques. Dans mon corps, je transporte deux petits laboratoires de chimie.',
+      ),
+    },
+    {
+      id: 'why',
+      title: t('Why was I sent?', 'Pourquoi m’a-t-on envoyé ?'),
+      lead: t('To ask a giant question: could Mars ever have hosted life?', 'Pour poser une question géante : Mars a-t-elle pu accueillir la vie ?'),
+      body: t(
+        'I am not looking for little green aliens. My job is to find out if Mars was ever able to support microbes, living things too tiny to see. They need water, the right chemistry and energy. Mount Sharp, in the middle of Gale Crater, is made of thousands of rock layers, like a giant history book. I read it page by page, climbing from the oldest layers to younger ones.',
+        'Je ne cherche pas de petits hommes verts. Mon travail est de savoir si Mars a pu un jour abriter des microbes, des êtres vivants trop petits pour être vus. Ils ont besoin d’eau, de la bonne chimie et d’énergie. Le mont Sharp, au milieu du cratère Gale, est fait de milliers de couches de roche, comme un livre d’histoire géant. Je le lis page après page, en grimpant des couches les plus anciennes vers les plus récentes.',
+      ),
+    },
+    {
+      id: 'how',
+      title: t('How I work', 'Comment je fonctionne'),
+      lead: t('Look, zap, drill, cook, then phone home.', 'Regarder, viser au laser, forer, chauffer, puis appeler la maison.'),
+      body: t(
+        'My cameras find an interesting rock. My laser zaps it from a distance to see what it is made of. If it looks promising, my arm drills into it and pours the rock powder into my labs, which heat it and read its secrets. My nuclear power source keeps me going day and night, and my antennas send everything to Earth.',
+        'Mes caméras repèrent une roche intéressante. Mon laser la vise de loin pour voir de quoi elle est faite. Si elle semble prometteuse, mon bras la fore et verse la poudre de roche dans mes laboratoires, qui la chauffent et lisent ses secrets. Ma source d’énergie nucléaire me fait fonctionner jour et nuit, et mes antennes envoient tout vers la Terre.',
+      ),
+      sceneAction: 'focus-part',
+      focusPart: 'drill',
+    },
+    {
+      id: 'hardest',
+      title: t('My hardest moment', 'Mon moment le plus difficile'),
+      lead: t('Seven minutes of terror.', 'Sept minutes de terreur.'),
+      body: t(
+        'I was too heavy to bounce down on airbags like the smaller rovers before me. So I came in through the thin air inside a heat shield, opened a giant parachute, then a rocket-powered "sky crane" hovered and lowered me on cables, about 7.6 m, onto my wheels. Radio signals from Mars take minutes to reach Earth: when the team heard I had started my descent, it was already over. I had landed safely.',
+        'J’étais trop lourd pour rebondir sur des airbags comme les petits rovers d’avant. Alors je suis entré dans l’air mince à l’abri d’un bouclier thermique, j’ai ouvert un parachute géant, puis une « grue céleste » à fusées a fait du surplace et m’a descendu au bout de câbles, d’environ 7,6 m, jusque sur mes roues. Les signaux radio de Mars mettent des minutes à atteindre la Terre : quand l’équipe a appris que ma descente commençait, tout était déjà fini. J’avais atterri sain et sauf.',
+      ),
+    },
+    {
+      id: 'discovered',
+      title: t('What I discovered', 'Ce que j’ai découvert'),
+      lead: t('Mars once had a place where microbes could have lived.', 'Mars a eu un endroit où des microbes auraient pu vivre.'),
+      body: t(
+        'Early in my mission, the powder from my drill showed chemical and mineral clues of an ancient lake with water that microbes could have lived in. Later, in a rock called "Cumberland", my SAM lab found decane, undecane and dodecane: the largest organic (carbon-based) molecules ever found on Mars. They are not proof of life, but they are some of the building blocks life uses. I also spent about six months exploring "boxwork", rock ridges that look like a giant spiderweb.',
+        'Au début de ma mission, la poudre de ma perceuse a révélé des indices chimiques et minéraux d’un ancien lac dont l’eau aurait pu abriter des microbes. Plus tard, dans une roche appelée « Cumberland », mon laboratoire SAM a trouvé du décane, de l’undécane et du dodécane : les plus grosses molécules organiques (à base de carbone) jamais trouvées sur Mars. Ce n’est pas une preuve de vie, mais ce sont des briques que la vie utilise. J’ai aussi passé environ six mois à explorer des « boxworks », des crêtes rocheuses qui ressemblent à une toile d’araignée géante.',
+      ),
+      sceneAction: 'focus-part',
+      focusPart: 'sam',
+    },
+    {
+      id: 'last-day',
+      title: t('Not my last day — yet', 'Pas mon dernier jour — pas encore'),
+      lead: t('Every machine wears out. My team helps me last.', 'Toute machine s’use. Mon équipe m’aide à durer.'),
+      body: t(
+        'I don’t depend on sunlight: my nuclear power source makes electricity day and night, through dust storms and winters, but it gives a little less power every year. My aluminium wheels got holes from sharp rocks, first spotted in 2013. So my team plans my routes around the sharpest rocks, and since 2017, smart software adjusts each wheel’s speed to press less on the rocks. Slowly and carefully, I keep going.',
+        'Je ne dépends pas du Soleil : ma source d’énergie nucléaire fabrique de l’électricité jour et nuit, pendant les tempêtes de poussière et les hivers, mais elle donne un peu moins d’énergie chaque année. Mes roues en aluminium ont été trouées par des roches pointues, repérées dès 2013. Alors mon équipe trace mes trajets en évitant les roches les plus coupantes et, depuis 2017, un logiciel malin ajuste la vitesse de chaque roue pour moins appuyer sur les cailloux. Lentement et prudemment, je continue.',
+      ),
+      sceneAction: 'focus-part',
+      focusPart: 'six-wheels',
+    },
+    {
+      id: 'today',
+      title: t('Where I am today', 'Où je suis aujourd’hui'),
+      lead: t('Still climbing. Still talking.', 'Toujours en train de grimper. Toujours en train de parler.'),
+      body: t(
+        'I have spent more than 5,000 Martian days on Mars. On August 26, 2026, I reached 1 km of height gained since the floor of Gale Crater. Opportunity, Spirit and Sojourner have fallen silent, but I still send pictures and measurements to Earth. Send me a signal: I can still answer.',
+        'J’ai passé plus de 5 000 jours martiens sur Mars. Le 26 août 2026, j’ai atteint 1 km de dénivelé gagné depuis le fond du cratère Gale. Opportunity, Spirit et Sojourner se sont tus, mais j’envoie toujours des photos et des mesures vers la Terre. Envoie-moi un signal : je peux encore répondre.',
+      ),
+      sceneAction: 'spin',
+    },
+  ],
+  parts: [
+    {
+      id: 'mmrtg',
+      icon: 'Atom',
+      name: t('Nuclear power source (MMRTG)', 'Source d’énergie nucléaire (MMRTG)'),
+      meshNames: ['mmrtg', 'rtg', 'generator', 'nuclear', 'power'],
+      anchor: [-1.38, 1.32, 0],
+      camera: { position: [-3.1, 1.9, 1.7], target: [-1.1, 1.0, 0] },
+      explode: [-0.55, 0.2, 0],
+      simple: t(
+        'I’m the rover’s warm heart, at the back. I turn the heat of a radioactive material into electricity, like a warm battery that works day and night. No need for sunshine!',
+        'Je suis le cœur chaud du rover, à l’arrière. Je transforme la chaleur d’une matière radioactive en électricité, comme une pile chaude qui marche jour et nuit. Pas besoin de Soleil !',
+      ),
+      deeper: t(
+        'The Multi-Mission Radioisotope Thermoelectric Generator contains plutonium dioxide that naturally gives off heat as it decays. Thermocouples turn that heat directly into electricity, with no moving parts, to charge the rover’s batteries. Its fins release extra heat, and some warm fluid is piped through the rover to keep its instruments from freezing.',
+        'Le générateur thermoélectrique à radio-isotopes multi-mission contient du dioxyde de plutonium qui dégage naturellement de la chaleur en se désintégrant. Des thermocouples transforment directement cette chaleur en électricité, sans pièce mobile, pour recharger les batteries du rover. Ses ailettes évacuent le surplus de chaleur, et un liquide chaud circule dans le rover pour empêcher ses instruments de geler.',
+      ),
+      whyItMattered: t('Dust storms ended Opportunity’s solar-powered mission. Curiosity’s nuclear power keeps working through storms, nights and winters, which is one reason it is still active.', 'Les tempêtes de poussière ont mis fin à la mission solaire d’Opportunity. L’énergie nucléaire de Curiosity fonctionne malgré les tempêtes, les nuits et les hivers : c’est une des raisons pour lesquelles il est toujours actif.'),
+      funFact: t('Its power slowly fades as the plutonium decays, so the team carefully plans how much energy each day’s work will use.', 'Sa puissance baisse lentement à mesure que le plutonium se désintègre : l’équipe planifie donc avec soin l’énergie utilisée chaque jour.'),
+      numbers: [
+        { value: '125 W', label: t('electric power at the start of the mission', 'puissance électrique au début de la mission'), sourceId: 'nssdca-msl' },
+        { value: '4.8 kg', label: t('of plutonium dioxide fuel', 'de combustible au dioxyde de plutonium'), sourceId: 'nasa-msl', verify: true },
+      ],
+      worksWith: ['antennas', 'sam'],
+    },
+    {
+      id: 'six-wheels',
+      icon: 'CircleDot',
+      name: t('Six wheels & rocker-bogie legs', 'Six roues et jambes « rocker-bogie »'),
+      meshNames: ['wheel', 'roue', 'rocker', 'bogie', 'suspension', 'leg'],
+      anchor: [0.25, 0.56, 1.12],
+      camera: { position: [1.3, 1.0, 3.3], target: [0.1, 0.4, 0.9] },
+      explode: [0, 0, 0.35],
+      simple: t(
+        'My six wheels are made of thin aluminium, with zig-zag treads to grip the rocks. My legs bend like a seesaw, so all six wheels stay on the ground. Sharp rocks have made holes in my wheels, but I still roll!',
+        'Mes six roues sont en aluminium fin, avec des crampons en zigzag pour s’agripper aux roches. Mes jambes basculent comme une balançoire, pour que les six roues restent au sol. Des roches pointues ont troué mes roues, mais je roule toujours !',
+      ),
+      deeper: t(
+        'Each wheel has its own motor, and the four corner wheels can steer. The rocker-bogie suspension has no springs: linked levers let each side tilt over rocks while keeping the body level. Since 2017, traction-control software changes each wheel’s speed in real time to reduce the push of sharp rocks on the thin wheel skin.',
+        'Chaque roue a son moteur, et les quatre roues des coins peuvent tourner. La suspension rocker-bogie n’a pas de ressorts : des leviers articulés laissent chaque côté basculer sur les roches tout en gardant le corps à plat. Depuis 2017, un logiciel de contrôle de traction change la vitesse de chaque roue en temps réel pour réduire la pression des roches pointues sur la fine peau des roues.',
+      ),
+      whyItMattered: t('Climbing a mountain on worn wheels, far from any mechanic, takes patience: careful driving is what keeps the mission going.', 'Grimper une montagne avec des roues usées, loin de tout mécanicien, demande de la patience : c’est la conduite prudente qui fait durer la mission.'),
+      funFact: t('The treads, called grousers, are zig-zag ridges designed for climbing rocks.', 'Les crampons, appelés « grousers », sont des crêtes en zigzag conçues pour escalader les roches.'),
+      numbers: [
+        { value: '6', label: t('wheels, each with its own motor', 'roues, chacune avec son moteur'), sourceId: 'nssdca-msl' },
+        { value: '≈ 4 cm/s', label: t('top speed on flat ground', 'vitesse maximale sur terrain plat'), sourceId: 'nssdca-msl' },
+        { value: '≈ 50 cm', label: t('wheel diameter', 'diamètre d’une roue'), sourceId: 'nasa-msl', verify: true },
+      ],
+      worksWith: ['mastcam', 'mmrtg'],
+    },
+    {
+      id: 'robotic-arm',
+      icon: 'Hand',
+      name: t('Robotic arm', 'Bras robotique'),
+      meshNames: ['arm', 'bras', 'turret', 'tourelle', 'apxs'],
+      anchor: [1.55, 1.2, -0.1],
+      camera: { position: [3.1, 1.7, -1.7], target: [1.45, 0.85, -0.1] },
+      explode: [0.3, 0.1, 0],
+      simple: t(
+        'My arm is about 2.2 m long, longer than a grown-up is tall. At the end, a "hand" turns like a revolver to pick the right tool: a drill, a camera-magnifier, a chemistry sensor or a brush.',
+        'Mon bras mesure environ 2,2 m, plus qu’un adulte est grand. Au bout, une « main » tourne comme un barillet pour choisir le bon outil : une perceuse, une caméra-loupe, un capteur chimique ou une brosse.',
+      ),
+      deeper: t(
+        'The arm has a shoulder, an elbow and a wrist. Its turret carries the drill, the MAHLI hand-lens camera, the APXS spectrometer (which measures chemical elements in a 1.7 cm spot), a dust-removal brush and a system that sieves the rock powder and delivers it to the labs inside the rover.',
+        'Le bras a une épaule, un coude et un poignet. Sa tourelle porte la perceuse, la caméra-loupe MAHLI, le spectromètre APXS (qui mesure les éléments chimiques sur une zone de 1,7 cm), une brosse à poussière et un système qui tamise la poudre de roche et la livre aux laboratoires à l’intérieur du rover.',
+      ),
+      whyItMattered: t('Touching rocks and bringing their powder inside is how Curiosity turned pictures into real chemistry.', 'Toucher les roches et ramener leur poudre à l’intérieur, c’est ainsi que Curiosity a transformé des images en vraie chimie.'),
+      numbers: [{ value: '2.2 m', label: t('arm length (7 ft)', 'longueur du bras (7 pieds)'), sourceId: 'nasa-msl' }],
+      worksWith: ['drill', 'mahli', 'sam', 'chemin'],
+    },
+    {
+      id: 'drill',
+      icon: 'Drill',
+      name: t('Rock drill', 'Perceuse à roches'),
+      meshNames: ['drill', 'foret', 'percu', 'bit'],
+      anchor: [1.8, 0.36, -0.14],
+      camera: { position: [2.8, 0.8, -1.1], target: [1.78, 0.42, -0.05] },
+      explode: [0.45, -0.05, -0.2],
+      simple: t(
+        'I make holes in rocks, a bit like a power drill in a toolbox. I turn the inside of the rock into fine powder, which goes to the labs inside the rover.',
+        'Je fais des trous dans les roches, un peu comme une perceuse de bricolage. Je transforme l’intérieur de la roche en poudre fine, qui part vers les laboratoires dans le rover.',
+      ),
+      deeper: t(
+        'The drill hammers and spins its bit a few centimetres into rock. The powder from inside, protected from dust and radiation at the surface, is sieved and dropped into SAM and CheMin. Each hole leaves a neat little circle that the cameras photograph.',
+        'La perceuse frappe et fait tourner son foret sur quelques centimètres dans la roche. La poudre de l’intérieur, protégée de la poussière et des radiations de la surface, est tamisée puis versée dans SAM et CheMin. Chaque trou laisse un petit cercle net que les caméras photographient.',
+      ),
+      whyItMattered: t('The habitable-lake discovery and the record organic molecules both came from drilled rock powder.', 'La découverte de l’ancien lac habitable et les molécules organiques record viennent toutes deux de poudre de roche forée.'),
+      funFact: t('All 42 drill holes together make a trail of tiny dots up the side of Mount Sharp.', 'Les 42 trous de forage forment ensemble un chemin de petits points sur le flanc du mont Sharp.'),
+      numbers: [{ value: '42', label: t('powdered rock samples drilled', 'échantillons de roche réduits en poudre'), sourceId: 'nasa-msl' }],
+      worksWith: ['robotic-arm', 'sam', 'chemin'],
+    },
+    {
+      id: 'mahli',
+      icon: 'Flashlight',
+      name: t('MAHLI hand-lens camera', 'Caméra-loupe MAHLI'),
+      meshNames: ['mahli', 'hand.?lens', 'loupe'],
+      anchor: [1.98, 0.68, 0.15],
+      camera: { position: [2.9, 0.95, 0.95], target: [1.9, 0.6, 0.1] },
+      explode: [0.5, 0.1, 0.2],
+      simple: t(
+        'I’m a magnifying-glass camera at the end of the arm. I see grains of sand up close, in colour. I even have little lights, so I can take pictures at night!',
+        'Je suis une caméra-loupe au bout du bras. Je vois les grains de sable de très près, en couleur. J’ai même de petites lumières, pour prendre des photos la nuit !',
+      ),
+      deeper: t(
+        'MAHLI (Mars Hand Lens Imager) takes colour close-ups of rock and soil textures, like a geologist’s hand lens. Its built-in LEDs can light up a target. On December 6, 2025 (sol 4,740), its LEDs lit a rock called "Nevado Sajama" at night, and Mastcam photographed the glow.',
+        'MAHLI (Mars Hand Lens Imager) prend des gros plans en couleur des textures de roche et de sol, comme la loupe d’un géologue. Ses LED intégrées peuvent éclairer une cible. Le 6 décembre 2025 (sol 4 740), ses LED ont éclairé de nuit une roche appelée « Nevado Sajama », et Mastcam a photographié la lueur.',
+      ),
+      whyItMattered: t('The shape and size of tiny grains tell whether a rock formed in water, in wind or from a volcano.', 'La forme et la taille des petits grains disent si une roche s’est formée dans l’eau, par le vent ou par un volcan.'),
+      funFact: t('MAHLI is also the camera that takes Curiosity’s famous "selfies", by holding the arm out at many angles.', 'MAHLI est aussi la caméra des célèbres « selfies » de Curiosity : le bras se tend sous plein d’angles différents.'),
+      numbers: [{ value: 'sol 4,740', label: t('night image lit by MAHLI’s LEDs (Dec 6, 2025)', 'photo de nuit éclairée par les LED de MAHLI (6 déc. 2025)'), sourceId: 'nasa-msl' }],
+      worksWith: ['robotic-arm', 'mastcam'],
+    },
+    {
+      id: 'chemcam',
+      icon: 'Zap',
+      name: t('ChemCam laser', 'Laser ChemCam'),
+      meshNames: ['chemcam', 'laser', 'rmi'],
+      anchor: [0.98, 2.24, 0.45],
+      camera: { position: [2.4, 2.5, 1.5], target: [0.88, 2.08, 0.45] },
+      explode: [0, 0.35, 0],
+      simple: t(
+        'I’m the big round eye on top of the head. I zap a tiny spot on a rock with a laser, from metres away. The rock sparkles, and the colour of the spark tells what it is made of.',
+        'Je suis le gros œil rond en haut de la tête. Je vise un minuscule point d’une roche avec un laser, à plusieurs mètres de distance. La roche fait une étincelle, et la couleur de l’étincelle dit de quoi elle est faite.',
+      ),
+      deeper: t(
+        'ChemCam fires laser pulses that vaporise a pinhead-size spot into a hot glowing gas called plasma. A telescope collects that light and three spectrographs split it into colours: each chemical element leaves its own pattern, like a barcode. A camera also takes a close-up of the target.',
+        'ChemCam tire des impulsions laser qui vaporisent un point grand comme une tête d’épingle en un gaz chaud et lumineux, le plasma. Un télescope recueille cette lumière et trois spectrographes la décomposent en couleurs : chaque élément chimique laisse son propre motif, comme un code-barres. Une caméra prend aussi un gros plan de la cible.',
+      ),
+      whyItMattered: t('Testing rocks from a distance, without driving to each one, saves time, energy and wheel wear.', 'Analyser les roches à distance, sans rouler jusqu’à chacune, économise du temps, de l’énergie et l’usure des roues.'),
+      numbers: [{ value: '≈ 7 m', label: t('maximum laser range', 'portée maximale du laser'), sourceId: 'nasa-msl', verify: true }],
+      worksWith: ['mastcam', 'drill'],
+    },
+    {
+      id: 'mastcam',
+      icon: 'Eye',
+      name: t('Mast & Mastcam "eyes"', 'Mât et « yeux » Mastcam'),
+      meshNames: ['mast', 'mastcam', 'navcam', 'head', 'rsm'],
+      anchor: [1.02, 1.96, 0.28],
+      camera: { position: [2.7, 2.1, 0.1], target: [0.85, 1.85, 0.4] },
+      explode: [0, 0.25, 0],
+      simple: t(
+        'This is my head! My two Mastcam eyes take colour photos and videos. Next to them, black-and-white Navcams help plan where I drive. I have 17 cameras in all.',
+        'Voici ma tête ! Mes deux yeux Mastcam prennent des photos et des vidéos en couleur. À côté, des Navcam en noir et blanc aident à choisir où je roule. J’ai 17 caméras en tout.',
+      ),
+      deeper: t(
+        'The two Mastcams have different zooms (about 34 mm and 100 mm focal lengths), like a wide eye and a telephoto eye, set about 24.5 cm apart. Paired cameras give 3D vision, like your two eyes. Low Hazcams on the front and back of the body watch for rocks and holes right around the wheels.',
+        'Les deux Mastcam ont des zooms différents (focales d’environ 34 mm et 100 mm), comme un œil grand angle et un œil téléobjectif, écartés d’environ 24,5 cm. Les caméras en paire donnent une vision en 3D, comme tes deux yeux. Des Hazcam basses à l’avant et à l’arrière du corps surveillent les roches et les trous autour des roues.',
+      ),
+      whyItMattered: t('Messages take minutes to travel, so the team plans each drive from these pictures, and the rover can stop by itself if it sees danger.', 'Les messages mettent des minutes à voyager : l’équipe prépare chaque trajet grâce à ces images, et le rover peut s’arrêter seul s’il voit un danger.'),
+      numbers: [
+        { value: '17', label: t('cameras on the rover', 'caméras sur le rover'), sourceId: 'nasa-msl' },
+        { value: '2.2 m', label: t('height to the top of the mast (7 ft)', 'hauteur jusqu’au sommet du mât (7 pieds)'), sourceId: 'nasa-msl' },
+      ],
+      worksWith: ['chemcam', 'rems-weather', 'six-wheels'],
+    },
+    {
+      id: 'sam',
+      icon: 'FlaskConical',
+      name: t('SAM: Sample Analysis at Mars', 'SAM : laboratoire d’analyse'),
+      meshNames: ['sam', 'sample.?analysis', 'oven', 'four'],
+      anchor: [0.12, 1.22, 0.32],
+      camera: { position: [0.9, 2.7, 2.5], target: [0.05, 0.9, 0.3] },
+      explode: [0, 0.5, 0.2],
+      simple: t(
+        'I’m a tiny chemistry lab hidden inside the rover, a bit like a kitchen oven with a very good nose. I cook rock powder and sniff the gases that come out. Turn on X-ray to see me!',
+        'Je suis un petit laboratoire de chimie caché dans le rover, un peu comme un four de cuisine avec un très bon nez. Je chauffe la poudre de roche et je renifle les gaz qui en sortent. Active les rayons X pour me voir !',
+      ),
+      deeper: t(
+        'SAM weighs about 40 kg. Its ovens heat samples to about 1,000 °C and its instruments identify the gases released, detecting organic (carbon-based) compounds even at less than one part per billion. It has a wheel with 74 small sample cups.',
+        'SAM pèse environ 40 kg. Ses fours chauffent les échantillons à environ 1 000 °C et ses instruments identifient les gaz libérés, détectant des composés organiques (à base de carbone) même à moins d’une partie par milliard. Il possède une roue de 74 petites coupelles à échantillons.',
+      ),
+      whyItMattered: t('SAM found decane, undecane and dodecane in the "Cumberland" rock: the largest organic molecules found on Mars so far.', 'SAM a trouvé du décane, de l’undécane et du dodécane dans la roche « Cumberland » : les plus grosses molécules organiques trouvées sur Mars à ce jour.'),
+      funFact: t('A 2026 study found that non-biological sources could not fully explain how much of these molecules there was. The mystery is still open!', 'Une étude de 2026 a montré que des sources non biologiques ne suffisaient pas à expliquer toute la quantité de ces molécules. Le mystère reste ouvert !'),
+      numbers: [
+        { value: '≈ 1,000 °C', label: t('oven temperature', 'température des fours'), sourceId: 'nasa-msl' },
+        { value: '74', label: t('sample cups', 'coupelles à échantillons'), sourceId: 'nasa-msl' },
+      ],
+      worksWith: ['drill', 'chemin', 'robotic-arm'],
+    },
+    {
+      id: 'chemin',
+      icon: 'Layers',
+      name: t('CheMin mineral identifier', 'Identificateur de minéraux CheMin'),
+      meshNames: ['chemin', 'x.?ray', 'diffract'],
+      anchor: [-0.32, 1.22, -0.32],
+      camera: { position: [-0.9, 2.7, -2.5], target: [-0.3, 0.9, -0.3] },
+      explode: [0, 0.45, -0.2],
+      simple: t(
+        'I shine X-rays through rock powder. The way the X-rays bounce tells me which minerals are inside, like recognising a friend by their fingerprint. I’m inside the rover too.',
+        'Je fais passer des rayons X à travers la poudre de roche. La façon dont ils rebondissent me dit quels minéraux sont dedans, comme reconnaître un ami à son empreinte digitale. Je suis aussi à l’intérieur du rover.',
+      ),
+      deeper: t(
+        'CheMin uses X-ray diffraction: each mineral has crystals with a particular spacing, which scatters X-rays in its own pattern. It measures how much of each mineral is present. An analysis can last up to 10 hours, spread over two or more Martian nights.',
+        'CheMin utilise la diffraction des rayons X : chaque minéral a des cristaux avec un espacement particulier, qui dévie les rayons X selon son propre motif. Il mesure la quantité de chaque minéral. Une analyse peut durer jusqu’à 10 heures, réparties sur deux nuits martiennes ou plus.',
+      ),
+      whyItMattered: t('Clay minerals, which form in water, helped prove that Gale Crater once held a lake where microbes could have lived.', 'Les minéraux argileux, qui se forment dans l’eau, ont aidé à prouver que le cratère Gale a contenu un lac où des microbes auraient pu vivre.'),
+      numbers: [{ value: '≤ 10 h', label: t('for one analysis', 'pour une analyse'), sourceId: 'nasa-msl' }],
+      worksWith: ['drill', 'sam'],
+    },
+    {
+      id: 'rems-weather',
+      icon: 'Thermometer',
+      name: t('REMS weather station', 'Station météo REMS'),
+      meshNames: ['rems', 'boom', 'weather', 'meteo'],
+      anchor: [0.8, 1.66, 0.74],
+      camera: { position: [2.1, 2.0, 2.1], target: [0.78, 1.6, 0.45] },
+      explode: [0, 0.15, 0.25],
+      simple: t(
+        'I’m the rover’s weather reporter. My two little arms on the mast measure the temperature, the wind, the air pressure and the Sun’s ultraviolet rays.',
+        'Je suis le présentateur météo du rover. Mes deux petits bras sur le mât mesurent la température, le vent, la pression de l’air et les rayons ultraviolets du Soleil.',
+      ),
+      deeper: t(
+        'REMS (Rover Environmental Monitoring Station) measures pressure, temperature, humidity, wind and UV light. It works from −130 °C to +70 °C and records for at least 5 minutes every hour, every sol, building a weather diary of Gale Crater that now covers many Martian years.',
+        'REMS (Rover Environmental Monitoring Station) mesure la pression, la température, l’humidité, le vent et les UV. Il fonctionne de −130 °C à +70 °C et enregistre au moins 5 minutes par heure, chaque sol, construisant un journal météo du cratère Gale qui couvre maintenant de nombreuses années martiennes.',
+      ),
+      whyItMattered: t('Knowing the weather and the UV levels on Mars helps scientists understand the planet and helps plan future human visits.', 'Connaître la météo et les UV sur Mars aide les scientifiques à comprendre la planète et à préparer de futures visites humaines.'),
+      numbers: [{ value: '−130 to +70 °C', label: t('operating range', 'plage de fonctionnement'), sourceId: 'nasa-msl' }],
+      worksWith: ['mastcam', 'rad'],
+    },
+    {
+      id: 'rad',
+      icon: 'Shield',
+      name: t('RAD radiation detector', 'Détecteur de radiations RAD'),
+      meshNames: ['rad', 'radiation'],
+      anchor: [0.38, 1.3, -0.28],
+      camera: { position: [1.7, 2.5, -1.9], target: [0.3, 1.15, -0.25] },
+      explode: [0, 0.35, 0],
+      simple: t(
+        'I’m about the size of a small toaster. I count invisible, fast particles that come from the Sun and from deep space, so future astronauts know how to protect themselves.',
+        'Je suis à peu près de la taille d’un petit grille-pain. Je compte des particules invisibles et rapides venues du Soleil et de l’espace lointain, pour que les futurs astronautes sachent comment se protéger.',
+      ),
+      deeper: t(
+        'Mars has a thin atmosphere and no global magnetic field, so more radiation reaches the ground than on Earth. RAD measures high-energy protons, ions, neutrons and gamma rays. It was switched on during the trip to Mars too.',
+        'Mars a une atmosphère mince et pas de champ magnétique global : plus de radiations atteignent le sol que sur Terre. RAD mesure des protons, des ions, des neutrons et des rayons gamma de haute énergie. Il fonctionnait aussi pendant le voyage vers Mars.',
+      ),
+      whyItMattered: t('Before humans go to Mars, we need to know how much radiation they would face, on the journey and on the surface.', 'Avant d’envoyer des humains sur Mars, il faut savoir combien de radiations ils recevraient, pendant le voyage et à la surface.'),
+      worksWith: ['rems-weather'],
+      verify: true,
+    },
+    {
+      id: 'antennas',
+      icon: 'Satellite',
+      name: t('Antennas: high-gain & UHF', 'Antennes : grand gain et UHF'),
+      meshNames: ['hga', 'high.?gain', 'uhf', 'antenna', 'antenne', 'dish'],
+      anchor: [-0.55, 1.58, -0.5],
+      camera: { position: [-2.3, 2.4, -2.0], target: [-0.5, 1.3, -0.3] },
+      explode: [0, 0.35, -0.1],
+      simple: t(
+        'The flat hexagon talks directly to Earth. My little UHF antenna talks to spacecraft flying around Mars, which pass my messages home, like a relay race. My messages take between 3 and 22 minutes to arrive.',
+        'L’hexagone plat parle directement à la Terre. Ma petite antenne UHF parle aux vaisseaux qui tournent autour de Mars, qui transmettent mes messages, comme une course de relais. Mes messages mettent entre 3 et 22 minutes à arriver.',
+      ),
+      deeper: t(
+        'The steerable high-gain antenna uses X-band radio to receive commands straight from the giant dishes of NASA’s Deep Space Network. Most of the rover’s pictures and data travel by UHF radio to orbiters passing overhead, which forward them to Earth with their bigger antennas and more power.',
+        'L’antenne à grand gain orientable utilise la radio en bande X pour recevoir les ordres directement des grandes antennes du Deep Space Network de la NASA. La plupart des images et des données du rover partent par radio UHF vers les orbiteurs qui passent au-dessus, qui les retransmettent vers la Terre avec leurs plus grandes antennes et plus d’énergie.',
+      ),
+      whyItMattered: t('These antennas are why Curiosity is not silent: every day of work becomes science only when it reaches Earth.', 'Ces antennes sont la raison pour laquelle Curiosity n’est pas silencieux : chaque journée de travail ne devient de la science qu’en arrivant sur Terre.'),
+      numbers: [{ value: '3–22 min', label: t('one-way signal time Mars → Earth', 'temps du signal Mars → Terre'), sourceId: 'nasa-msl', verify: true }],
+      worksWith: ['mmrtg', 'mastcam'],
+    },
+  ],
+  telemetry: {
+    band: t('X-band direct to Earth + UHF relay via Mars orbiters', 'Bande X vers la Terre + relais UHF via les orbiteurs martiens'),
+    power: { value: '125 W', label: t('from the MMRTG at the start of the mission, slowly decreasing', 'du MMRTG au début de la mission, en lente baisse'), sourceId: 'nssdca-msl' },
+    delay: t('3 to 22 minutes one way, depending on planet positions', '3 à 22 minutes aller simple, selon la position des planètes'),
+    delaySeconds: 12.5 * 60,
+    delayLabel: t('typical ≈ 12.5 min — sped up', 'typique ≈ 12,5 min — accéléré'),
+    lastContact: t('Still in contact — active mission (November 2026)', 'Toujours en contact — mission active (novembre 2026)'),
+    link: t('Rover → Mars orbiter (UHF) or direct X-band → Deep Space Network → Earth', 'Rover → orbiteur martien (UHF) ou bande X directe → Deep Space Network → Terre'),
+    replies: true,
+    replyText: t(
+      'Your message reached Gale Crater… and an answer is coming back! Curiosity is still active: after the round trip across space, its signals return to Earth through the Deep Space Network.',
+      'Ton message a atteint le cratère Gale… et une réponse revient ! Curiosity est toujours actif : après l’aller-retour à travers l’espace, ses signaux reviennent vers la Terre grâce au Deep Space Network.',
+    ),
+  },
+  quiz: [
+    {
+      q: t('Where does Curiosity get its electricity?', 'D’où Curiosity tire-t-il son électricité ?'),
+      options: [t('From solar panels', 'De panneaux solaires'), t('From the heat of a nuclear generator', 'De la chaleur d’un générateur nucléaire'), t('From a wind turbine', 'D’une éolienne')],
+      answer: 1,
+      explain: t('Its MMRTG turns heat from decaying plutonium into electricity, day and night, even during dust storms.', 'Son MMRTG transforme la chaleur du plutonium qui se désintègre en électricité, jour et nuit, même pendant les tempêtes de poussière.'),
+    },
+    {
+      q: t('What does ChemCam do?', 'Que fait ChemCam ?'),
+      options: [t('Zaps rocks with a laser to find out what they are made of', 'Vise les roches au laser pour savoir de quoi elles sont faites'), t('Cuts rocks in half', 'Coupe les roches en deux'), t('Sweeps dust off the wheels', 'Balaie la poussière des roues')],
+      answer: 0,
+      explain: t('The laser makes a tiny glowing spark; its colours reveal the chemical elements in the rock.', 'Le laser fait une petite étincelle lumineuse ; ses couleurs révèlent les éléments chimiques de la roche.'),
+    },
+    {
+      q: t('What big question was Curiosity sent to answer?', 'À quelle grande question Curiosity doit-il répondre ?'),
+      options: [t('Can people breathe on Mars?', 'Peut-on respirer sur Mars ?'), t('Was Mars ever able to support tiny microbes?', 'Mars a-t-elle pu abriter de minuscules microbes ?'), t('Is Mars hotter than Earth?', 'Mars est-elle plus chaude que la Terre ?')],
+      answer: 1,
+      explain: t('Curiosity found that Gale Crater once had a lake with the right conditions for microbial life.', 'Curiosity a découvert que le cratère Gale a eu un lac avec les bonnes conditions pour la vie microbienne.'),
+    },
+  ],
+  faq: [
+    {
+      q: t('Are you still working?', 'Est-ce que tu travailles encore ?'),
+      a: t('Yes! I landed in 2012 and I am still climbing Mount Sharp. I send pictures and measurements to Earth through my antennas.', 'Oui ! J’ai atterri en 2012 et je grimpe toujours le mont Sharp. J’envoie des photos et des mesures vers la Terre grâce à mes antennes.'),
+      keywords: ['still', 'alive', 'working', 'active', 'today', 'now', 'encore', 'actif', 'vivant', 'travailles', 'aujourd', 'maintenant'],
+    },
+    {
+      q: t('Where does your energy come from?', 'D’où vient ton énergie ?'),
+      a: t('From my MMRTG, a nuclear power source at my back. It turns the heat of plutonium into electricity, day and night, so I don’t need sunlight like Opportunity did.', 'De mon MMRTG, une source d’énergie nucléaire dans mon dos. Il transforme la chaleur du plutonium en électricité, jour et nuit : je n’ai pas besoin du Soleil comme Opportunity.'),
+      keywords: ['energy', 'power', 'battery', 'nuclear', 'plutonium', 'mmrtg', 'solar', 'electricity', 'energie', 'batterie', 'nucleaire', 'solaire', 'electricite'],
+    },
+    {
+      q: t('Did you find life on Mars?', 'As-tu trouvé de la vie sur Mars ?'),
+      a: t('Not life itself. But I found that Mars once had a lake where microbes could have lived, and I found organic molecules, some of the building blocks life uses. The search goes on!', 'Pas la vie elle-même. Mais j’ai découvert que Mars a eu un lac où des microbes auraient pu vivre, et j’ai trouvé des molécules organiques, des briques que la vie utilise. La recherche continue !'),
+      keywords: ['life', 'alien', 'microbe', 'organic', 'molecule', 'living', 'vie', 'extraterrestre', 'organique', 'vivant'],
+    },
+  ],
+  audio: {
+    story: { en: 'audio/curiosity_en.mp3', fr: 'audio/curiosity_fr.mp3' },
+    transcript: t(
+      'Once upon a time, a robot as big as a car fell toward Mars. It was too heavy for airbags, so a flying crane lowered it gently on cables into a giant crater. Its name was Curiosity. In the middle of the crater stood a mountain made of rock layers, like the pages of a book. Curiosity began to climb and read. It drilled into stones, zapped them with a laser and cooked their dust in its tiny labs. It learned that, long ago, a lake shone here. Its wheels got holes, so it learned to drive gently. Its friends on Mars fell asleep one by one. But Curiosity is still climbing, and every day, it still calls home.',
+      'Il était une fois un robot grand comme une voiture qui tombait vers Mars. Il était trop lourd pour des airbags, alors une grue volante le déposa doucement au bout de câbles dans un cratère géant. Il s’appelait Curiosity. Au milieu du cratère se dressait une montagne faite de couches de roche, comme les pages d’un livre. Curiosity se mit à grimper et à lire. Il fora des pierres, les visa au laser et chauffa leur poussière dans ses petits laboratoires. Il apprit qu’il y a très longtemps, un lac brillait ici. Ses roues se trouèrent, alors il apprit à rouler en douceur. Ses amis sur Mars s’endormirent un à un. Mais Curiosity grimpe encore et, chaque jour, il appelle toujours la maison.',
+    ),
+  },
+  model: {
+    glb: 'models/curiosity.glb',
+    scale: 1,
+    defaultCamera: { position: [4.4, 2.7, 4.6], target: [0.25, 0.9, 0] },
+    env: { clearRadius: 3.6, tracks: true, blueberries: false },
+  },
+  lesson: {
+    ideas: [
+      t(
+        'Habitability: what does life as we know it need? (water, chemistry, energy). Compare a lake on Earth with the ancient lake of Gale Crater.',
+        'L’habitabilité : de quoi la vie telle que nous la connaissons a-t-elle besoin ? (eau, chimie, énergie). Comparer un lac sur Terre avec l’ancien lac du cratère Gale.',
+      ),
+      t(
+        'Energy: solar (Opportunity) vs nuclear (Curiosity). Why did a dust storm end one mission but not the other?',
+        'L’énergie : solaire (Opportunity) contre nucléaire (Curiosity). Pourquoi une tempête de poussière a-t-elle arrêté une mission et pas l’autre ?',
+      ),
+      t(
+        'Rock layers as a history book: lower layers are usually older. Why does climbing Mount Sharp mean travelling forward in time?',
+        'Les couches de roche comme un livre d’histoire : les couches du bas sont en général plus anciennes. Pourquoi grimper le mont Sharp, c’est avancer dans le temps ?',
+      ),
+    ],
+    activity: t(
+      '15-minute "core sample" activity: in groups, stack 4–5 thin layers of different-coloured modelling clay in a cup, each colour standing for an event (lake, sand, volcanic ash…). Swap cups. Each group pushes a clear straw straight down like Curiosity’s drill, pulls out a core, and reads the story from bottom (oldest) to top (youngest). Discuss: what can a drill tell us that a photo cannot?',
+      'Activité « carotte » de 15 minutes : en groupes, empiler 4 à 5 fines couches de pâte à modeler de couleurs différentes dans un gobelet, chaque couleur représentant un événement (lac, sable, cendre volcanique…). Échanger les gobelets. Chaque groupe enfonce une paille transparente bien droite, comme la perceuse de Curiosity, retire une carotte et lit l’histoire du bas (le plus ancien) vers le haut (le plus récent). Discussion : que peut nous apprendre une perceuse qu’une photo ne peut pas ?',
+    ),
+  },
+  sources: ['nasa-msl', 'nasa-msl-instruments', 'nssdca-msl'],
+};

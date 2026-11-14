@@ -7,9 +7,9 @@
 Beyond the Dust
 
 ## High-Level Summary
-Beyond the Dust is a free, mobile-first 3D web experience that lets school-age space fans *teleport* to three machines
-NASA left behind — the Lunar Roving Vehicle on the Moon, the Opportunity rover on Mars and the Pioneer 10 probe drifting
-toward Aldebaran. Instead of reading a fact sheet, visitors walk around each machine in a 360° scene and touch its
+Beyond the Dust is a free, mobile-first 3D web experience that lets school-age space fans *teleport* to six machines
+NASA sent beyond Earth — the Apollo 11 lunar module "Eagle" and a Lunar Roving Vehicle on the Moon, Sojourner,
+Opportunity and the still-active Curiosity on Mars, and the Pioneer 10 probe drifting toward Aldebaran. Instead of reading a fact sheet, visitors walk around each machine in a 360° scene and touch its
 parts: every part explains itself in simple, first-person words ("I'm the antenna, the rover's phone to Earth"), with a
 "Go deeper" level that links the engineering to the science it made possible. Each machine then tells its own life story
 in seven short chapters, from launch to its last day. Interactive moments make the science felt: the 2018 dust storm
@@ -28,7 +28,7 @@ on low-end phones.
 The visitor picks a destination on a solar-system map, chooses a machine and is teleported in front of it.
 
 **How it works.**
-- *Touchable parts*: 31 clickable parts across the three machines (wheels, batteries, solar panels, robotic arm, rock
+- *Touchable parts*: 66 clickable parts across the six machines (wheels, batteries, solar panels, robotic arm, rock
   abrasion tool, RTG nuclear generators, the Pioneer plaque…). Clicking flies the camera to the part, highlights it and
   opens an explanation with two reading levels (age 8–10 and 11–15), a "why it mattered" link to the science,
   sourced numbers, and links to the parts it works with. Exploded view, X-ray mode and a narrated guided tour help
@@ -59,7 +59,7 @@ Web Audio API, Web Speech API; Blender/CAD for team models (glTF/.glb with Draco
 - Code: written with the help of an AI coding assistant, reviewed and tested by the team.
 - Text: first drafts of the explanations and stories generated with AI from NASA sources, then edited and fact-checked
   by the team (fact-check log in the repository: FACT_CHECK.md).
-- Voice-over: AI neural text-to-speech (Microsoft Edge neural voices via the open-source edge-tts tool), adult voices only, in English and French.
+- Voice-over: AI neural text-to-speech (Microsoft Edge neural voices via the open-source edge-tts tool), adult female voices only, in English and French.
 - 3D models and environments are procedural code; any AI-generated image or video carries a visible "AI-generated"
   watermark. No NASA logos, flags or mission insignia are used.
 

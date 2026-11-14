@@ -12,3 +12,9 @@ promt.txt
 .agents/
 .aws/
 .codex/
+
+# SolidWorks sources (export to .glb for the web)
+*.SLDPRT
+*.SLDASM
+*.sldprt
+*.sldasm

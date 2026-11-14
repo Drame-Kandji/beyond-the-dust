@@ -18,7 +18,7 @@ const { SOURCES } = await import(pathToFileURL(out).href).then(async () => {
   return import(pathToFileURL(o2).href);
 });
 
-const OWNER = { lrv: 'Siga', opportunity: 'Cheikhouna', pioneer10: 'Cheikhouna' };
+const OWNER = { lrv: 'Siga', opportunity: 'Cheikhouna', pioneer10: 'Cheikhouna', apollo11lm: 'Siga', sojourner: 'Mouhamed', curiosity: 'Mouhamed' };
 const rows = [];
 for (const v of VEHICLE_LIST) {
   const add = (what, value, sourceId, owner = OWNER[v.id]) => rows.push({ v: v.name.en, what, value, src: SOURCES[sourceId] || SOURCES[v.sources[0]], owner });

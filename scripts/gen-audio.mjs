@@ -16,7 +16,8 @@ import { pathToFileURL } from 'node:url';
 const force = process.argv.includes('--force');
 const EDGE = process.env.EDGE_TTS || 'edge-tts';
 const VOICES = {
-  story: { en: 'en-US-AndrewMultilingualNeural', fr: 'fr-FR-RemyMultilingualNeural' }, // warm adult narrator
+  // Adult female voices only (team choice; contest rule: no voices of people under 18).
+  story: { en: 'en-US-EmmaMultilingualNeural', fr: 'fr-FR-DeniseNeural' }, // warm storyteller
   part: { en: 'en-US-AvaMultilingualNeural', fr: 'fr-FR-VivienneMultilingualNeural' }, // the machine's own voice
 };
 const out = join(tmpdir(), `btd-audio-${Date.now()}.mjs`);

@@ -11,10 +11,13 @@ import { PartRegistryProvider, usePartRegistry, usePointerHandlers, type Registr
 import { LRVModel } from './procedural/LRVModel';
 import { OpportunityModel } from './procedural/OpportunityModel';
 import { Pioneer10Model } from './procedural/Pioneer10Model';
+import { Apollo11LMModel } from './procedural/Apollo11LMModel';
+import { SojournerModel } from './procedural/SojournerModel';
+import { CuriosityModel } from './procedural/CuriosityModel';
 import { Hotspots } from './Hotspots';
 import { useAppStore } from '../store/useAppStore';
 
-const PROCEDURAL = { lrv: LRVModel, opportunity: OpportunityModel, pioneer10: Pioneer10Model };
+const PROCEDURAL = { lrv: LRVModel, opportunity: OpportunityModel, pioneer10: Pioneer10Model, apollo11lm: Apollo11LMModel, sojourner: SojournerModel, curiosity: CuriosityModel };
 const DRACO = `${import.meta.env.BASE_URL}draco/`;
 
 /** Checks that a real glTF binary exists (dev servers may answer index.html for missing files). */

@@ -5,6 +5,7 @@ import { useAppStore } from '../../store/useAppStore';
 import { useT } from '../../i18n/useT';
 import { LanguageSwitch } from '../layout/Settings';
 import { VehicleArt } from '../ui/VehicleArt';
+import type { VehicleId } from '../../data/types';
 
 const t2 = (en: string, fr: string) => ({ en, fr });
 
@@ -33,7 +34,7 @@ function PageShell({ title, children, print = false }: { title: string; children
   );
 }
 
-const LESSONS = {
+const LESSONS: Partial<Record<VehicleId, { ideas: readonly { en: string; fr: string }[]; activity: { en: string; fr: string } }>> = {
   lrv: {
     ideas: [
       t2('Gravity on the Moon is about 1/6 of Earth’s: mass vs. weight.', 'La gravité lunaire vaut environ 1/6 de celle de la Terre : masse et poids.'),
@@ -67,7 +68,7 @@ const LESSONS = {
       '15 min — « Dessine ta plaque » : sans aucun mot, dessinez un message qui dit à des inconnus qui nous sommes et où est la Terre. Comparez avec la plaque de Pioneer.',
     ),
   },
-} as const;
+};
 
 export function TeachersPage() {
   const { t, l } = useT();
@@ -78,7 +79,8 @@ export function TeachersPage() {
       </p>
       <div className="mt-8 grid gap-6">
         {VEHICLE_LIST.map((v) => {
-          const lesson = LESSONS[v.id];
+          const lesson = v.lesson ?? LESSONS[v.id];
+          if (!lesson) return null;
           return (
             <section key={v.id} className="rounded-3xl border border-white/10 bg-white/[0.03] p-6 print-light">
               <div className="flex items-center gap-4">
