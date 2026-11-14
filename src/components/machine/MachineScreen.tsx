@@ -10,6 +10,7 @@ import { PartIcon } from '../ui/Icon';
 import { VehicleArt } from '../ui/VehicleArt';
 import { SettingsMenu, SoundToggle, LanguageSwitch } from '../layout/Settings';
 import { VRButton } from '../../three/xr/VRButton';
+import { ARButton, ARViewer } from '../ar/ARButton';
 import { PartPanel } from './PartPanel';
 import { StoryPanel } from './StoryPanel';
 import { QuizPanel } from './QuizPanel';
@@ -299,6 +300,7 @@ export function MachineScreen() {
         </div>
         <div className="pointer-events-auto flex items-center gap-2">
           <VRButton />
+          {!mobile && <ARButton labelClass="hidden lg:inline" />}
           <SoundToggle />
           <SettingsMenu />
         </div>
@@ -323,6 +325,7 @@ export function MachineScreen() {
         <div className="fixed inset-x-0 bottom-0 z-20 pb-[calc(var(--sab)+8px)]">
           {webgl && <MobilePartsStrip vehicle={vehicle} />}
           <div className="no-scrollbar flex gap-2 overflow-x-auto px-3">
+            <ARButton className="btn glass shrink-0 px-3.5 text-sm" />
             {actions.map((a) => (
               <button key={a.k} className="btn glass shrink-0 px-3.5 text-sm" aria-pressed={panel === a.k} onClick={() => openPanel(a.k)}>
                 <a.icon size={17} /> {a.label}
@@ -346,6 +349,7 @@ export function MachineScreen() {
       <AskPanel vehicle={vehicle} />
       <StormOverlay />
       <PlaqueModal />
+      <ARViewer vehicle={vehicle} />
       <Teleport vehicle={vehicle} />
     </main>
   );

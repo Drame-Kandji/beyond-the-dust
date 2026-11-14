@@ -41,7 +41,10 @@ export function usePartRegistry(parts: PartData[]) {
         const mats: Entry['mats'] = [];
         const xrayOnly: THREE.Object3D[] = [];
         object.userData.partId = partId;
-        object.traverse((o) => {
+        const visit = (o: THREE.Object3D) => {
+          // Skip sub-trees already registered as another part (nested parts in .glb files).
+          if (o !== object && o.userData.partId && o.userData.partId !== partId) return;
+          o.children.forEach(visit);
           if (o.userData.xrayOnly) xrayOnly.push(o);
           const mesh = o as THREE.Mesh;
           if (!mesh.isMesh) return;
@@ -55,7 +58,8 @@ export function usePartRegistry(parts: PartData[]) {
             return c;
           });
           mesh.material = Array.isArray(mesh.material) ? cloned : cloned[0];
-        });
+        };
+        visit(object);
         const e: Entry = {
           partId,
           object,

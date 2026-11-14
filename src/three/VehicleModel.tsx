@@ -58,15 +58,16 @@ function GlbModel({ url, vehicle, registry }: { url: string; vehicle: Vehicle; r
   const root = useMemo(() => scene.clone(true), [scene]);
   useEffect(() => {
     const cleanups: (() => void)[] = [];
-    const claim = (o: THREE.Object3D) => {
-      const id = matchPart(o.name, vehicle.parts);
-      if (id) {
-        cleanups.push(registry.register(id, o));
-        return; // children belong to the same part
-      }
-      o.children.forEach(claim);
+    // A matched node claims its whole subtree, except descendants that match ANOTHER part
+    // (e.g. the drill and MAHLI camera sitting on the robotic arm stay separately clickable).
+    // Register children first so their materials are their own when the parent clones its subtree.
+    const claim = (o: THREE.Object3D, inherited: string | null) => {
+      const own = matchPart(o.name, vehicle.parts);
+      const id = own && own !== inherited ? own : null;
+      o.children.forEach((c) => claim(c, id ?? inherited));
+      if (id) cleanups.push(registry.register(id, o));
     };
-    root.children.forEach(claim);
+    root.children.forEach((c) => claim(c, null));
     root.traverse((o) => {
       const m = o as THREE.Mesh;
       if (m.isMesh) {
