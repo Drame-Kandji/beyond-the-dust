@@ -1,0 +1,14 @@
+node_modules
+dist
+.DS_Store
+*.log
+.vercel
+.netlify
+tsconfig.tsbuildinfo
+# Private / working files (not published)
+*.pdf
+PROMPT_*.md
+promt.txt
+.agents/
+.aws/
+.codex/

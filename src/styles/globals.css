@@ -1,0 +1,360 @@
+@import 'tailwindcss';
+
+@theme {
+  --color-space-950: #05070d;
+  --color-space-900: #0a1020;
+  --color-night-800: #121a33;
+  --color-night-700: #1b2550;
+  --color-ink-100: #eef1f8;
+  --color-ink-300: #a9b2c8;
+  --color-ink-500: #8089a5;
+  --color-amber-400: #ffb547;
+  --color-amber-300: #ffcb7a;
+  --color-signal-300: #7fe7f2;
+  --color-moon: #c9ccd3;
+  --color-mars: #e07a3f;
+  --color-mars-deep: #c1440e;
+  --color-deep: #3d4e9e;
+  --font-serif: 'Fraunces Variable', Georgia, serif;
+  --font-sans: 'DM Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+}
+
+:root {
+  --space-950: #05070d;
+  --glass: rgba(14, 20, 40, 0.72);
+  --glass-strong: rgba(10, 15, 32, 0.9);
+  --line: rgba(255, 255, 255, 0.09);
+  --amber: #ffb547;
+  --signal: #7fe7f2;
+  --ink: #eef1f8;
+  --ink-2: #a9b2c8;
+  --sat: env(safe-area-inset-top, 0px);
+  --sab: env(safe-area-inset-bottom, 0px);
+  color-scheme: dark;
+}
+
+/* Base and component rules live in cascade layers so Tailwind utilities (text-*, px-*, colours)
+   written on an element can override them. Unlayered rules would silently beat every utility. */
+@layer base {
+  html {
+    font-size: 100%;
+    -webkit-text-size-adjust: 100%;
+  }
+  html.large-text {
+    font-size: 120%;
+  }
+  body {
+    margin: 0;
+    background: var(--space-950);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    font-size: 1.0625rem;
+    line-height: 1.55;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+  #root {
+    min-height: 100dvh;
+  }
+  button {
+    font: inherit;
+    color: inherit;
+    cursor: pointer;
+  }
+  :focus-visible {
+    outline: 3px solid var(--amber);
+    outline-offset: 2px;
+  }
+}
+
+.reduce-motion *,
+.reduce-motion *::before,
+.reduce-motion *::after {
+  animation-duration: 0.001ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.001ms !important;
+}
+.demo-mode,
+.demo-mode * {
+  cursor: none !important;
+}
+
+@layer components {
+  .font-display {
+    font-family: var(--font-serif);
+    font-optical-sizing: auto;
+    letter-spacing: -0.01em;
+  }
+  .mono {
+    font-family: var(--font-mono);
+  }
+
+  /* --------------------------------- glass -------------------------------- */
+  .glass {
+    background: var(--glass);
+    border: 1px solid var(--line);
+    box-shadow: 0 20px 60px -20px rgba(0, 0, 0, 0.65), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  }
+  @supports ((backdrop-filter: blur(14px)) or (-webkit-backdrop-filter: blur(14px))) {
+    .glass {
+      -webkit-backdrop-filter: blur(16px) saturate(1.2);
+      backdrop-filter: blur(16px) saturate(1.2);
+    }
+  }
+  @supports not ((backdrop-filter: blur(14px)) or (-webkit-backdrop-filter: blur(14px))) {
+    .glass {
+      background: var(--glass-strong);
+    }
+  }
+
+  /* -------------------------------- buttons ------------------------------- */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    min-height: 44px;
+    padding: 0.6rem 1.1rem;
+    border-radius: 999px;
+    border: 1px solid var(--line);
+    background: rgba(255, 255, 255, 0.04);
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: transform 0.18s ease, background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+    white-space: nowrap;
+  }
+  .btn:hover {
+    background: rgba(255, 255, 255, 0.09);
+    border-color: rgba(255, 255, 255, 0.18);
+  }
+  .btn:active {
+    transform: scale(0.97);
+  }
+  .btn-primary {
+    background: linear-gradient(180deg, #ffc56a, #ffa933);
+    color: #1a1206;
+    border-color: transparent;
+    box-shadow: 0 10px 30px -8px rgba(255, 181, 71, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.45);
+  }
+  .btn-primary:hover {
+    background: linear-gradient(180deg, #ffd187, #ffb547);
+    box-shadow: 0 14px 40px -8px rgba(255, 181, 71, 0.7);
+  }
+  .btn-ghost {
+    background: transparent;
+    border-color: transparent;
+  }
+  .btn-icon {
+    width: 44px;
+    padding: 0;
+  }
+  .btn[aria-pressed='true'] {
+    background: rgba(255, 181, 71, 0.16);
+    border-color: rgba(255, 181, 71, 0.55);
+    color: var(--amber);
+  }
+  .btn[disabled] {
+    opacity: 0.45;
+    cursor: not-allowed;
+  }
+
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.2rem 0.6rem;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    border: 1px solid var(--line);
+    background: rgba(255, 255, 255, 0.04);
+    color: var(--ink-2);
+  }
+
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-2);
+  }
+
+  /* -------------------------------- hotspots ------------------------------ */
+  .hotspot {
+    position: relative;
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    border: 0;
+    background: transparent;
+    padding: 0;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .hotspot-num {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    place-items: center;
+    width: 26px;
+    height: 26px;
+    border-radius: 999px;
+    background: rgba(10, 14, 28, 0.82);
+    border: 2px solid var(--amber);
+    color: var(--amber);
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 700;
+    box-shadow: 0 0 16px rgba(255, 181, 71, 0.5);
+    transition: transform 0.2s ease, background 0.2s ease, color 0.2s;
+  }
+  .hotspot-ring {
+    position: absolute;
+    inset: 6px;
+    border-radius: 999px;
+    border: 2px solid rgba(255, 181, 71, 0.7);
+    animation: pulse 2.2s ease-out infinite;
+  }
+  .hotspot-label {
+    position: absolute;
+    left: 40px;
+    top: 50%;
+    transform: translateY(-50%) translateX(-4px);
+    white-space: nowrap;
+    padding: 0.25rem 0.6rem;
+    border-radius: 8px;
+    background: rgba(10, 14, 28, 0.88);
+    border: 1px solid var(--line);
+    font-size: 0.78rem;
+    font-weight: 600;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s, transform 0.2s;
+  }
+  .hotspot:hover .hotspot-label,
+  .hotspot:focus-visible .hotspot-label,
+  .hotspot.is-active .hotspot-label {
+    opacity: 1;
+    transform: translateY(-50%) translateX(0);
+  }
+  .hotspot:hover .hotspot-num,
+  .hotspot.is-active .hotspot-num {
+    transform: scale(1.18);
+    background: var(--amber);
+    color: #1a1206;
+  }
+  .hotspot.is-active .hotspot-ring {
+    border-color: var(--signal);
+  }
+  @keyframes pulse {
+    0% {
+      transform: scale(0.7);
+      opacity: 0.9;
+    }
+    100% {
+      transform: scale(1.8);
+      opacity: 0;
+    }
+  }
+  @media (max-width: 767px) {
+    .hotspot-num {
+      width: 22px;
+      height: 22px;
+      font-size: 11px;
+    }
+    .hotspot-label {
+      display: none;
+    }
+  }
+
+  /* ------------------------------ bottom sheet ---------------------------- */
+  .sheet-handle {
+    width: 44px;
+    height: 5px;
+    border-radius: 99px;
+    background: rgba(255, 255, 255, 0.28);
+    margin: 0 auto;
+  }
+
+  .scroll-thin {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.15) transparent;
+  }
+  .no-scrollbar {
+    scrollbar-width: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* ------------------------------- teleport ------------------------------- */
+  .warp {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    background: radial-gradient(circle at 50% 50%, rgba(127, 231, 242, 0.25), rgba(5, 7, 13, 0.95) 55%, #05070d 75%);
+  }
+
+  /* ------------------------------- stamps --------------------------------- */
+  .stamp {
+    border: 2px dashed currentColor;
+    border-radius: 14px;
+    transform: rotate(-6deg);
+  }
+
+  .verify-dot {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    border-radius: 99px;
+    background: var(--amber);
+    margin-left: 4px;
+    vertical-align: middle;
+    opacity: 0.8;
+  }
+
+  .prose-story p + p {
+    margin-top: 0.75rem;
+  }
+}
+
+/* Touch-target floor: kept outside the layers on purpose so a smaller min-h-* utility cannot shrink a button below 44px. */
+.btn {
+  min-height: 44px;
+}
+
+/* ------------------------------ solar map ------------------------------- */
+.map-marker {
+  outline: none;
+}
+.map-focus {
+  opacity: 0;
+  transition: opacity 0.15s;
+}
+.map-marker:focus-visible .map-focus {
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hotspot-ring {
+    animation: none;
+  }
+}
+
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  body {
+    background: white;
+    color: black;
+  }
+  .print-light {
+    background: white !important;
+    color: black !important;
+    border-color: #ccc !important;
+  }
+}
