@@ -1,4 +1,4 @@
-/** Curiosity — original line-art silhouette (viewBox 0 0 200 120, stroke=currentColor). */
+/** Curiosity: original line-art silhouette (viewBox 0 0 200 120, stroke=currentColor). */
 export function Art_curiosity({ className = '' }: { className?: string }) {
   return (
     <svg viewBox="0 0 200 120" className={className} fill="none" stroke="currentColor" strokeWidth={2.2} strokeLinecap="round" strokeLinejoin="round" aria-hidden>

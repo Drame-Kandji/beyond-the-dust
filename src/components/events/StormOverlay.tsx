@@ -5,7 +5,7 @@ import { useAppStore } from '../../store/useAppStore';
 import { useT } from '../../i18n/useT';
 
 /**
- * "Last day — June 2018": the dust storm darkens the 3D sky while the solar energy gauge drops.
+ * "Last day, June 2018": the dust storm darkens the 3D sky while the solar energy gauge drops.
  * Energy values are illustrative of the trend (not telemetry); the dates are real.
  */
 export function StormOverlay() {

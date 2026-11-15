@@ -1,5 +1,5 @@
 /**
- * Opportunity (Mars Exploration Rover B) — content drafted with AI assistance
+ * Opportunity (Mars Exploration Rover B), content drafted with AI assistance
  * from NASA Science / JPL pages. `verify: true` = to be checked by the team (FACT_CHECK.md).
  * Coordinates: metres, +x = front of the rover, +y = up.
  */
@@ -311,7 +311,7 @@ export const opportunity: Vehicle = {
         'Cette antenne orientable envoyait un faisceau radio étroit vers la Terre, où les grandes antennes du Deep Space Network de la NASA écoutaient.',
       ),
       whyItMattered: t('Every picture and every measurement had to make the long trip home to become science.', 'Chaque photo et chaque mesure devait faire le long voyage du retour pour devenir de la science.'),
-      numbers: [{ value: '3–22 min', label: t('one-way signal time Mars → Earth', 'temps du signal Mars → Terre'), sourceId: 'nasa-mer' }],
+      numbers: [{ value: '3-22 min', label: t('one-way signal time Mars → Earth', 'temps du signal Mars → Terre'), sourceId: 'nasa-mer' }],
       worksWith: ['uhf-antenna', 'solar-panels'],
     },
     {
@@ -357,7 +357,7 @@ export const opportunity: Vehicle = {
     band: t('X-band direct to Earth + UHF relay via Mars orbiters', 'Bande X vers la Terre + relais UHF via les orbiteurs martiens'),
     delay: t('3 to 22 minutes one way, depending on planet positions', '3 à 22 minutes aller simple, selon la position des planètes'),
     delaySeconds: 12.5 * 60,
-    delayLabel: t('typical ≈ 12.5 min — sped up', 'typique ≈ 12,5 min — accéléré'),
+    delayLabel: t('typical ≈ 12.5 min (sped up)', 'typique ≈ 12,5 min (accéléré)'),
     lastContact: t('June 10, 2018', '10 juin 2018'),
     link: t('Rover → Mars orbiter → Deep Space Network → Earth', 'Rover → orbiteur martien → Deep Space Network → Terre'),
     replies: false,

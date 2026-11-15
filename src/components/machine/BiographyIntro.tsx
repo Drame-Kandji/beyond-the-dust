@@ -156,7 +156,7 @@ export function BiographyIntro({ vehicle }: { vehicle: Vehicle }) {
       {visible && (
         <motion.aside
           key="journey"
-          aria-label={`${t('tour')} — ${l(vehicle.name)}`}
+          aria-label={`${t('tour')}: ${l(vehicle.name)}`}
           aria-live="polite"
           className="pointer-events-none fixed inset-x-2 bottom-[calc(var(--sab)+8px)] z-40 flex justify-center md:inset-x-auto md:top-[84px] md:right-4 md:bottom-auto md:block md:w-[440px]"
           initial={{ opacity: 0, y: reduce ? 0 : 24 }}
@@ -240,7 +240,7 @@ export function BiographyIntro({ vehicle }: { vehicle: Vehicle }) {
                   {step.kind === 'bio' && step.slide === 'remember' && (
                     <figure className="bio-epitaph mt-4 rounded-2xl p-4">
                       <blockquote className="font-display text-[1.1rem] leading-snug text-amber-100 italic">“{l(bio.epitaph)}”</blockquote>
-                      {bio.epitaphSource && <figcaption className="mt-2 text-[0.8125rem] text-ink-300">— {l(bio.epitaphSource)}</figcaption>}
+                      {bio.epitaphSource && <figcaption className="mt-2 text-[0.8125rem] text-ink-300">{l(bio.epitaphSource)}</figcaption>}
                     </figure>
                   )}
                   <p className="mt-3 flex items-center gap-1.5 text-[0.8125rem] text-ink-300">

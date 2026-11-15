@@ -111,7 +111,7 @@ export function SignalPanel({ vehicle }: { vehicle: Vehicle }) {
       <dl className="divide-y divide-white/[0.08] overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03] text-[0.9375rem]">
         {[
           [t('band'), l(tm.band)],
-          ...(tm.power ? [[t('power'), `${tm.power.value} — ${l(tm.power.label)}`]] : []),
+          ...(tm.power ? [[t('power'), `${tm.power.value}, ${l(tm.power.label)}`]] : []),
           [t('delay'), l(tm.delay)],
           [t('lastContact'), l(tm.lastContact)],
           [t('path'), l(tm.link)],

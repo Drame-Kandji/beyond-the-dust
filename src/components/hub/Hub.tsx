@@ -133,7 +133,7 @@ export function Hub() {
       </header>
 
       <div className="relative z-10 flex flex-col lg:h-[calc(100dvh-64px)] lg:flex-row-reverse">
-        {/* Map — right on desktop, top on mobile */}
+        {/* Map: right on desktop, top on mobile */}
         <section className="relative h-[52dvh] min-h-[320px] lg:h-auto lg:flex-[1.4]" aria-label={t('mapLabel')}>
           <MapView selected={destination} onSelect={select} />
         </section>

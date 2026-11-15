@@ -1,5 +1,5 @@
 /**
- * Perseverance (Mars 2020) — content drafted with AI assistance
+ * Perseverance (Mars 2020), content drafted with AI assistance
  * from NASA Science / JPL / NSSDCA pages. `verify: true` = to be checked by the team (FACT_CHECK.md).
  * Like Curiosity, Perseverance is STILL ACTIVE (status as of November 2026).
  * Coordinates: metres, +x = front of the rover, +y = up (computed from the NASA 3D model).
@@ -112,7 +112,7 @@ export const perseverance: Vehicle = {
     },
     {
       id: 'last-day',
-      title: t('Not my last day — yet', 'Pas mon dernier jour — pas encore'),
+      title: t('Not my last day… yet', 'Pas mon dernier jour… pas encore'),
       lead: t('Every machine wears out. My team helps me last.', 'Toute machine s’use. Mon équipe m’aide à durer.'),
       body: t(
         'Like Curiosity, I run on a nuclear power source, so night, winter and dust storms do not stop me. But it gives a little less power every year, so my team plans each day’s energy carefully. My tubes are also limited: I brought 43, and each one is used only for a very special rock. My little friend Ingenuity already stopped flying in 2024. Engineers think I can keep going for years, slowly and carefully.',
@@ -405,7 +405,7 @@ export const perseverance: Vehicle = {
       whyItMattered: t('For the first time, people could listen to another planet, not just look at it.', 'Pour la première fois, on a pu écouter une autre planète, pas seulement la regarder.'),
       numbers: [
         { value: '2', label: t('microphones on the rover', 'micros sur le rover'), sourceId: 'nasa-m2020-components' },
-        { value: '≈ 240–250 m/s', label: t('speed of sound measured on Mars', 'vitesse du son mesurée sur Mars'), sourceId: 'nasa-m2020-sounds', verify: true },
+        { value: '≈ 240-250 m/s', label: t('speed of sound measured on Mars', 'vitesse du son mesurée sur Mars'), sourceId: 'nasa-m2020-sounds', verify: true },
       ],
       worksWith: ['supercam'],
     },
@@ -427,7 +427,7 @@ export const perseverance: Vehicle = {
       ),
       whyItMattered: t('Every discovery only becomes science when it reaches Earth: these antennas are why Perseverance is not silent.', 'Chaque découverte ne devient de la science qu’en arrivant sur Terre : ces antennes sont la raison pour laquelle Perseverance n’est pas silencieux.'),
       numbers: [
-        { value: '3–22 min', label: t('one-way signal time Mars → Earth', 'temps du signal Mars → Terre'), sourceId: 'nasa-m2020', verify: true },
+        { value: '3-22 min', label: t('one-way signal time Mars → Earth', 'temps du signal Mars → Terre'), sourceId: 'nasa-m2020', verify: true },
         { value: '≈ 2 Mbit/s', label: t('UHF link to orbiters, at best', 'liaison UHF vers les orbiteurs, au maximum'), sourceId: 'nasa-m2020-components' },
       ],
       worksWith: ['mmrtg', 'body'],
@@ -537,8 +537,8 @@ export const perseverance: Vehicle = {
     power: { value: '≈ 110 W', label: t('from the MMRTG at launch, slowly decreasing', 'du MMRTG au lancement, en lente baisse'), sourceId: 'nasa-m2020-components' },
     delay: t('3 to 22 minutes one way, depending on planet positions', '3 à 22 minutes aller simple, selon la position des planètes'),
     delaySeconds: 12.5 * 60,
-    delayLabel: t('typical ≈ 12.5 min — sped up', 'typique ≈ 12,5 min — accéléré'),
-    lastContact: t('Still in contact — active mission (November 2026)', 'Toujours en contact — mission active (novembre 2026)'),
+    delayLabel: t('typical ≈ 12.5 min (sped up)', 'typique ≈ 12,5 min (accéléré)'),
+    lastContact: t('Still in contact: active mission (November 2026)', 'Toujours en contact : mission active (novembre 2026)'),
     link: t('Rover → Mars orbiter (UHF) or direct X-band → Deep Space Network → Earth', 'Rover → orbiteur martien (UHF) ou bande X directe → Deep Space Network → Terre'),
     replies: true,
     replyText: t(
@@ -671,7 +671,7 @@ export const perseverance: Vehicle = {
       ),
     ],
     activity: t(
-      '15-minute "sample team" activity: give each group 5 small jars or tubes and a tray of 10–12 different "rocks" (pebbles, chalk, sand, bits of sponge…). Like Perseverance, the group can keep only 5. Each group must choose, label each tube (name, place, why it matters) and present its choice. Discuss: why can’t a rover keep everything, and what makes a sample worth bringing back to Earth?',
+      '15-minute "sample team" activity: give each group 5 small jars or tubes and a tray of 10-12 different "rocks" (pebbles, chalk, sand, bits of sponge…). Like Perseverance, the group can keep only 5. Each group must choose, label each tube (name, place, why it matters) and present its choice. Discuss: why can’t a rover keep everything, and what makes a sample worth bringing back to Earth?',
       'Activité « équipe échantillons » de 15 minutes : donner à chaque groupe 5 petits pots ou tubes et un plateau de 10 à 12 « roches » différentes (cailloux, craie, sable, bouts d’éponge…). Comme Perseverance, le groupe ne peut en garder que 5. Chaque groupe choisit, étiquette chaque tube (nom, lieu, pourquoi il est important) et présente son choix. Discussion : pourquoi un rover ne peut-il pas tout garder, et qu’est-ce qui rend un échantillon digne d’être ramené sur Terre ?',
     ),
   },

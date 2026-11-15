@@ -1,5 +1,5 @@
 /**
- * Curiosity (Mars Science Laboratory) — content drafted with AI assistance
+ * Curiosity (Mars Science Laboratory), content drafted with AI assistance
  * from NASA Science / JPL / NSSDCA pages. `verify: true` = to be checked by the team (FACT_CHECK.md).
  * Unlike the other machines, Curiosity is STILL ACTIVE (status as of November 2026).
  * Coordinates: metres, +x = front of the rover, +y = up.
@@ -104,7 +104,7 @@ export const curiosity: Vehicle = {
     },
     {
       id: 'last-day',
-      title: t('Not my last day — yet', 'Pas mon dernier jour — pas encore'),
+      title: t('Not my last day… yet', 'Pas mon dernier jour… pas encore'),
       lead: t('Every machine wears out. My team helps me last.', 'Toute machine s’use. Mon équipe m’aide à durer.'),
       body: t(
         'I don’t depend on sunlight: my nuclear power source makes electricity day and night, through dust storms and winters, but it gives a little less power every year. My aluminium wheels got holes from sharp rocks, first spotted in 2013. So my team plans my routes around the sharpest rocks, and since 2017, smart software adjusts each wheel’s speed to press less on the rocks. Slowly and carefully, I keep going.',
@@ -380,7 +380,7 @@ export const curiosity: Vehicle = {
         'L’antenne à grand gain orientable utilise la radio en bande X pour recevoir les ordres directement des grandes antennes du Deep Space Network de la NASA. La plupart des images et des données du rover partent par radio UHF vers les orbiteurs qui passent au-dessus, qui les retransmettent vers la Terre avec leurs plus grandes antennes et plus d’énergie.',
       ),
       whyItMattered: t('These antennas are why Curiosity is not silent: every day of work becomes science only when it reaches Earth.', 'Ces antennes sont la raison pour laquelle Curiosity n’est pas silencieux : chaque journée de travail ne devient de la science qu’en arrivant sur Terre.'),
-      numbers: [{ value: '3–22 min', label: t('one-way signal time Mars → Earth', 'temps du signal Mars → Terre'), sourceId: 'nasa-msl', verify: true }],
+      numbers: [{ value: '3-22 min', label: t('one-way signal time Mars → Earth', 'temps du signal Mars → Terre'), sourceId: 'nasa-msl', verify: true }],
       worksWith: ['mmrtg', 'mastcam'],
     },
   ],
@@ -389,8 +389,8 @@ export const curiosity: Vehicle = {
     power: { value: '125 W', label: t('from the MMRTG at the start of the mission, slowly decreasing', 'du MMRTG au début de la mission, en lente baisse'), sourceId: 'nssdca-msl' },
     delay: t('3 to 22 minutes one way, depending on planet positions', '3 à 22 minutes aller simple, selon la position des planètes'),
     delaySeconds: 12.5 * 60,
-    delayLabel: t('typical ≈ 12.5 min — sped up', 'typique ≈ 12,5 min — accéléré'),
-    lastContact: t('Still in contact — active mission (November 2026)', 'Toujours en contact — mission active (novembre 2026)'),
+    delayLabel: t('typical ≈ 12.5 min (sped up)', 'typique ≈ 12,5 min (accéléré)'),
+    lastContact: t('Still in contact: active mission (November 2026)', 'Toujours en contact : mission active (novembre 2026)'),
     link: t('Rover → Mars orbiter (UHF) or direct X-band → Deep Space Network → Earth', 'Rover → orbiteur martien (UHF) ou bande X directe → Deep Space Network → Terre'),
     replies: true,
     replyText: t(
@@ -464,7 +464,7 @@ export const curiosity: Vehicle = {
       ),
     ],
     activity: t(
-      '15-minute "core sample" activity: in groups, stack 4–5 thin layers of different-coloured modelling clay in a cup, each colour standing for an event (lake, sand, volcanic ash…). Swap cups. Each group pushes a clear straw straight down like Curiosity’s drill, pulls out a core, and reads the story from bottom (oldest) to top (youngest). Discuss: what can a drill tell us that a photo cannot?',
+      '15-minute "core sample" activity: in groups, stack 4-5 thin layers of different-coloured modelling clay in a cup, each colour standing for an event (lake, sand, volcanic ash…). Swap cups. Each group pushes a clear straw straight down like Curiosity’s drill, pulls out a core, and reads the story from bottom (oldest) to top (youngest). Discuss: what can a drill tell us that a photo cannot?',
       'Activité « carotte » de 15 minutes : en groupes, empiler 4 à 5 fines couches de pâte à modeler de couleurs différentes dans un gobelet, chaque couleur représentant un événement (lac, sable, cendre volcanique…). Échanger les gobelets. Chaque groupe enfonce une paille transparente bien droite, comme la perceuse de Curiosity, retire une carotte et lit l’histoire du bas (le plus ancien) vers le haut (le plus récent). Discussion : que peut nous apprendre une perceuse qu’une photo ne peut pas ?',
     ),
   },

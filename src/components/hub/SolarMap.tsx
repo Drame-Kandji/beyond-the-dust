@@ -12,7 +12,7 @@ const DEEP = { x: 735, y: 95 };
 /** Stylised, interactive Solar System map (not to scale). */
 export function SolarMap({ selected, onSelect }: { selected: DestinationId; onSelect: (d: DestinationId) => void }) {
   const { l, t } = useT();
-  // Below lg the 800×600 map renders at ~0.4–0.6×: enlarge labels and hit areas so they stay legible and ≥ 44 px.
+  // Below lg the 800×600 map renders at ~0.4-0.6×: enlarge labels and hit areas so they stay legible and ≥ 44 px.
   const k = useMedia('(max-width: 1023px)') ? 1.5 : 1;
   const markers: { id: DestinationId; x: number; y: number; color: string; r: number }[] = [
     { id: 'moon', x: EARTH.x + 26, y: EARTH.y - 16, color: '#C9CCD3', r: 6 },

@@ -1,9 +1,9 @@
 /**
- * Sojourner rover + Mars Pathfinder lander (Carl Sagan Memorial Station) — content drafted
+ * Sojourner rover + Mars Pathfinder lander (Carl Sagan Memorial Station), content drafted
  * with AI assistance from NASA Science, NSSDCA and JPL pages. `verify: true` = to be checked
  * by the team (FACT_CHECK.md).
  * Coordinates: metres, +x = front of the rover, +y = up. Rover at the origin,
- * lander centred at (-1.6, 0, -0.55) — see three/procedural/SojournerModel.tsx.
+ * lander centred at (-1.6, 0, -0.55), see three/procedural/SojournerModel.tsx.
  */
 import type { Vehicle } from '../types';
 
@@ -294,7 +294,7 @@ export const sojourner: Vehicle = {
         'Un petit modem radio UHF reliait le rover à l’atterrisseur. Celui-ci envoyait ensuite tout vers les grandes antennes du Deep Space Network de la NASA sur Terre. C’est pour cela que Sojourner restait à courte distance de son partenaire.',
       ),
       whyItMattered: t('Teamwork between two robots: the lander was the rover’s only way home.', 'Le travail d’équipe entre deux robots : l’atterrisseur était le seul chemin du rover vers la Terre.'),
-      numbers: [{ value: '3–22 min', label: t('one-way signal time Mars → Earth', 'temps du signal Mars → Terre'), sourceId: 'nasa-pathfinder', verify: true }],
+      numbers: [{ value: '3-22 min', label: t('one-way signal time Mars → Earth', 'temps du signal Mars → Terre'), sourceId: 'nasa-pathfinder', verify: true }],
       worksWith: ['warm-electronics-box', 'lander-petals'],
     },
     {
@@ -395,7 +395,7 @@ export const sojourner: Vehicle = {
     power: { value: '13 W', label: t('rover nominal power', 'puissance nominale du rover'), sourceId: 'nssdca' },
     delay: t('3 to 22 minutes one way, depending on planet positions', '3 à 22 minutes aller simple, selon la position des planètes'),
     delaySeconds: 11 * 60,
-    delayLabel: t('typical ≈ 11 min — sped up', 'typique ≈ 11 min — accéléré'),
+    delayLabel: t('typical ≈ 11 min (sped up)', 'typique ≈ 11 min (accéléré)'),
     lastContact: t('September 27, 1997', '27 septembre 1997'),
     link: t('Sojourner → UHF modem → Pathfinder lander → Deep Space Network → Earth', 'Sojourner → modem UHF → atterrisseur Pathfinder → Deep Space Network → Terre'),
     replies: false,

@@ -214,7 +214,7 @@ export function MachineScreen() {
         <div className="pointer-events-none absolute inset-0 shadow-[inset_0_0_160px_rgba(0,0,0,0.65)]" />
       </div>
       <p className="sr-only">
-        {l(vehicle.name)} — {l(vehicle.location)}. {l(vehicle.intro)}
+        {l(vehicle.name)}, {l(vehicle.location)}. {l(vehicle.intro)}
       </p>
 
       <header className="pointer-events-none fixed inset-x-0 top-0 z-30 flex items-center gap-2 px-3 pt-[calc(var(--sat)+12px)] sm:px-4">

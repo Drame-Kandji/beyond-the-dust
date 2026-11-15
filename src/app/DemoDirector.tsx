@@ -4,7 +4,7 @@ import { useAppStore } from '../store/useAppStore';
 import { useT } from '../i18n/useT';
 
 /**
- * `?demo=1` — scripted, click-free 30-second sequence for the video recording.
+ * `?demo=1`: scripted, click-free 30-second sequence for the video recording.
  * Press R to replay.
  */
 export function DemoDirector() {

@@ -1,5 +1,5 @@
 /**
- * Beyond the Dust — data model.
+ * Beyond the Dust: data model.
  * Content was drafted with AI assistance from NASA sources listed in sources.ts
  * and reviewed by the team. Items flagged `verify: true` are listed in FACT_CHECK.md.
  */

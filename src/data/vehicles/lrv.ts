@@ -1,5 +1,5 @@
 /**
- * Lunar Roving Vehicle — content drafted with AI assistance from NASA NSSDCA
+ * Lunar Roving Vehicle, content drafted with AI assistance from NASA NSSDCA
  * and the Apollo Lunar Surface Journal. `verify: true` = to be checked by the team (FACT_CHECK.md).
  * Coordinates: metres, +x = front of the rover, +y = up.
  */
@@ -12,7 +12,7 @@ export const lrv: Vehicle = {
   destination: 'moon',
   name: t('Lunar Roving Vehicle', 'Rover lunaire (LRV)'),
   category: t('Astronaut-driven Moon car', 'Voiture lunaire conduite par des astronautes'),
-  status: t('Parked on the Moon since 1971–1972', 'Garé sur la Lune depuis 1971–1972'),
+  status: t('Parked on the Moon since 1971-1972', 'Garé sur la Lune depuis 1971-1972'),
   hook: t('They came by rocket. They left by rocket. The car stayed behind.', 'Ils sont venus en fusée. Ils sont repartis en fusée. La voiture est restée.'),
   location: t('Hadley-Apennine, the Moon (Apollo 15)', 'Hadley-Apennin, la Lune (Apollo 15)'),
   teleportText: t('Teleporting to Hadley-Apennine, the Moon…', 'Téléportation vers Hadley-Apennin, sur la Lune…'),

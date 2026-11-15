@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useT } from '../../i18n/useT';
 
 /**
- * "Live it in VR" — DOM button, rendered only when immersive-vr is supported.
+ * "Live it in VR": DOM button, rendered only when immersive-vr is supported.
  * Imports nothing from three: the XR store is pulled in with a dynamic import
  * (already loaded by the lazy SceneRoot chunk by the time a user clicks).
  */

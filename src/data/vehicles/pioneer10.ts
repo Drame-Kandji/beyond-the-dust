@@ -1,5 +1,5 @@
 /**
- * Pioneer 10 — content drafted with AI assistance from NASA Science / NASA Ames pages.
+ * Pioneer 10, content drafted with AI assistance from NASA Science / NASA Ames pages.
  * `verify: true` = to be checked by the team (FACT_CHECK.md).
  * Coordinates: metres. The dish opens toward +z (toward Earth), magnetometer boom along +y.
  */
@@ -301,7 +301,7 @@ export const pioneer10: Vehicle = {
     power: { value: '8 W', label: t('transmitter power (about a night light)', 'puissance de l’émetteur (environ une veilleuse)'), sourceId: 'nasa-pioneer10' },
     delay: t('≈ 11 h 20 min one way at its last contact (2003)', '≈ 11 h 20 min aller simple lors du dernier contact (2003)'),
     delaySeconds: 11 * 3600 + 20 * 60,
-    delayLabel: t('11 h 20 min — sped up', '11 h 20 min — accéléré'),
+    delayLabel: t('11 h 20 min (sped up)', '11 h 20 min (accéléré)'),
     lastContact: t('January 23, 2003', '23 janvier 2003'),
     link: t('Pioneer dish → Deep Space Network antennas → Earth', 'Antenne de Pioneer → antennes du Deep Space Network → Terre'),
     replies: false,

@@ -127,7 +127,7 @@ export function StoryPanel({ vehicle }: { vehicle: Vehicle }) {
           return (
             <li key={id}>
               <a className="inline-flex items-start gap-2 text-ink-200 underline decoration-white/25 underline-offset-2 hover:text-ink-100" href={s.url} target="_blank" rel="noreferrer">
-                <ExternalLink size={14} className="mt-0.5 shrink-0 text-ink-300" /> {s.publisher} — {s.title}
+                <ExternalLink size={14} className="mt-0.5 shrink-0 text-ink-300" /> {s.publisher} · {s.title}
               </a>
             </li>
           );

@@ -1,5 +1,5 @@
 /**
- * Apollo 11 Lunar Module "Eagle" — descent stage. Content drafted with AI assistance
+ * Apollo 11 Lunar Module "Eagle", descent stage. Content drafted with AI assistance
  * from NASA NSSDCA (1969-059C), the Apollo Lunar Surface Journal and NASA/JPL pages.
  * `verify: true` = to be checked by the team (FACT_CHECK.md).
  * Coordinates: metres, +x = front of the lander (ladder leg, facing west), +y = up, -z = south.
@@ -32,7 +32,7 @@ export const apollo11lm: Vehicle = {
     facts: [
       { value: '6', label: t('descent stages left on the Moon (Apollo 11 to 17, except 13)', 'étages de descente laissés sur la Lune (Apollo 11 à 17, sauf 13)'), sourceId: 'alsj' },
       { value: '1972-12-14', label: t('last lift-off from the Moon (Apollo 17)', 'dernier décollage depuis la Lune (Apollo 17)'), sourceId: 'alsj' },
-      { value: '?', label: t('fate of Eagle’s ascent stage (likely crashed within 1–4 months)', 'sort de l’étage de remontée d’Eagle (sans doute écrasé en 1 à 4 mois)'), sourceId: 'nssdca-a11lm' },
+      { value: '?', label: t('fate of Eagle’s ascent stage (likely crashed within 1-4 months)', 'sort de l’étage de remontée d’Eagle (sans doute écrasé en 1 à 4 mois)'), sourceId: 'nssdca-a11lm' },
     ],
   },
   keyDates: [
@@ -198,7 +198,7 @@ export const apollo11lm: Vehicle = {
       whyItMattered: t('In the dust kicked up by the engine, it was hard to see the ground. The probes "felt" it for the crew.', 'Dans la poussière soulevée par le moteur, on voyait mal le sol. Les sondes le « sentaient » pour l’équipage.'),
       funFact: t('Buzz Aldrin called out "Contact light" at 3:17:40 p.m. Houston time, the moment Eagle reached the Moon.', 'Buzz Aldrin a annoncé « Contact light » à 15 h 17 min 40 s, heure de Houston : le moment où Eagle a atteint la Lune.'),
       numbers: [
-        { value: '≈ 1.7 m', label: t('length of each probe (67–68 inches)', 'longueur de chaque sonde (67 à 68 pouces)'), sourceId: 'alsj' },
+        { value: '≈ 1.7 m', label: t('length of each probe (67-68 inches)', 'longueur de chaque sonde (67 à 68 pouces)'), sourceId: 'alsj' },
         { value: '3', label: t('probes, one on each leg except the ladder leg', 'sondes, une par jambe sauf celle de l’échelle'), sourceId: 'alsj', verify: true },
       ],
       worksWith: ['landing-legs', 'descent-engine'],
@@ -376,8 +376,8 @@ export const apollo11lm: Vehicle = {
         'Je suis un miroir sans piles. Envoie-moi un laser depuis la Terre et je renvoie la lumière tout droit, comme un catadioptre de vélo. Je fonctionne encore aujourd’hui !',
       ),
       deeper: t(
-        'The Laser Ranging Retroreflector is a panel of 100 small glass corner prisms, set up about 5 m north-northwest of the seismometer. It needs no power. Observatories time how long a laser pulse takes to come back, about 2.5 seconds, and measure the Earth–Moon distance to within a few millimetres.',
-        'Le rétroréflecteur laser est un panneau de 100 petits prismes de verre en coin, installé à environ 5 m au nord-nord-ouest du sismomètre. Il n’a besoin d’aucune énergie. Des observatoires chronomètrent le temps que met une impulsion laser pour revenir, environ 2,5 secondes, et mesurent la distance Terre–Lune à quelques millimètres près.',
+        'The Laser Ranging Retroreflector is a panel of 100 small glass corner prisms, set up about 5 m north-northwest of the seismometer. It needs no power. Observatories time how long a laser pulse takes to come back, about 2.5 seconds, and measure the Earth-Moon distance to within a few millimetres.',
+        'Le rétroréflecteur laser est un panneau de 100 petits prismes de verre en coin, installé à environ 5 m au nord-nord-ouest du sismomètre. Il n’a besoin d’aucune énergie. Des observatoires chronomètrent le temps que met une impulsion laser pour revenir, environ 2,5 secondes, et mesurent la distance Terre-Lune à quelques millimètres près.',
       ),
       whyItMattered: t('Decades of laser measurements showed that the Moon slowly moves away from Earth, that it has a fluid core, and that Einstein’s theory of gravity holds up.', 'Des décennies de mesures laser ont montré que la Lune s’éloigne lentement de la Terre, qu’elle a un noyau fluide, et que la théorie de la gravité d’Einstein tient bon.'),
       funFact: t('It is the only Apollo 11 experiment still in use today.', 'C’est la seule expérience d’Apollo 11 encore utilisée aujourd’hui.'),
@@ -432,7 +432,7 @@ export const apollo11lm: Vehicle = {
         t('The laser retroreflector', 'Le rétroréflecteur laser'),
       ],
       answer: 2,
-      explain: t('It needs no power: observatories bounce lasers off it to measure the Earth–Moon distance very precisely.', 'Il n’a besoin d’aucune énergie : des observatoires y font rebondir des lasers pour mesurer très précisément la distance Terre–Lune.'),
+      explain: t('It needs no power: observatories bounce lasers off it to measure the Earth-Moon distance very precisely.', 'Il n’a besoin d’aucune énergie : des observatoires y font rebondir des lasers pour mesurer très précisément la distance Terre-Lune.'),
     },
   ],
   faq: [
@@ -473,8 +473,8 @@ export const apollo11lm: Vehicle = {
       t('Messages across time: what the plaque says about the people who wrote it.', 'Des messages à travers le temps : ce que la plaque dit de ceux qui l’ont écrite.'),
     ],
     activity: t(
-      '15 min — "Laser to the Moon": in pairs, one student is Earth and one is the Moon reflector, 10 steps apart. Earth "fires" a ball, the Moon sends it straight back; a third student times the round trip. Then compute: light travels about 300,000 km per second and takes about 2.5 s for the round trip, so how far away is the Moon? (≈ 375,000 km.) Discuss why a mirror with no batteries can work for more than 50 years.',
-      '15 min — « Un laser vers la Lune » : par deux, un élève joue la Terre et l’autre le réflecteur lunaire, à 10 pas l’un de l’autre. La Terre « tire » une balle, la Lune la renvoie tout droit ; un troisième élève chronomètre l’aller-retour. Puis calculez : la lumière parcourt environ 300 000 km par seconde et met environ 2,5 s pour l’aller-retour ; à quelle distance est la Lune ? (≈ 375 000 km.) Discutez : pourquoi un miroir sans piles peut-il fonctionner plus de 50 ans ?',
+      '15 min: "Laser to the Moon": in pairs, one student is Earth and one is the Moon reflector, 10 steps apart. Earth "fires" a ball, the Moon sends it straight back; a third student times the round trip. Then compute: light travels about 300,000 km per second and takes about 2.5 s for the round trip, so how far away is the Moon? (≈ 375,000 km.) Discuss why a mirror with no batteries can work for more than 50 years.',
+      '15 min : « Un laser vers la Lune » : par deux, un élève joue la Terre et l’autre le réflecteur lunaire, à 10 pas l’un de l’autre. La Terre « tire » une balle, la Lune la renvoie tout droit ; un troisième élève chronomètre l’aller-retour. Puis calculez : la lumière parcourt environ 300 000 km par seconde et met environ 2,5 s pour l’aller-retour ; à quelle distance est la Lune ? (≈ 375 000 km.) Discutez : pourquoi un miroir sans piles peut-il fonctionner plus de 50 ans ?',
     ),
   },
   sources: ['nssdca-a11lm', 'alsj', 'nssdca', 'jpl-llr', 'nasa-a11-plaque'],

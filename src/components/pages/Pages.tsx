@@ -1,7 +1,7 @@
 import { ArrowLeft, ExternalLink, Printer, Rocket } from 'lucide-react';
 import { TEAM } from '../../data/team';
 import { VEHICLE_LIST } from '../../data';
-import { NON_ENDORSEMENT, SOURCES } from '../../data/sources';
+import { SOURCES } from '../../data/sources';
 import { useAppStore } from '../../store/useAppStore';
 import { useT } from '../../i18n/useT';
 import { LanguageSwitch } from '../layout/Settings';
@@ -43,8 +43,8 @@ const LESSONS: Partial<Record<VehicleId, { ideas: readonly { en: string; fr: str
       t2('Navigation without GPS or a magnetic compass.', 'Se repérer sans GPS ni boussole magnétique.'),
     ],
     activity: t2(
-      '15 min — "Pack the lunar module": give groups a weight budget and a list of items (rover, rocks, tools, food). They must choose what comes home. Discuss why the rover stayed.',
-      '15 min — « Remplis le module lunaire » : donnez aux groupes un budget de masse et une liste d’objets (rover, roches, outils, nourriture). Ils choisissent ce qui revient. Discutez de la raison pour laquelle le rover est resté.',
+      '15 min: "Pack the lunar module": give groups a weight budget and a list of items (rover, rocks, tools, food). They must choose what comes home. Discuss why the rover stayed.',
+      '15 min : « Remplis le module lunaire » : donnez aux groupes un budget de masse et une liste d’objets (rover, roches, outils, nourriture). Ils choisissent ce qui revient. Discutez de la raison pour laquelle le rover est resté.',
     ),
   },
   opportunity: {
@@ -54,8 +54,8 @@ const LESSONS: Partial<Record<VehicleId, { ideas: readonly { en: string; fr: str
       t2('Time delay: why a rover must be partly autonomous.', 'Le délai de communication : pourquoi un rover doit être en partie autonome.'),
     ],
     activity: t2(
-      '15 min — "Remote rover": one student is the rover (eyes closed), another is "Earth" and can only send one instruction every 30 seconds. Experience why Mars rovers need hazard cameras.',
-      '15 min — « Rover télécommandé » : un élève joue le rover (yeux fermés), un autre la « Terre », qui ne peut envoyer qu’une instruction toutes les 30 secondes. On comprend pourquoi les rovers ont besoin de caméras anti-obstacles.',
+      '15 min: "Remote rover": one student is the rover (eyes closed), another is "Earth" and can only send one instruction every 30 seconds. Experience why Mars rovers need hazard cameras.',
+      '15 min : « Rover télécommandé » : un élève joue le rover (yeux fermés), un autre la « Terre », qui ne peut envoyer qu’une instruction toutes les 30 secondes. On comprend pourquoi les rovers ont besoin de caméras anti-obstacles.',
     ),
   },
   pioneer10: {
@@ -65,8 +65,8 @@ const LESSONS: Partial<Record<VehicleId, { ideas: readonly { en: string; fr: str
       t2('Communicating with science: the plaque as a universal message.', 'Communiquer grâce à la science : la plaque comme message universel.'),
     ],
     activity: t2(
-      '15 min — "Design your plaque": with no words, draw a message that tells strangers who we are and where Earth is. Compare with the Pioneer plaque.',
-      '15 min — « Dessine ta plaque » : sans aucun mot, dessinez un message qui dit à des inconnus qui nous sommes et où est la Terre. Comparez avec la plaque de Pioneer.',
+      '15 min: "Design your plaque": with no words, draw a message that tells strangers who we are and where Earth is. Compare with the Pioneer plaque.',
+      '15 min : « Dessine ta plaque » : sans aucun mot, dessinez un message qui dit à des inconnus qui nous sommes et où est la Terre. Comparez avec la plaque de Pioneer.',
     ),
   },
 };
@@ -76,7 +76,7 @@ export function TeachersPage() {
   return (
     <PageShell title={t('teachers')} print>
       <p className="mt-3 max-w-2xl text-lg text-ink-300">
-        {l(t2('Three machines, three science lessons, ages 8–15. Every fact links to a NASA source; the in-app quizzes reuse these questions.', 'Trois machines, trois leçons de sciences, de 8 à 15 ans. Chaque fait renvoie à une source NASA ; les quiz de l’application reprennent ces questions.'))}
+        {l(t2('Three machines, three science lessons, ages 8-15. Every fact links to a NASA source; the in-app quizzes reuse these questions.', 'Trois machines, trois leçons de sciences, de 8 à 15 ans. Chaque fait renvoie à une source NASA ; les quiz de l’application reprennent ces questions.'))}
       </p>
       <div className="mt-8 grid gap-6">
         {VEHICLE_LIST.map((v) => {
@@ -103,7 +103,7 @@ export function TeachersPage() {
               <ol className="list-decimal space-y-1 pl-5">
                 {v.quiz.map((q) => (
                   <li key={q.q.en}>
-                    {l(q.q)} <span className="text-ink-500">— {l(q.options[q.answer])}</span>
+                    {l(q.q)} <span className="text-ink-500">: {l(q.options[q.answer])}</span>
                   </li>
                 ))}
               </ol>
@@ -128,7 +128,7 @@ export function SourcesPage() {
           {Object.values(SOURCES).map((s) => (
             <li key={s.id}>
               <a className="inline-flex min-h-[44px] items-start gap-2 py-2.5 text-ink-100 underline decoration-white/20 hover:decoration-amber-400" href={s.url} target="_blank" rel="noreferrer">
-                <ExternalLink size={15} className="mt-1 shrink-0" aria-hidden /> <span>{s.publisher} — {s.title}</span>
+                <ExternalLink size={15} className="mt-1 shrink-0" aria-hidden /> <span>{s.publisher} · {s.title}</span>
               </a>
             </li>
           ))}
@@ -146,15 +146,14 @@ export function SourcesPage() {
       <section className="mt-10">
         <h2 className="eyebrow mb-3">Credits</h2>
         <ul className="list-disc space-y-1 pl-5 text-ink-300">
-          <li>Fonts: Fraunces, DM Sans, JetBrains Mono — SIL Open Font License (via Fontsource).</li>
+          <li>Fonts: Fraunces, DM Sans, JetBrains Mono, SIL Open Font License (via Fontsource).</li>
           <li>3D: three.js, React Three Fiber, drei (MIT). Apollo 11 LM, Pioneer 10 and Perseverance: models from NASA 3D Resources (science.nasa.gov/3d-resources), split into clickable parts by the team, NASA/JPL logos removed. Curiosity and Sojourner: the team’s own Blender / SolidWorks models. The other machines and all environments are procedural, built for this project.</li>
           <li>Icons: Lucide (ISC). Animation: Motion (MIT). State: Zustand (MIT).</li>
           <li>Sounds: generated in the browser with the Web Audio API.</li>
-          <li>Challenge: NASA Space Apps Challenge 2026 — “Abandoned but not Forgotten”.</li>
+          <li>Challenge: NASA Space Apps Challenge 2026: “Abandoned but not Forgotten”.</li>
         </ul>
       </section>
       <TeamSection />
-      <p className="mt-10 border-t border-white/10 pt-6 text-sm text-ink-500">{NON_ENDORSEMENT}</p>
     </PageShell>
   );
 }
@@ -172,11 +171,8 @@ function TeamSection() {
               <Rocket size={15} aria-hidden className="text-amber-400" /> NASA Space Apps Challenge 2026
             </p>
             <h2 id="team-title" className="font-display text-3xl sm:text-4xl">
-              {t('team')} <span className="text-amber-400">·</span> Dakar
+              {t('team')}
             </h2>
-            <p className="mt-2 max-w-xl text-ink-300">
-              {l(t2('Six people from Dakar, Senegal, who wanted the machines left on the Moon and Mars to tell their own stories.', 'Six personnes de Dakar, au Sénégal, qui ont voulu que les machines laissées sur la Lune et sur Mars racontent elles-mêmes leur histoire.'))}
-            </p>
           </div>
           <p className="mono rounded-full border border-amber-400/30 bg-amber-400/10 px-3 py-1.5 text-xs tracking-widest text-amber-300 uppercase">
             {l(t2('Challenge: Abandoned but not Forgotten', 'Défi : Abandoned but not Forgotten'))}

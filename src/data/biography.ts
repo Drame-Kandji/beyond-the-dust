@@ -37,7 +37,7 @@ export const BIO_TITLES: Record<BioSlideId, L10n> = {
 export const BIO_RESULT: Record<BioResult, L10n> = {
   success: t('Mission accomplished', 'Mission accomplie'),
   beyond: t('Far beyond what was planned', 'Bien au-delà de ce qui était prévu'),
-  ongoing: t('Success — and still working', 'Réussie — et toujours en activité'),
+  ongoing: t('Success, and still working', 'Réussie, et toujours en activité'),
 };
 
 export const BIOGRAPHY: Record<VehicleId, Biography> = {

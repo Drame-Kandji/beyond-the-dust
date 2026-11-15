@@ -37,7 +37,7 @@ export const TEAM: TeamMember[] = [
   },
   {
     firstName: 'Cheikhouna',
-    fullName: 'Cheikhouna Diop',
+    fullName: 'Cheikhouna Bousso',
     role: t('Aerospace & storytelling', 'Aérospatial & récit'),
     focus: t('Mission facts and the machines’ stories', 'Faits des missions et histoires des machines'),
   },
