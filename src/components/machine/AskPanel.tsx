@@ -21,14 +21,22 @@ export function AskPanel({ vehicle }: { vehicle: Vehicle }) {
   const open = useAppStore((s) => s.panel === 'ask');
   const [msgs, setMsgs] = useState<{ who: 'me' | 'bot'; text: string }[]>([]);
   const [input, setInput] = useState('');
-  const end = useRef<HTMLDivElement>(null);
+  const lastQ = useRef<HTMLDivElement>(null);
+  const lastA = useRef<HTMLParagraphElement>(null);
+  const reduce = useAppStore((s) => s.reduceMotion);
 
   useEffect(() => {
     if (open) setMsgs([{ who: 'bot', text: l(vehicle.intro) }]);
   }, [open, vehicle, l]);
+  // After a question: scroll so the question and its answer are at the top, and move focus to the answer.
   useEffect(() => {
-    end.current?.scrollIntoView({ behavior: 'smooth' });
-  }, [msgs]);
+    if (msgs.length < 2) return;
+    const id = window.requestAnimationFrame(() => {
+      lastQ.current?.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
+      lastA.current?.focus({ preventScroll: true });
+    });
+    return () => window.cancelAnimationFrame(id);
+  }, [msgs, reduce]);
 
   const answer = (q: string) => {
     const n = norm(q);
@@ -47,17 +55,26 @@ export function AskPanel({ vehicle }: { vehicle: Vehicle }) {
   return (
     <ResponsivePanel open={open} onClose={() => useAppStore.getState().setPanel(null)} labelledBy="ask-title" eyebrow={l(vehicle.name)} title={t('ask')}>
       <div className="space-y-3" aria-live="polite">
-        {msgs.map((m, i) => (
-          <div key={i} className={`flex gap-2 ${m.who === 'me' ? 'justify-end' : ''}`}>
+        {msgs.map((m, i) => {
+          const isLastQ = m.who === 'me' && i === msgs.length - 2;
+          const isLastA = m.who === 'bot' && i === msgs.length - 1 && i > 0;
+          return (
+          <div key={i} ref={isLastQ ? lastQ : undefined} className={`flex scroll-mt-4 gap-2 ${m.who === 'me' ? 'justify-end' : ''}`}>
             {m.who === 'bot' && (
               <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full border border-white/10 bg-white/[0.06] text-amber-300">
                 <VehicleArt id={vehicle.id} className="h-6 w-7" />
               </span>
             )}
-            <p className={`max-w-[85%] rounded-2xl px-4 py-2.5 text-[1rem] leading-relaxed ${m.who === 'me' ? 'rounded-br-md bg-amber-400 font-medium text-[#1a1206]' : 'rounded-tl-md border border-white/10 bg-white/[0.06] text-ink-100'}`}>{m.text}</p>
+            <p
+              ref={isLastA ? lastA : undefined}
+              tabIndex={isLastA ? -1 : undefined}
+              className={`max-w-[85%] rounded-2xl px-4 py-2.5 text-[1rem] leading-relaxed outline-none ${m.who === 'me' ? 'rounded-br-md bg-amber-400 font-medium text-[#1a1206]' : `rounded-tl-md border bg-white/[0.06] text-ink-100 ${isLastA ? 'answer-new border-amber-400/50' : 'border-white/10'}`}`}
+            >
+              {m.text}
+            </p>
           </div>
-        ))}
-        <div ref={end} />
+          );
+        })}
       </div>
       <div className="mt-5 flex flex-wrap gap-2">
         {vehicle.faq.map((f) => (

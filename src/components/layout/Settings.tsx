@@ -66,7 +66,7 @@ export function SettingsMenu() {
       document.removeEventListener('keydown', onKey);
     };
   }, []);
-  const Row = ({ label, k }: { label: string; k: 'reduceMotion' | 'largeText' }) => (
+  const Row = ({ label, k }: { label: string; k: 'reduceMotion' | 'largeText' | 'showNumbers' }) => (
     <label className="flex min-h-[44px] cursor-pointer items-center justify-between gap-4 text-sm">
       <span>{label}</span>
       <input type="checkbox" className="h-5 w-5 accent-amber-400" checked={s[k]} onChange={(e) => s.setSetting(k, e.target.checked)} />
@@ -96,6 +96,7 @@ export function SettingsMenu() {
             <div className="eyebrow mb-2">{t('settings')}</div>
             <Row label={t('reduceMotion')} k="reduceMotion" />
             <Row label={t('largeText')} k="largeText" />
+            <Row label={t('numbers')} k="showNumbers" />
             <div className="my-2 h-px bg-white/10" />
             <button className="block min-h-[44px] w-full text-left text-sm text-ink-300 hover:text-ink-100" onClick={() => (setOpen(false), s.setScreen('teachers'))}>
               {t('teachers')}

@@ -167,10 +167,6 @@ export function togglePause() {
   useNarrator.setState({ paused: !s.paused });
 }
 
-export function seekNarration(p: number) {
-  if (audio && audio.duration) audio.currentTime = p * audio.duration;
-}
-
 if (typeof document !== 'undefined') {
   document.addEventListener('visibilitychange', () => {
     if (document.hidden) stopNarration();

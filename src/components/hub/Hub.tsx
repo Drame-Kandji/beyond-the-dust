@@ -1,7 +1,11 @@
 import { AnimatePresence, motion } from 'motion/react';
 import { ArrowRight, Lock, Stamp } from 'lucide-react';
 import { Starfield } from '../ui/Starfield';
+import { Suspense, lazy, useState as useStateMap } from 'react';
 import { SolarMap } from './SolarMap';
+import { hasWebGL } from '../../hooks/useMedia';
+
+const SolarMap3D = lazy(() => import('./SolarMap3D'));
 import { VehicleArt } from '../ui/VehicleArt';
 import { DESTINATIONS, VEHICLE_LIST, comingSoonFor, vehiclesFor } from '../../data';
 import type { DestinationId, Vehicle } from '../../data/types';
@@ -10,6 +14,18 @@ import { useT } from '../../i18n/useT';
 import { LanguageSwitch, SettingsMenu, SoundToggle } from '../layout/Settings';
 import { Footer } from '../layout/Footer';
 import { ping } from '../../hooks/ambient';
+
+/** 3D map when WebGL is available (flat SVG map while it loads, or as a fallback). */
+function MapView({ selected, onSelect }: { selected: DestinationId; onSelect: (d: DestinationId) => void }) {
+  const [webgl] = useStateMap(hasWebGL);
+  const flat = <SolarMap selected={selected} onSelect={onSelect} />;
+  if (!webgl) return flat;
+  return (
+    <Suspense fallback={flat}>
+      <SolarMap3D selected={selected} onSelect={onSelect} />
+    </Suspense>
+  );
+}
 
 const ACCENT: Record<DestinationId, string> = { moon: '#C9CCD3', mars: '#E07A3F', 'deep-space': '#7FE7F2' };
 
@@ -118,8 +134,8 @@ export function Hub() {
 
       <div className="relative z-10 flex flex-col lg:h-[calc(100dvh-64px)] lg:flex-row-reverse">
         {/* Map — right on desktop, top on mobile */}
-        <section className="relative h-[40dvh] min-h-[260px] lg:h-auto lg:flex-[1.25]" aria-label={t('mapLabel')}>
-          <SolarMap selected={destination} onSelect={select} />
+        <section className="relative h-[52dvh] min-h-[320px] lg:h-auto lg:flex-[1.4]" aria-label={t('mapLabel')}>
+          <MapView selected={destination} onSelect={select} />
         </section>
 
         {/* Choice panel */}

@@ -521,3 +521,70 @@
     border: 1px solid rgba(255, 181, 71, 0.3);
   }
 }
+
+@layer components {
+  /* Labels of the 3D hub map (real buttons, keyboard accessible). */
+  .map3d-label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    padding: 6px 12px;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    background: rgba(8, 11, 24, 0.72);
+    backdrop-filter: blur(8px);
+    color: #eef1f8;
+    font: 700 0.95rem/1.1 'DM Sans', sans-serif;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    cursor: pointer;
+    min-height: 40px;
+    justify-content: center;
+    transition: transform 0.2s, border-color 0.2s, color 0.2s, background 0.2s;
+  }
+  .map3d-label small {
+    font: 500 0.7rem/1 'JetBrains Mono', monospace;
+    letter-spacing: 0.02em;
+    text-transform: none;
+    color: #a9b2c8;
+  }
+  .map3d-label:hover,
+  .map3d-label:focus-visible {
+    border-color: rgba(255, 181, 71, 0.7);
+    transform: scale(1.05);
+  }
+  .map3d-label.is-active {
+    color: #1a1206;
+    background: #ffb547;
+    border-color: #ffb547;
+    box-shadow: 0 0 24px rgba(255, 181, 71, 0.45);
+  }
+  .map3d-label.is-active small {
+    color: #3a2a10;
+  }
+  .map3d-sub {
+    font: 500 0.8rem/1 'DM Sans', sans-serif;
+    color: #a9b2c8;
+    white-space: nowrap;
+    text-shadow: 0 1px 6px rgba(0, 0, 0, 0.9);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .map3d-label { transition: none; }
+  }
+}
+
+@layer components {
+  /* Newest answer in "Ask me": a short glow so the eye finds it. */
+  .answer-new {
+    animation: answer-glow 1.6s ease-out 1;
+  }
+  @keyframes answer-glow {
+    0% { box-shadow: 0 0 0 0 rgba(255, 181, 71, 0.55); }
+    100% { box-shadow: 0 0 0 14px rgba(255, 181, 71, 0); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .answer-new { animation: none; }
+  }
+}

@@ -9,6 +9,8 @@ interface Settings {
   lang: Lang;
   reduceMotion: boolean;
   largeText: boolean;
+  /** Show the numbered hotspots on the machines. */
+  showNumbers: boolean;
   muted: boolean;
 }
 
@@ -71,7 +73,7 @@ function save(s: AppState) {
   try {
     localStorage.setItem(
       KEY,
-      JSON.stringify({ lang: s.lang, reduceMotion: s.reduceMotion, largeText: s.largeText, muted: s.muted, passport: s.passport }),
+      JSON.stringify({ lang: s.lang, reduceMotion: s.reduceMotion, largeText: s.largeText, showNumbers: s.showNumbers, muted: s.muted, passport: s.passport }),
     );
   } catch {
     /* storage unavailable: ignore */
@@ -114,6 +116,7 @@ export const useAppStore = create<AppState>((set, get) => ({
   lang: (urlLang === 'fr' || urlLang === 'en' ? urlLang : saved.lang) ?? 'en',
   reduceMotion: saved.reduceMotion ?? !!prefersReduced,
   largeText: saved.largeText ?? false,
+  showNumbers: saved.showNumbers ?? true,
   muted: saved.muted ?? false,
   passport: saved.passport ?? [],
   screen: 'intro',

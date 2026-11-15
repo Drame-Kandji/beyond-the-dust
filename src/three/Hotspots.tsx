@@ -45,6 +45,8 @@ function Hotspot({ part, index }: { part: Part; index: number }) {
 }
 
 export function Hotspots({ vehicle }: { vehicle: Vehicle }) {
+  const show = useAppStore((s) => s.showNumbers);
+  if (!show) return null;
   return (
     <>
       {vehicle.parts.map((p, i) => (

@@ -1,6 +1,6 @@
 import { Suspense, lazy, useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'motion/react';
-import { ArrowLeft, BookOpen, ScrollText, Boxes, ChevronDown, Expand, HelpCircle, ListOrdered, MessageCircle, Play, Radio, RotateCcw, ScanLine, Square } from 'lucide-react';
+import { ArrowLeft, BookOpen, Hash, ScrollText, Boxes, ChevronDown, Expand, HelpCircle, ListOrdered, MessageCircle, Play, Radio, RotateCcw, ScanLine, Square } from 'lucide-react';
 import { VEHICLES } from '../../data';
 import type { Vehicle } from '../../data/types';
 import { useAppStore } from '../../store/useAppStore';
@@ -146,6 +146,7 @@ export function MachineScreen() {
   const xray = useAppStore((s) => s.xray);
   const touring = useAppStore((s) => s.touring);
   const bioOpen = useAppStore((s) => s.bio);
+  const showNumbers = useAppStore((s) => s.showNumbers);
   const mobile = useIsMobile();
   const [webgl] = useState(hasWebGL);
   // The guided tour IS the story: "Guided tour" anywhere opens the unified visit.
@@ -189,6 +190,7 @@ export function MachineScreen() {
     { k: 'reset', icon: RotateCcw, label: t('reset'), on: false, fn: () => (s().set({ selectedPart: null, panel: panel === 'part' ? null : panel }), s().resetCamera()) },
     { k: 'exploded', icon: Boxes, label: t('exploded'), on: exploded, fn: () => (s().toggle('exploded'), s().resetCamera()) },
     { k: 'xray', icon: ScanLine, label: t('xray'), on: xray, fn: () => s().toggle('xray') },
+    { k: 'numbers', icon: Hash, label: t('numbersShort'), on: showNumbers, fn: () => s().setSetting('showNumbers', !showNumbers) },
     {
       k: 'tour',
       icon: bioOpen ? Square : Play,
@@ -268,7 +270,7 @@ export function MachineScreen() {
                 <a.icon size={17} /> {a.label}
               </button>
             ))}
-            {tools.slice(0, 4).filter((x) => webgl || x.k === 'tour').map((x) => (
+            {tools.slice(0, 5).filter((x) => webgl || x.k === 'tour').map((x) => (
               <button key={x.k} className="btn glass shrink-0 px-3.5 text-sm" aria-pressed={x.on} onClick={x.fn}>
                 <x.icon size={17} /> {x.label}
               </button>

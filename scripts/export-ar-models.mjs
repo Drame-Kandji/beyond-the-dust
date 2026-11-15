@@ -25,7 +25,7 @@ import { dedup, flatten, join as joinMeshes, prune, weld } from '@gltf-transform
 
 const ROOT = resolve(fileURLToPath(new URL('..', import.meta.url)));
 const OUT = join(ROOT, 'public/models/ar');
-const ALL = ['apollo11lm', 'lrv', 'sojourner', 'opportunity', 'curiosity', 'pioneer10']; // perseverance: AR uses its real models/perseverance.glb
+const ALL = ['lrv', 'opportunity']; // the other machines use their real model (public/models/<id>.glb) in AR
 const ids = process.argv.slice(2).filter((a) => ALL.includes(a));
 const wanted = ids.length ? ids : ALL;
 
