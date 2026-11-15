@@ -14,8 +14,8 @@ Le site est 100 % statique : aucune base de données, aucune clé API, aucune va
 
 ### 2. Importer le dépôt
 1. Sur le tableau de bord, cliquer **Add New… → Project**.
-2. Dans *Import Git Repository*, trouver **naza-space-app** → **Import**.
-   - S'il n'apparaît pas : cliquer **Adjust GitHub App Permissions**, autoriser le dépôt `naza-space-app`, puis revenir.
+2. Dans *Import Git Repository*, trouver **beyond-the-dust** → **Import**.
+   - S'il n'apparaît pas : cliquer **Adjust GitHub App Permissions**, autoriser le dépôt `beyond-the-dust`, puis revenir.
 
 ### 3. Vérifier la configuration (normalement rien à changer)
 Vercel lit le fichier `vercel.json` du dépôt :
@@ -87,7 +87,7 @@ Le jury ne doit avoir **besoin d'aucun compte** pour ouvrir le lien.
 | Le build échoue sur une erreur TypeScript | Lancer `npm run build` en local, corriger, puis `git push`. Les logs sont dans *Deployments → (le déploiement) → Building*. |
 | Erreur de version de Node | *Settings → General → Node.js Version* → choisir **20.x** ou **22.x**, puis *Redeploy*. |
 | « The deployment was blocked » ou l'auteur du commit n'est pas reconnu | Ajouter l'email Git (`git config user.email`) au compte GitHub (*Settings → Emails*), ou rendre le dépôt public. |
-| Le dépôt n'apparaît pas dans l'import | *Adjust GitHub App Permissions* → autoriser `naza-space-app`. |
+| Le dépôt n'apparaît pas dans l'import | *Adjust GitHub App Permissions* → autoriser `beyond-the-dust`. |
 | Le son ne marche pas | Toucher l'écran une fois (les navigateurs bloquent le son avant un geste), vérifier que le téléphone n'est pas en mode silencieux. Sans MP3, la voix du navigateur prend le relais. |
 | La 3D est lente sur un vieux téléphone | Normal : la qualité baisse automatiquement. `?no3d=1` force le mode 2D. |
 | Une page renvoie 404 | Utiliser les adresses avec `#/…` (le site utilise des routes en hash, aucune configuration serveur n'est nécessaire). |
