@@ -6,7 +6,7 @@
  *
  *   <id>      apollo11lm | sojourner | curiosity | lrv | opportunity | pioneer10
  *   folder    e.g. models-src/curiosity   (file names become part names: wheel_left.stl → "wheel_left")
- *   --scale   force a unit factor (default: auto — millimetres are detected and converted to metres)
+ *   --scale   force a unit factor (default: auto: millimetres are detected and converted to metres)
  *   --zup     the model was drawn with Z up (rotate so that Y is up)
  *   --rotate  turn the model around the vertical axis (degrees) so its front faces +X
  *
@@ -106,6 +106,6 @@ mkdirSync('public/models', { recursive: true });
 const out = `public/models/${id}.glb`;
 await io.write(out, doc);
 const mb = statSync(out).size / 1024 / 1024;
-console.log(`\n✓ ${out} — ${parts.length} parts, ${(size.x * scale).toFixed(2)} × ${(size.y * scale).toFixed(2)} × ${(size.z * scale).toFixed(2)} m, ${mb.toFixed(2)} MB${mb > 5 ? '  ⚠️ over 5 MB: export the STL with a coarser resolution' : ''}`);
+console.log(`\n✓ ${out}: ${parts.length} parts, ${(size.x * scale).toFixed(2)} × ${(size.y * scale).toFixed(2)} × ${(size.z * scale).toFixed(2)} m, ${mb.toFixed(2)} MB${mb > 5 ? '  ⚠️ over 5 MB: export the STL with a coarser resolution' : ''}`);
 if (scale !== 1) console.log(`  (units converted ×${scale})`);
 execFileSync('node', ['scripts/inspect-glb.mjs', out, id], { stdio: 'inherit' });

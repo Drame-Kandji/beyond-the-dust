@@ -6,7 +6,7 @@ no animation, Draco meshes + WebP textures.
   blender -b --disable-autoexec --python scripts/blender-prepare-nasa-glb.py -- <in.glb> <out.glb> <apollo11lm|pioneer10|perseverance> [ref.glb]
 
 apollo11lm: parts are copied by proximity from a reference model (the SolidWorks conversion,
-            public/models/apollo11lm-sw.glb) — ascent stage removed (it flew back in 1969);
+            public/models/apollo11lm-sw.glb), ascent stage removed (it flew back in 1969);
             contact probes, plaque and MESA panel are taken from that reference.
 pioneer10:  the NASA file is split by material, so it is cut into loose pieces and sorted by position.
 perseverance: parts come from the node names of the NASA file.

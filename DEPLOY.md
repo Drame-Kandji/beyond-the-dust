@@ -1,11 +1,11 @@
-# Déployer Beyond the Dust sur Vercel — guide pas à pas
+# Déployer Beyond the Dust sur Vercel : guide pas à pas
 
 Durée : environ 10 minutes. Coût : gratuit (offre *Hobby*).
 Le site est 100 % statique : aucune base de données, aucune clé API, aucune variable d'environnement.
 
 ---
 
-## Méthode A — Depuis le site Vercel (recommandée)
+## Méthode A : Depuis le site Vercel (recommandée)
 
 ### 1. Créer le compte
 1. Aller sur **https://vercel.com/signup**.
@@ -42,7 +42,7 @@ L'avancement est visible dans l'onglet **Deployments**.
 
 ---
 
-## Méthode B — En ligne de commande (alternative)
+## Méthode B : En ligne de commande (alternative)
 
 ```bash
 npm i -g vercel          # installer l'outil
@@ -73,11 +73,10 @@ Le jury ne doit avoir **besoin d'aucun compte** pour ouvrir le lien.
 - [ ] (Si casque Meta Quest) ouvrir le lien dans le navigateur du casque → **Live it in VR**. La VR exige HTTPS : c'est le cas sur Vercel.
 
 ## 7. Mettre le lien partout
-1. Dans **SUBMISSION.md** : remplacer `[Public website URL]` par l'adresse Vercel.
-2. Dans le **README.md** : ajouter en haut la ligne `**Live demo:** https://…vercel.app`.
-3. Sur la page GitHub du dépôt : roue dentée ⚙️ à côté de *About* → champ **Website** → coller l'adresse.
-4. Sur la page de soumission Space Apps : rubrique **Final Project** (et **Project Demo** pour la vidéo).
-5. `git add -A && git commit -m "Add live demo link" && git push`
+1. Dans le **README.md** : ajouter en haut la ligne `**Live demo:** https://…vercel.app`.
+2. Sur la page GitHub du dépôt : roue dentée ⚙️ à côté de *About* → champ **Website** → coller l'adresse.
+3. Sur la page de soumission Space Apps : rubrique **Final Project** (et **Project Demo** pour la vidéo).
+4. `git add -A && git commit -m "Add live demo link" && git push`
 
 ---
 

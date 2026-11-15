@@ -1,4 +1,4 @@
-# Modèles 3D — comment mettre VOS modèles sur le site
+# Modèles 3D : comment mettre VOS modèles sur le site
 
 Le site cherche automatiquement ces fichiers dans ce dossier :
 
@@ -16,7 +16,7 @@ S'il n'y a pas de fichier `.glb`, le site affiche le modèle construit en code (
 
 ---
 
-## Cas 1 — Vous avez un fichier Blender (`.blend`) → le plus simple
+## Cas 1 : Vous avez un fichier Blender (`.blend`) → le plus simple
 
 1. Ouvrir le fichier dans **Blender** (gratuit : https://www.blender.org/download/).
 2. Menu **File → Export → glTF 2.0 (.glb/.gltf)**.
@@ -29,7 +29,7 @@ S'il n'y a pas de fichier `.glb`, le site affiche le modèle construit en code (
 4. Nommer le fichier exactement comme dans le tableau (ex. `curiosity.glb`) → **Export glTF 2.0**.
 5. Mettre le fichier dans ce dossier `public/models/`.
 
-## Cas 2 — Vous avez SolidWorks (`.SLDPRT` / `.SLDASM`)
+## Cas 2 : Vous avez SolidWorks (`.SLDPRT` / `.SLDASM`)
 
 > Un `.SLDASM` (assemblage) ne contient PAS les pièces : il faut aussi tous les `.SLDPRT` qu'il utilise, dans le même dossier.
 
@@ -76,7 +76,7 @@ Chaque pièce cliquable devient un nœud nommé comme l'`id` de la pièce dans `
 
 Le code est dans `scripts/solidworks/` (Python 3 + numpy). Si vous ré-enregistrez les fichiers, relancez la commande.
 
-## Modèles NASA (.glb) — Apollo 11 LM, Pioneer 10, Perseverance
+## Modèles NASA (.glb) : Apollo 11 LM, Pioneer 10, Perseverance
 
 Les fichiers `Apollo Lunar Module.glb`, `Pioneer 10.glb` et `Mars 2020 Perseverance Rover.glb` (ressources 3D NASA)
 sont préparés par Blender avec :

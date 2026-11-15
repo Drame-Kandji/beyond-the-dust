@@ -39,7 +39,7 @@ const match = (name) => {
   return parts.find((p) => n === p.id || p.patterns.some((pat) => new RegExp(pat, 'i').test(n)))?.id;
 };
 
-console.log(`\n${file} — ${sizeMb} MB ${Number(sizeMb) > 5 ? '⚠️  larger than 5 MB, compress it (gltf-transform optimize --compress draco)' : '✓'}`);
+console.log(`\n${file}: ${sizeMb} MB ${Number(sizeMb) > 5 ? '⚠️  larger than 5 MB, compress it (gltf-transform optimize --compress draco)' : '✓'}`);
 console.log(`Draco: ${(gltf.extensionsUsed || []).includes('KHR_draco_mesh_compression') ? 'yes' : 'no'}\n`);
 const nodes = gltf.nodes || [];
 const found = new Set();
@@ -58,7 +58,7 @@ if (parts.length) {
   const missing = parts.filter((p) => !found.has(p.id));
   console.log(`\nMapped parts: ${found.size}/${parts.length}`);
   if (missing.length) {
-    console.log('Missing parts — rename an object so its name contains one of:');
+    console.log('Missing parts: rename an object so its name contains one of:');
     missing.forEach((p) => console.log(`  • ${p.id} (${p.name}): ${p.patterns.join(', ')}`));
     console.log('Missing parts still work: the app keeps the hotspot and the explanation.');
   }

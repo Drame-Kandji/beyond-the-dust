@@ -8,7 +8,7 @@
  * How: starts a Vite dev server (same config as the app), opens scripts/ar-export/entry.tsx in
  * headless Chrome/Chromium (WebGL via SwiftShader), which mounts every procedural model and sends
  * a binary glTF back. Each file is then optimised with glTF-Transform (dedup, flatten, join, weld,
- * prune) and written to public/models/ar/<id>.glb — 1 unit = 1 m, +y up, sitting on y = 0.
+ * prune) and written to public/models/ar/<id>.glb: 1 unit = 1 m, +y up, sitting on y = 0.
  *
  * The AR viewer uses public/models/<id>.glb (team model) first when it exists, else this file.
  * Browser: set CHROME_PATH if Chrome/Chromium is not found automatically.

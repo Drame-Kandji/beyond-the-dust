@@ -1,5 +1,5 @@
 """
-Minimal reader for SolidWorks 2015+ files (.SLDPRT / .SLDASM) — no SolidWorks needed.
+Minimal reader for SolidWorks 2015+ files (.SLDPRT / .SLDASM), no SolidWorks needed.
 
 It only reads the *display data* SolidWorks caches inside the file (the triangles you see
 on screen), not the exact CAD (B-rep) geometry:
@@ -63,7 +63,7 @@ def biggest(secs: dict, prefix: str):
 
 
 def displaylist_bodies(d: bytes):
-    """Triangle soups: [(positions Nx3, normals Nx3)] — one per solid body."""
+    """Triangle soups: [(positions Nx3, normals Nx3)], one per solid body."""
     arrs = []
     for m in F3.finditer(d):
         p = m.start()
