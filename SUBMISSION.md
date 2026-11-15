@@ -49,7 +49,7 @@ Web Audio API, Web Speech API; Blender/CAD for team models (glTF/.glb with Draco
 ## Use of AI
 - Code: written with the help of an AI coding assistant, reviewed and tested by the team.
 - Text: first drafts of the explanations and stories generated with AI from NASA sources, then edited and fact-checked
-  by the team (fact-check log in the repository: FACT_CHECK.md).
+  by the team.
 - Voice-over: AI neural text-to-speech (Microsoft Edge neural voices via the open-source edge-tts tool), adult female voices only, in English and French.
 - 3D models and environments are procedural code; any AI-generated image or video carries a visible "AI-generated"
   watermark. No NASA logos, flags or mission insignia are used.
