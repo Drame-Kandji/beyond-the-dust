@@ -34,6 +34,13 @@ interface AppState extends Settings {
   passport: VehicleId[];
   camera: CameraRequest | null;
   demo: boolean;
+  /** The machine's life story, told before the parts (see BiographyIntro). */
+  bio: boolean;
+  /** Current step of the unified tour (life story + parts) and whether it narrates by itself. */
+  bioStep: number;
+  bioAuto: boolean;
+  /** Move the camera to a part and highlight it, without opening the part panel. */
+  focusPart: (id: string | null) => void;
 
   setScreen: (s: Screen) => void;
   setDestination: (d: DestinationId) => void;
@@ -76,6 +83,30 @@ const saved = load();
 const params = typeof window !== 'undefined' ? new URLSearchParams(window.location.search) : new URLSearchParams();
 const urlLang = params.get('lang');
 
+function hasUserActivation() {
+  try {
+    return (navigator as Navigator & { userActivation?: { hasBeenActive: boolean } }).userActivation?.hasBeenActive ?? false;
+  } catch {
+    return false;
+  }
+}
+
+/** The life story opens once per vehicle and browser session. */
+export function bioSeen(id: VehicleId) {
+  try {
+    return sessionStorage.getItem(`btd-bio-${id}`) === '1';
+  } catch {
+    return false;
+  }
+}
+export function markBioSeen(id: VehicleId) {
+  try {
+    sessionStorage.setItem(`btd-bio-${id}`, '1');
+  } catch {
+    /* storage unavailable: ignore */
+  }
+}
+
 let nonce = 0;
 const cam = (position: Vec3, target: Vec3): CameraRequest => ({ position, target, nonce: ++nonce });
 
@@ -99,6 +130,9 @@ export const useAppStore = create<AppState>((set, get) => ({
   plaqueOpen: false,
   camera: null,
   demo: params.has('demo'),
+  bio: false,
+  bioStep: 0,
+  bioAuto: false,
 
   setScreen: (screen) => set({ screen }),
   setDestination: (destination) => set({ destination }),
@@ -117,11 +151,21 @@ export const useAppStore = create<AppState>((set, get) => ({
       spin: false,
       plaqueOpen: false,
       camera: null,
+      bio: !get().demo && !bioSeen(id),
+      bioStep: 0,
+      bioAuto: !get().demo && !bioSeen(id) && hasUserActivation(),
     }),
   finishTeleport: () => set({ teleporting: false }),
   leave: () =>
-    set({ screen: 'hub', vehicleId: null, panel: null, selectedPart: null, touring: false, storm: false, spin: false, plaqueOpen: false, exploded: false, xray: false }),
+    set({ screen: 'hub', vehicleId: null, bio: false, panel: null, selectedPart: null, touring: false, storm: false, spin: false, plaqueOpen: false, exploded: false, xray: false }),
   setPanel: (panel) => set({ panel, touring: panel === 'part' ? get().touring : false }),
+  focusPart: (id) => {
+    const v = get().vehicleId ? VEHICLES[get().vehicleId!] : null;
+    if (!v) return;
+    const p = id ? v.parts.find((x) => x.id === id) : null;
+    const c = p ? p.camera : v.model.defaultCamera;
+    set({ selectedPart: p ? p.id : null, camera: get().exploded ? null : cam(c.position, c.target) });
+  },
   selectPart: (id) => {
     const v = get().vehicleId ? VEHICLES[get().vehicleId!] : null;
     if (!v) return;

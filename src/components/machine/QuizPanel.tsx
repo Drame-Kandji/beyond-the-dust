@@ -51,18 +51,18 @@ export function QuizPanel({ vehicle }: { vehicle: Vehicle }) {
         <div>
           <div className="mb-4 flex gap-1.5">
             {vehicle.quiz.map((_, k) => (
-              <div key={k} className={`h-1.5 flex-1 rounded-full ${k < qi ? 'bg-amber-400' : k === qi ? 'bg-amber-400/60' : 'bg-white/15'}`} />
+              <div key={k} className={`h-1.5 flex-1 rounded-full ${k < qi ? 'bg-amber-400' : k === qi ? 'bg-amber-400/60' : 'bg-white/20'}`} />
             ))}
           </div>
-          <p className="font-display text-[1.35rem] leading-snug">{l(q.q)}</p>
+          <p className="font-display text-[1.3rem] leading-snug font-semibold text-ink-100">{l(q.q)}</p>
           <div className="mt-4 grid gap-2.5">
             {q.options.map((o, i) => {
               const isPicked = picked === i;
               const right = i === q.answer;
               const state = picked === null ? '' : isPicked && right ? 'border-emerald-400 bg-emerald-400/10' : isPicked ? 'border-rose-400 bg-rose-400/10' : '';
               return (
-                <button key={i} onClick={() => choose(i)} className={`flex min-h-[52px] items-center gap-3 rounded-2xl border border-white/12 bg-white/[0.03] px-4 py-3 text-left transition hover:border-white/30 ${state}`}>
-                  <span className="mono grid h-7 w-7 shrink-0 place-items-center rounded-full border border-white/20 text-xs">{String.fromCharCode(65 + i)}</span>
+                <button key={i} onClick={() => choose(i)} className={`flex min-h-[54px] items-center gap-3 rounded-2xl border border-white/12 bg-white/[0.04] px-4 py-3 text-left text-[1rem] leading-snug text-ink-100 transition hover:border-white/30 hover:bg-white/[0.07] ${state}`}>
+                  <span className="mono grid h-8 w-8 shrink-0 place-items-center rounded-full border border-amber-400/45 text-[0.8125rem] font-bold text-amber-300">{String.fromCharCode(65 + i)}</span>
                   <span className="flex-1">{l(o)}</span>
                   {isPicked && (right ? <Check className="text-emerald-400" size={20} aria-label={t('correct')} /> : <X className="text-rose-400" size={20} aria-label={t('notQuite')} />)}
                 </button>
@@ -70,10 +70,10 @@ export function QuizPanel({ vehicle }: { vehicle: Vehicle }) {
             })}
           </div>
           {picked !== null && (
-            <motion.div initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} className="mt-4 rounded-2xl border border-white/10 bg-white/[0.04] p-4" aria-live="polite">
+            <motion.div initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} className="mt-4 rounded-2xl border border-white/12 bg-white/[0.05] p-4" aria-live="polite">
               <p className="font-semibold">{picked === q.answer ? `✅ ${t('correct')}` : `💭 ${t('notQuite')}`}</p>
-              <p className="mt-1 text-[0.98rem] text-ink-300">{l(q.explain)}</p>
-              <div className="mt-3 flex gap-2">
+              <p className="reading mt-1.5">{l(q.explain)}</p>
+              <div className="mt-4 flex flex-wrap gap-2">
                 {picked !== q.answer && (
                   <button className="btn" onClick={() => setPicked(null)}>
                     <RotateCcw size={16} /> {t('tryAgain')}

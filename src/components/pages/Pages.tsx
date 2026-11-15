@@ -1,10 +1,12 @@
-import { ArrowLeft, ExternalLink, Printer } from 'lucide-react';
+import { ArrowLeft, ExternalLink, Printer, Rocket } from 'lucide-react';
+import { TEAM } from '../../data/team';
 import { VEHICLE_LIST } from '../../data';
 import { NON_ENDORSEMENT, SOURCES } from '../../data/sources';
 import { useAppStore } from '../../store/useAppStore';
 import { useT } from '../../i18n/useT';
 import { LanguageSwitch } from '../layout/Settings';
 import { VehicleArt } from '../ui/VehicleArt';
+import type { VehicleId } from '../../data/types';
 
 const t2 = (en: string, fr: string) => ({ en, fr });
 
@@ -33,7 +35,7 @@ function PageShell({ title, children, print = false }: { title: string; children
   );
 }
 
-const LESSONS = {
+const LESSONS: Partial<Record<VehicleId, { ideas: readonly { en: string; fr: string }[]; activity: { en: string; fr: string } }>> = {
   lrv: {
     ideas: [
       t2('Gravity on the Moon is about 1/6 of Earth’s: mass vs. weight.', 'La gravité lunaire vaut environ 1/6 de celle de la Terre : masse et poids.'),
@@ -67,7 +69,7 @@ const LESSONS = {
       '15 min — « Dessine ta plaque » : sans aucun mot, dessinez un message qui dit à des inconnus qui nous sommes et où est la Terre. Comparez avec la plaque de Pioneer.',
     ),
   },
-} as const;
+};
 
 export function TeachersPage() {
   const { t, l } = useT();
@@ -78,7 +80,8 @@ export function TeachersPage() {
       </p>
       <div className="mt-8 grid gap-6">
         {VEHICLE_LIST.map((v) => {
-          const lesson = LESSONS[v.id];
+          const lesson = v.lesson ?? LESSONS[v.id];
+          if (!lesson) return null;
           return (
             <section key={v.id} className="rounded-3xl border border-white/10 bg-white/[0.03] p-6 print-light">
               <div className="flex items-center gap-4">
@@ -144,17 +147,94 @@ export function SourcesPage() {
         <h2 className="eyebrow mb-3">Credits</h2>
         <ul className="list-disc space-y-1 pl-5 text-ink-300">
           <li>Fonts: Fraunces, DM Sans, JetBrains Mono — SIL Open Font License (via Fontsource).</li>
-          <li>3D: three.js, React Three Fiber, drei (MIT). All 3D models and environments are procedural, built for this project.</li>
+          <li>3D: three.js, React Three Fiber, drei (MIT). Apollo 11 LM, Pioneer 10 and Perseverance: models from NASA 3D Resources (science.nasa.gov/3d-resources), split into clickable parts by the team, NASA/JPL logos removed. Curiosity and Sojourner: the team’s own Blender / SolidWorks models. The other machines and all environments are procedural, built for this project.</li>
           <li>Icons: Lucide (ISC). Animation: Motion (MIT). State: Zustand (MIT).</li>
           <li>Sounds: generated in the browser with the Web Audio API.</li>
           <li>Challenge: NASA Space Apps Challenge 2026 — “Abandoned but not Forgotten”.</li>
         </ul>
       </section>
-      <section className="mt-10">
-        <h2 className="eyebrow mb-3">{t('team')}</h2>
-        <p className="text-ink-300">Siga · Aliou · Rokheya · Cheikhouna · Mouhamed · Ibrahima — NASA Space Apps Challenge, Dakar 2026.</p>
-      </section>
+      <TeamSection />
       <p className="mt-10 border-t border-white/10 pt-6 text-sm text-ink-500">{NON_ENDORSEMENT}</p>
     </PageShell>
+  );
+}
+
+const AVATAR_HUES = [32, 190, 280, 12, 150, 220];
+
+function TeamSection() {
+  const { t, l } = useT();
+  return (
+    <section className="mt-12" aria-labelledby="team-title">
+      <div className="team-hero relative overflow-hidden rounded-3xl border border-white/10 p-6 sm:p-8">
+        <div className="relative flex flex-wrap items-end justify-between gap-4">
+          <div>
+            <p className="eyebrow mb-2 flex items-center gap-2">
+              <Rocket size={15} aria-hidden className="text-amber-400" /> NASA Space Apps Challenge 2026
+            </p>
+            <h2 id="team-title" className="font-display text-3xl sm:text-4xl">
+              {t('team')} <span className="text-amber-400">·</span> Dakar
+            </h2>
+            <p className="mt-2 max-w-xl text-ink-300">
+              {l(t2('Six people from Dakar, Senegal, who wanted the machines left on the Moon and Mars to tell their own stories.', 'Six personnes de Dakar, au Sénégal, qui ont voulu que les machines laissées sur la Lune et sur Mars racontent elles-mêmes leur histoire.'))}
+            </p>
+          </div>
+          <p className="mono rounded-full border border-amber-400/30 bg-amber-400/10 px-3 py-1.5 text-xs tracking-widest text-amber-300 uppercase">
+            {l(t2('Challenge: Abandoned but not Forgotten', 'Défi : Abandoned but not Forgotten'))}
+          </p>
+        </div>
+      </div>
+
+      <ul className="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {TEAM.map((m, i) => {
+          const hue = AVATAR_HUES[i % AVATAR_HUES.length];
+          const initials = m.fullName
+            .replace(/…/g, '')
+            .split(/\s+/)
+            .filter(Boolean)
+            .map((w) => w[0])
+            .slice(0, 2)
+            .join('')
+            .toUpperCase();
+          const card = (
+            <>
+              <div className="flex items-center gap-4">
+                <div
+                  className="grid h-14 w-14 shrink-0 place-items-center rounded-2xl font-display text-xl font-semibold text-white shadow-lg"
+                  style={{ background: `linear-gradient(135deg, hsl(${hue} 80% 58%), hsl(${(hue + 40) % 360} 70% 38%))` }}
+                  aria-hidden
+                >
+                  {initials || m.firstName[0]}
+                </div>
+                <div className="min-w-0">
+                  <p className="flex flex-wrap items-center gap-2 font-display text-lg leading-tight font-semibold text-ink-100">
+                    {m.fullName.replace(/\s*…\s*$/, '')}
+                    {m.lead && (
+                      <span className="mono rounded-full bg-amber-400/15 px-2 py-0.5 font-sans text-[0.68rem] font-normal tracking-wider text-amber-300 uppercase">
+                        Lead
+                      </span>
+                    )}
+                  </p>
+                  <p className="mt-1 text-sm font-medium" style={{ color: `hsl(${hue} 85% 70%)` }}>
+                    {l(m.role)}
+                  </p>
+                </div>
+              </div>
+              <p className="mt-4 border-t border-white/10 pt-3 text-[0.95rem] leading-relaxed text-ink-300">{l(m.focus)}</p>
+            </>
+          );
+          return (
+            <li key={m.firstName} className="team-card rounded-2xl border border-white/10 p-5 transition hover:-translate-y-0.5 hover:border-white/20">
+              {m.link ? (
+                <a href={m.link} target="_blank" rel="noreferrer" className="block">
+                  {card}
+                </a>
+              ) : (
+                card
+              )}
+            </li>
+          );
+        })}
+      </ul>
+    </section>
   );
 }

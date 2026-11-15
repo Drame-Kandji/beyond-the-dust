@@ -63,7 +63,7 @@ export function SignalPanel({ vehicle }: { vehicle: Vehicle }) {
         <div className="flex items-center justify-between">
           <div className="text-center">
             <div className="mx-auto h-12 w-12 rounded-full bg-[radial-gradient(circle_at_35%_35%,#8ec5ff,#1d4fa3)] shadow-[0_0_30px_rgba(80,150,255,0.5)]" />
-            <div className="mt-1 text-xs text-ink-300">{t('fromEarth')}</div>
+            <div className="mt-1.5 text-[0.8125rem] font-medium text-ink-200">{t('fromEarth')}</div>
           </div>
           <div className="relative mx-3 h-12 flex-1">
             <div className="absolute top-1/2 right-0 left-0 border-t border-dashed border-signal-300/30" />
@@ -76,12 +76,12 @@ export function SignalPanel({ vehicle }: { vehicle: Vehicle }) {
           </div>
           <div className="text-center" style={{ color: vehicle.destination === 'mars' ? '#E07A3F' : vehicle.destination === 'moon' ? '#C9CCD3' : '#7FE7F2' }}>
             <VehicleArt id={vehicle.id} className={`mx-auto h-12 w-16 ${phase === 'arrived' ? 'animate-pulse' : ''}`} />
-            <div className="mt-1 text-xs text-ink-300">{l(vehicle.name)}</div>
+            <div className="mt-1.5 text-[0.8125rem] font-medium text-ink-200">{l(vehicle.name)}</div>
           </div>
         </div>
         <div className="mt-4 text-center">
           <div className="mono text-3xl font-semibold text-signal-300 tabular-nums">{fmtDuration(phase === 'idle' ? 0 : elapsed)}</div>
-          <div className="mono mt-1 text-xs tracking-widest text-ink-500 uppercase">{l(tm.delayLabel)}</div>
+          <div className="mono mt-1.5 text-xs tracking-[0.14em] text-ink-300 uppercase">{l(tm.delayLabel)}</div>
         </div>
       </div>
 
@@ -91,9 +91,9 @@ export function SignalPanel({ vehicle }: { vehicle: Vehicle }) {
             <Send size={18} /> {t('sendHello')}
           </button>
         )}
-        {phase === 'sending' && <p className="text-center text-ink-300">{t('sending')}</p>}
+        {phase === 'sending' && <p className="text-center text-ink-200">{t('sending')}</p>}
         {phase === 'arrived' && (
-          <p className="text-center text-ink-300">
+          <p className="text-center text-ink-200">
             {t('arrived')} {t('waiting')}
           </p>
         )}
@@ -107,8 +107,8 @@ export function SignalPanel({ vehicle }: { vehicle: Vehicle }) {
         )}
       </div>
 
-      <div className="eyebrow mt-6 mb-2">{t('telemetry')}</div>
-      <dl className="divide-y divide-white/10 rounded-2xl border border-white/10 text-sm">
+      <div className="section-label mt-6 mb-3">{t('telemetry')}</div>
+      <dl className="divide-y divide-white/[0.08] overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03] text-[0.9375rem]">
         {[
           [t('band'), l(tm.band)],
           ...(tm.power ? [[t('power'), `${tm.power.value} — ${l(tm.power.label)}`]] : []),
@@ -116,9 +116,9 @@ export function SignalPanel({ vehicle }: { vehicle: Vehicle }) {
           [t('lastContact'), l(tm.lastContact)],
           [t('path'), l(tm.link)],
         ].map(([k, v]) => (
-          <div key={k} className="grid grid-cols-[110px_1fr] gap-3 px-4 py-2.5">
-            <dt className="mono text-xs text-ink-500 uppercase">{k}</dt>
-            <dd className="text-ink-100">
+          <div key={k} className="grid grid-cols-[112px_1fr] gap-3 px-4 py-3">
+            <dt className="mono pt-0.5 text-xs leading-snug tracking-wide text-ink-300 uppercase">{k}</dt>
+            <dd className="leading-snug text-ink-100">
               {v}
               {k === t('power') && tm.power?.verify && <span className="verify-dot" />}
             </dd>

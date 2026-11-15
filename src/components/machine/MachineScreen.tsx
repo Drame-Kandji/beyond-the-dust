@@ -1,6 +1,6 @@
-import { Suspense, lazy, useEffect, useRef, useState } from 'react';
+import { Suspense, lazy, useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'motion/react';
-import { ArrowLeft, BookOpen, Boxes, Expand, HelpCircle, ListOrdered, MessageCircle, Play, Radio, RotateCcw, ScanLine, Square } from 'lucide-react';
+import { ArrowLeft, BookOpen, ScrollText, Boxes, ChevronDown, Expand, HelpCircle, ListOrdered, MessageCircle, Play, Radio, RotateCcw, ScanLine, Square } from 'lucide-react';
 import { VEHICLES } from '../../data';
 import type { Vehicle } from '../../data/types';
 import { useAppStore } from '../../store/useAppStore';
@@ -10,7 +10,9 @@ import { PartIcon } from '../ui/Icon';
 import { VehicleArt } from '../ui/VehicleArt';
 import { SettingsMenu, SoundToggle, LanguageSwitch } from '../layout/Settings';
 import { VRButton } from '../../three/xr/VRButton';
+import { ARButton, ARViewer } from '../ar/ARButton';
 import { PartPanel } from './PartPanel';
+import { BiographyIntro } from './BiographyIntro';
 import { StoryPanel } from './StoryPanel';
 import { QuizPanel } from './QuizPanel';
 import { SignalPanel } from './SignalPanel';
@@ -19,7 +21,7 @@ import { Captions } from './ListenButton';
 import { StormOverlay } from '../events/StormOverlay';
 import { PlaqueModal } from '../events/PlaqueModal';
 import { hasWebGL, useIsMobile } from '../../hooks/useMedia';
-import { playNarration, stopNarration, useNarrator } from '../../hooks/narrator';
+import { stopNarration } from '../../hooks/narrator';
 import { playAmbient } from '../../hooks/ambient';
 
 const SceneRoot = lazy(() => import('../../three/SceneRoot'));
@@ -61,30 +63,34 @@ function PartsList({ vehicle }: { vehicle: Vehicle }) {
   const selected = useAppStore((s) => s.selectedPart);
   const [open, setOpen] = useState(true);
   return (
-    <nav className="glass fixed top-20 left-4 z-20 hidden max-h-[calc(100dvh-200px)] w-64 flex-col rounded-3xl lg:flex" aria-label={t('parts')}>
-      <button className="flex min-h-[48px] items-center gap-2 px-4 py-3 text-left" onClick={() => setOpen((o) => !o)} aria-expanded={open}>
-        <ListOrdered size={18} className="text-amber-400" />
-        <span className="eyebrow flex-1">{t('parts')}</span>
-        <span className="mono text-xs text-ink-500">{vehicle.parts.length}</span>
+    <nav className={`surface fixed top-20 left-4 z-20 hidden w-[288px] flex-col overflow-hidden rounded-[24px] lg:flex ${open ? 'max-h-[calc(100dvh-196px)]' : ''}`} aria-label={t('parts')}>
+      <button className={`flex min-h-[56px] items-center gap-3 px-4 py-3 text-left transition-colors hover:bg-white/[0.03] ${open ? 'surface-divider border-b' : ''}`} onClick={() => setOpen((o) => !o)} aria-expanded={open}>
+        <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl border border-amber-400/30 bg-amber-400/10 text-amber-400">
+          <ListOrdered size={18} />
+        </span>
+        <span className="min-w-0 flex-1">
+          <span className="block text-[1rem] leading-tight font-semibold text-ink-100">{t('parts')}</span>
+          <span className="block truncate text-[0.8125rem] leading-snug text-ink-300">{l(vehicle.name)}</span>
+        </span>
+        <span className="mono rounded-full border border-white/12 bg-white/[0.05] px-2 py-0.5 text-xs font-semibold text-ink-200">{vehicle.parts.length}</span>
+        <ChevronDown size={18} aria-hidden className={`shrink-0 text-ink-300 transition-transform ${open ? '' : '-rotate-90'}`} />
       </button>
       {open && (
-        <ol className="scroll-thin min-h-0 flex-1 overflow-y-auto px-2 pb-3">
-          {vehicle.parts.map((p, i) => (
-            <li key={p.id}>
-              <button
-                onClick={() => useAppStore.getState().selectPart(p.id)}
-                aria-current={selected === p.id}
-                className={`flex min-h-[42px] w-full items-center gap-2.5 rounded-xl px-2.5 text-left text-sm transition ${selected === p.id ? 'bg-amber-400/15 text-amber-300' : 'text-ink-300 hover:bg-white/5 hover:text-ink-100'}`}
-              >
-                <span className={`mono grid h-6 w-6 shrink-0 place-items-center rounded-full text-[0.7rem] font-bold ${selected === p.id ? 'bg-amber-400 text-[#1a1206]' : 'border border-amber-400/50 text-amber-400'}`}>{i + 1}</span>
-                <PartIcon name={p.icon} size={16} />
-                <span className="truncate">{l(p.name)}</span>
-              </button>
-            </li>
-          ))}
-        </ol>
+        <>
+          <ol className="scroll-thin scroll-fade min-h-0 flex-1 space-y-0.5 overflow-y-auto py-2 pr-2 pl-4">
+            {vehicle.parts.map((p, i) => (
+              <li key={p.id}>
+                <button onClick={() => useAppStore.getState().selectPart(p.id)} aria-current={selected === p.id} className="part-row">
+                  <span className="part-num">{i + 1}</span>
+                  <PartIcon name={p.icon} size={17} className={`shrink-0 ${selected === p.id ? 'text-amber-300' : 'text-ink-300'}`} />
+                  <span className="line-clamp-2 min-w-0 flex-1 text-[0.9375rem] leading-snug font-medium">{l(p.name)}</span>
+                </button>
+              </li>
+            ))}
+          </ol>
+          <p className="surface-divider border-t px-4 py-3 text-[0.8125rem] leading-snug text-ink-300">{t('partsHint')}</p>
+        </>
       )}
-      <p className="px-4 pb-3 text-[0.72rem] text-ink-500">{t('partsHint')}</p>
     </nav>
   );
 }
@@ -94,11 +100,15 @@ function MobilePartsStrip({ vehicle }: { vehicle: Vehicle }) {
   const selected = useAppStore((s) => s.selectedPart);
   return (
     <div className="no-scrollbar flex gap-2 overflow-x-auto px-3 pb-2">
-      {vehicle.parts.map((p, i) => (
-        <button key={p.id} onClick={() => useAppStore.getState().selectPart(p.id)} className={`glass flex min-h-[40px] shrink-0 items-center gap-1.5 rounded-full px-3 text-xs font-semibold ${selected === p.id ? 'border-amber-400 text-amber-300' : 'text-ink-300'}`}>
-          <span className="mono text-amber-400">{i + 1}</span> {l(p.name)}
-        </button>
-      ))}
+      {vehicle.parts.map((p, i) => {
+        const on = selected === p.id;
+        return (
+          <button key={p.id} onClick={() => useAppStore.getState().selectPart(p.id)} aria-current={on} className={`flex min-h-[40px] shrink-0 items-center gap-2 rounded-full border py-1 pr-3.5 pl-1.5 text-[0.875rem] font-semibold shadow-[0_8px_24px_-10px_rgba(0,0,0,0.8)] backdrop-blur-md transition-colors ${on ? 'border-amber-400 bg-[rgba(46,34,14,0.94)] text-amber-300' : 'border-white/12 bg-[rgba(11,16,33,0.88)] text-ink-200'}`}>
+            <span className={`mono grid h-7 w-7 place-items-center rounded-full text-xs font-bold ${on ? 'bg-amber-400 text-[#1a1206]' : 'border border-amber-400/55 text-amber-400'}`}>{i + 1}</span>
+            {l(p.name)}
+          </button>
+        );
+      })}
     </div>
   );
 }
@@ -127,96 +137,6 @@ function Fallback2D({ vehicle }: { vehicle: Vehicle }) {
   );
 }
 
-function Greeting({ vehicle }: { vehicle: Vehicle }) {
-  const { l, t, lang } = useT();
-  const teleporting = useAppStore((s) => s.teleporting);
-  const selected = useAppStore((s) => s.selectedPart);
-  const panel = useAppStore((s) => s.panel);
-  const demo = useAppStore((s) => s.demo);
-  const [dismissed, setDismissed] = useState(false);
-  useEffect(() => {
-    setDismissed(false);
-  }, [vehicle]);
-  useEffect(() => {
-    if (selected || panel) setDismissed(true);
-  }, [selected, panel]);
-  const show = !teleporting && !dismissed && !demo;
-  return (
-    <AnimatePresence>
-      {show && (
-        <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 10 }} transition={{ delay: 0.8 }} className="glass fixed top-[calc(var(--sat)+76px)] left-1/2 z-20 w-[min(520px,calc(100vw-24px))] -translate-x-1/2 rounded-3xl p-4 lg:top-auto lg:bottom-28">
-          <div className="flex gap-3">
-            <div className="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-black/30" style={{ color: ACCENT[vehicle.destination] }}>
-              <VehicleArt id={vehicle.id} className="h-8 w-10" />
-            </div>
-            <div className="min-w-0 flex-1">
-              <p className="font-display text-[1.05rem] leading-snug">“{l(vehicle.intro)}”</p>
-              <div className="mt-3 flex flex-wrap gap-2">
-                <button className="btn btn-primary min-h-[40px] py-1.5 text-sm" onClick={() => (setDismissed(true), playNarration(`story-${vehicle.id}`, l(vehicle.audio.transcript), lang, vehicle.audio.story[lang]))}>
-                  🎧 {t('hearStory')}
-                </button>
-                <button className="btn min-h-[40px] py-1.5 text-sm" onClick={() => (setDismissed(true), useAppStore.getState().set({ touring: true }))}>
-                  <Play size={15} /> {t('tour')}
-                </button>
-                <button className="btn btn-ghost min-h-[40px] py-1.5 text-sm text-ink-300" onClick={() => setDismissed(true)}>
-                  {t('close')}
-                </button>
-              </div>
-            </div>
-          </div>
-        </motion.div>
-      )}
-    </AnimatePresence>
-  );
-}
-
-/** Guided tour: visit every part with the camera and voice. */
-function useGuidedTour(vehicle: Vehicle | null) {
-  const touring = useAppStore((s) => s.touring);
-  const { l, lang } = useT();
-  const step = useRef(0);
-  useEffect(() => {
-    if (!touring || !vehicle) return;
-    step.current = 0;
-    let timer = 0;
-    let unsub: (() => void) | null = null;
-    const go = () => {
-      if (!useAppStore.getState().touring) return;
-      const p = vehicle.parts[step.current];
-      if (!p) {
-        useAppStore.getState().set({ touring: false });
-        return;
-      }
-      useAppStore.getState().selectPart(p.id);
-      const started = Date.now();
-      const text = `${l(p.name)}. ${l(p.simple)}`;
-      let advanced = false;
-      const advance = () => {
-        if (advanced) return;
-        advanced = true;
-        unsub?.();
-        unsub = null;
-        window.clearTimeout(safety);
-        step.current++;
-        timer = window.setTimeout(go, 900);
-      };
-      playNarration(`tour-${p.id}`, l(p.simple), lang, `audio/parts/${vehicle.id}_${p.id}_${lang}.mp3`);
-      // Safety net: never get stuck on a part if the voice does not finish.
-      const safety = window.setTimeout(advance, 4000 + text.split(' ').length * 420);
-      unsub?.();
-      unsub = useNarrator.subscribe((s) => {
-        if (!s.playing && Date.now() - started > 800) advance();
-      });
-    };
-    timer = window.setTimeout(go, 300);
-    return () => {
-      window.clearTimeout(timer);
-      unsub?.();
-      stopNarration();
-    };
-  }, [touring, vehicle, l, lang]);
-}
-
 export function MachineScreen() {
   const { t, l } = useT();
   const id = useAppStore((s) => s.vehicleId);
@@ -225,9 +145,14 @@ export function MachineScreen() {
   const exploded = useAppStore((s) => s.exploded);
   const xray = useAppStore((s) => s.xray);
   const touring = useAppStore((s) => s.touring);
+  const bioOpen = useAppStore((s) => s.bio);
   const mobile = useIsMobile();
   const [webgl] = useState(hasWebGL);
-  useGuidedTour(vehicle);
+  // The guided tour IS the story: "Guided tour" anywhere opens the unified visit.
+  useEffect(() => {
+    if (!touring) return;
+    useAppStore.getState().set({ touring: false, panel: null, bio: true, bioStep: 0, bioAuto: true });
+  }, [touring]);
 
   useEffect(() => {
     if (!vehicle) return;
@@ -240,7 +165,11 @@ export function MachineScreen() {
 
   if (!vehicle) return null;
   const s = useAppStore.getState;
-  const openPanel = (p: 'story' | 'quiz' | 'signal' | 'ask') => {
+  const openPanel = (p: 'bio' | 'story' | 'quiz' | 'signal' | 'ask') => {
+    if (p === 'bio') {
+      s().set({ touring: false, selectedPart: null, panel: null, bio: true, bioStep: 0, bioAuto: true });
+      return;
+    }
     s().set({ touring: false, selectedPart: null });
     s().setPanel(panel === p ? null : p);
   };
@@ -250,6 +179,7 @@ export function MachineScreen() {
   };
 
   const actions = [
+    { k: 'bio' as const, icon: ScrollText, label: t('tour') },
     { k: 'story' as const, icon: BookOpen, label: t('story') },
     { k: 'signal' as const, icon: Radio, label: t('signal') },
     { k: 'quiz' as const, icon: HelpCircle, label: t('quiz') },
@@ -259,7 +189,13 @@ export function MachineScreen() {
     { k: 'reset', icon: RotateCcw, label: t('reset'), on: false, fn: () => (s().set({ selectedPart: null, panel: panel === 'part' ? null : panel }), s().resetCamera()) },
     { k: 'exploded', icon: Boxes, label: t('exploded'), on: exploded, fn: () => (s().toggle('exploded'), s().resetCamera()) },
     { k: 'xray', icon: ScanLine, label: t('xray'), on: xray, fn: () => s().toggle('xray') },
-    { k: 'tour', icon: touring ? Square : Play, label: touring ? t('stopTour') : t('tour'), on: touring, fn: () => s().set({ touring: !touring }) },
+    {
+      k: 'tour',
+      icon: bioOpen ? Square : Play,
+      label: bioOpen ? t('stopTour') : t('tour'),
+      on: bioOpen,
+      fn: () => (bioOpen ? (stopNarration(), s().set({ bio: false, bioAuto: false }), s().focusPart(null)) : openPanel('bio')),
+    },
     { k: 'fs', icon: Expand, label: t('fullscreen'), on: false, fn: fullscreen },
   ];
 
@@ -283,15 +219,17 @@ export function MachineScreen() {
         <button className="btn glass pointer-events-auto" onClick={() => s().leave()} data-testid="leave">
           <ArrowLeft size={18} /> {t('leave')}
         </button>
-        <div className="pointer-events-auto min-w-0 flex-1 px-2">
-          <div className="font-display truncate text-lg leading-tight font-semibold sm:text-xl">{l(vehicle.name)}</div>
-          <div className="truncate text-xs" style={{ color: ACCENT[vehicle.destination] }}>
-            {l(vehicle.location)}
+        <div className="pointer-events-auto min-w-0 flex-1">
+          <div className="inline-flex max-w-full flex-col rounded-2xl bg-[rgba(8,12,26,0.6)] px-3 py-1 backdrop-blur-md">
+            <div className="font-display truncate text-lg leading-tight font-semibold text-ink-100 sm:text-xl">{l(vehicle.name)}</div>
+            <div className="truncate text-[0.8125rem] font-medium" style={{ color: ACCENT[vehicle.destination] }}>
+              {l(vehicle.location)}
+            </div>
           </div>
         </div>
         <div className="pointer-events-auto hidden items-center gap-2 md:flex">
           {actions.map((a) => (
-            <button key={a.k} className="btn glass" aria-pressed={panel === a.k} aria-label={a.label} onClick={() => openPanel(a.k)} data-testid={`action-${a.k}`}>
+            <button key={a.k} className="btn glass" aria-pressed={a.k === 'bio' ? bioOpen : panel === a.k} aria-label={a.label} onClick={() => openPanel(a.k)} data-testid={`action-${a.k}`}>
               <a.icon size={17} /> <span className="hidden xl:inline">{a.label}</span>
             </button>
           ))}
@@ -299,6 +237,7 @@ export function MachineScreen() {
         </div>
         <div className="pointer-events-auto flex items-center gap-2">
           <VRButton />
+          {!mobile && <ARButton labelClass="hidden lg:inline" />}
           <SoundToggle />
           <SettingsMenu />
         </div>
@@ -315,7 +254,7 @@ export function MachineScreen() {
               </button>
             ))}
           </div>
-          {webgl && <p className="mt-2 text-center text-xs text-ink-500">{t('dragHint')}</p>}
+          {webgl && <p className="mt-2 text-center text-xs text-ink-300 [text-shadow:0_1px_6px_rgba(0,0,0,0.9)]">{t('dragHint')}</p>}
         </div>
       )}
 
@@ -323,8 +262,9 @@ export function MachineScreen() {
         <div className="fixed inset-x-0 bottom-0 z-20 pb-[calc(var(--sab)+8px)]">
           {webgl && <MobilePartsStrip vehicle={vehicle} />}
           <div className="no-scrollbar flex gap-2 overflow-x-auto px-3">
+            <ARButton className="btn glass shrink-0 px-3.5 text-sm" />
             {actions.map((a) => (
-              <button key={a.k} className="btn glass shrink-0 px-3.5 text-sm" aria-pressed={panel === a.k} onClick={() => openPanel(a.k)}>
+              <button key={a.k} className="btn glass shrink-0 px-3.5 text-sm" aria-pressed={a.k === 'bio' ? bioOpen : panel === a.k} onClick={() => openPanel(a.k)}>
                 <a.icon size={17} /> {a.label}
               </button>
             ))}
@@ -337,8 +277,8 @@ export function MachineScreen() {
         </div>
       )}
 
-      <Greeting vehicle={vehicle} />
-      <Captions />
+      {!bioOpen && <Captions />}
+      <BiographyIntro vehicle={vehicle} />
       <PartPanel vehicle={vehicle} />
       <StoryPanel vehicle={vehicle} />
       <QuizPanel vehicle={vehicle} />
@@ -346,6 +286,7 @@ export function MachineScreen() {
       <AskPanel vehicle={vehicle} />
       <StormOverlay />
       <PlaqueModal />
+      <ARViewer vehicle={vehicle} />
       <Teleport vehicle={vehicle} />
     </main>
   );

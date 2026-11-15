@@ -10,11 +10,14 @@ Visitors don't read a fact sheet: they **teleport** in front of a machine NASA l
 360° scene, and **touch each part — the part explains itself**, in words an 8-year-old understands, with a
 "Go deeper" level for teenagers. Then the machine tells its own life story, in the first person.
 
-| Machine | Where | Story hook |
+| Machine | Where | Status |
 |---|---|---|
-| Lunar Roving Vehicle (+ Apollo 16 & 17 rovers) | The Moon, Hadley-Apennine | *They came by rocket. They left by rocket. The car stayed behind.* |
-| Opportunity (+ twin Spirit) | Mars, Perseverance Valley | *Built for 90 days. It worked for more than 5,000.* |
-| Pioneer 10 (+ sister Pioneer 11) | Deep space, toward Aldebaran | *It left for 21 months and spoke for 31 years.* |
+| Apollo 11 Lunar Module "Eagle" — descent stage (+ EASEP, laser retroreflector) | The Moon, Tranquility Base | Left as the launch pad, 1969 |
+| Lunar Roving Vehicle (+ Apollo 16 & 17 rovers) | The Moon, Hadley-Apennine | Parked since 1971–1972 |
+| Sojourner + Mars Pathfinder lander | Mars, Ares Vallis | Silent since 27 Sept 1997 |
+| Opportunity (+ twin Spirit) | Mars, Perseverance Valley | Silent since 10 June 2018 |
+| Curiosity (+ sibling Perseverance) | Mars, Gale Crater / Mount Sharp | **Still exploring** |
+| Pioneer 10 (+ sister Pioneer 11) | Deep space, toward Aldebaran | Silent since 2003 |
 
 ## Experience
 
@@ -48,7 +51,7 @@ npm run preview
 Deploy `dist/` to any static host — Vercel (`vercel.json`), Netlify (`netlify.toml`) or GitHub Pages (relative `base`,
 hash routing, no server needed).
 
-Useful URLs: `#/hub`, `#/machine/opportunity`, `#/machine/pioneer10`, `#/machine/lrv`, `#/teachers`, `#/sources`,
+Useful URLs: `#/hub`, `#/machine/apollo11lm`, `#/machine/lrv`, `#/machine/sojourner`, `#/machine/opportunity`, `#/machine/curiosity`, `#/machine/pioneer10`, `#/teachers`, `#/sources`,
 `?lang=fr`, `?no3d=1`, **`?demo=1`** (scripted 30-second sequence for the video, press `R` to replay).
 
 ## Architecture
@@ -103,6 +106,10 @@ Narration MP3s are pre-generated with AI text-to-speech: `pip install edge-tts &
 - NASA Apollo Lunar Surface Journal: https://www.nasa.gov/history/alsj/
 - NASA Science / JPL — Mars Exploration Rovers Spirit and Opportunity: https://science.nasa.gov/mission/mars-exploration-rovers-spirit-and-opportunity/
 - NASA Science — Pioneer 10: https://science.nasa.gov/mission/pioneer-10/ and Pioneer 11: https://science.nasa.gov/mission/pioneer-11/
+- NASA NSSDCA — Apollo 11 Lunar Module / EASEP (1969-059C): https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1969-059C
+- NASA Science — Mars Pathfinder: https://science.nasa.gov/mission/mars-pathfinder/ · NSSDCA 1996-068A and Sojourner (MESURPR) · JPL Sojourner page
+- NASA Science — Curiosity (MSL): https://science.nasa.gov/mission/msl-curiosity/ and its science-instruments page · NSSDCA 2011-070A
+- NASA JPL — lunar laser ranging: https://www.jpl.nasa.gov/news/the-apollo-experiment-that-keeps-on-giving/
 - NASA Space Science Data Coordinated Archive: https://nssdc.gsfc.nasa.gov/
 
 Every displayed number carries its source in the UI. Values still being double-checked show an amber dot and are
@@ -113,12 +120,7 @@ listed in [`FACT_CHECK.md`](FACT_CHECK.md).
 - **Code**: written with AI assistance (an AI coding assistant) and reviewed by the team. Data files carry a header noting this.
 - **Texts**: first drafts by AI from the NASA sources above, reviewed and fact-checked by the team.
 - **3D models & environments**: procedural, generated in code (no AI images).
-- **Voice-over**: AI neural text-to-speech, adult voices only — Microsoft Edge neural voices generated with `edge-tts` (`npm run audio`; EN: Andrew / Ava, FR: Rémy / Vivienne). Any file can be replaced by an ElevenLabs export with the same name.
+- **Voice-over**: AI neural text-to-speech, adult voices only — Microsoft Edge neural voices generated with `edge-tts` (`npm run audio`; adult female voices — EN: Emma / Ava, FR: Denise / Vivienne). Any file can be replaced by an ElevenLabs export with the same name.
 - Any AI-generated image or video carries a visible **"AI-generated"** watermark.
 - No NASA logos, flags, insignia or mission patches are used anywhere.
 
-## Credits
-
-See [`CREDITS.md`](CREDITS.md).
-
-> NASA does not endorse any non-U.S. Government entity and is not responsible for information contained on non-U.S. Government websites.

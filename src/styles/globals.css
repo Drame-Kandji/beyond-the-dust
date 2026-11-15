@@ -6,8 +6,9 @@
   --color-night-800: #121a33;
   --color-night-700: #1b2550;
   --color-ink-100: #eef1f8;
-  --color-ink-300: #a9b2c8;
-  --color-ink-500: #8089a5;
+  --color-ink-200: #d3d9e8;
+  --color-ink-300: #aeb7cc;
+  --color-ink-500: #8a93ae;
   --color-amber-400: #ffb547;
   --color-amber-300: #ffcb7a;
   --color-signal-300: #7fe7f2;
@@ -22,8 +23,12 @@
 
 :root {
   --space-950: #05070d;
-  --glass: rgba(14, 20, 40, 0.72);
-  --glass-strong: rgba(10, 15, 32, 0.9);
+  --glass: rgba(13, 19, 38, 0.8);
+  --glass-strong: rgba(10, 15, 32, 0.94);
+  /* Reading surfaces (side panels, bottom sheets): near-opaque so text never washes out over the 3D scene. */
+  --surface: rgba(11, 16, 33, 0.9);
+  --surface-top: rgba(19, 26, 52, 0.92);
+  --surface-line: rgba(255, 255, 255, 0.11);
   --line: rgba(255, 255, 255, 0.09);
   --amber: #ffb547;
   --signal: #7fe7f2;
@@ -108,6 +113,113 @@
     }
   }
 
+  /* ------------------------------- surface -------------------------------- */
+  .surface {
+    background: linear-gradient(180deg, var(--surface-top) 0%, var(--surface) 140px);
+    border: 1px solid var(--surface-line);
+    box-shadow:
+      0 30px 80px -24px rgba(0, 0, 0, 0.8),
+      0 2px 8px rgba(0, 0, 0, 0.35),
+      inset 0 1px 0 rgba(255, 255, 255, 0.07);
+  }
+  @supports ((backdrop-filter: blur(14px)) or (-webkit-backdrop-filter: blur(14px))) {
+    .surface {
+      -webkit-backdrop-filter: blur(22px) saturate(1.15);
+      backdrop-filter: blur(22px) saturate(1.15);
+    }
+  }
+  @supports not ((backdrop-filter: blur(14px)) or (-webkit-backdrop-filter: blur(14px))) {
+    .surface {
+      background: rgb(11, 16, 33);
+    }
+  }
+  /* Bottom sheet on phones: the scene stays visible above it, so the sheet itself can be fully solid. */
+  .surface-solid {
+    background: linear-gradient(180deg, rgba(19, 26, 52, 0.97) 0%, rgba(11, 16, 33, 0.98) 140px);
+  }
+  .surface-divider {
+    border-color: rgba(255, 255, 255, 0.08);
+  }
+
+  /* Section label inside a panel: small caps label followed by a hairline. */
+  .section-label {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #aeb7cc;
+  }
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.12), transparent);
+  }
+
+  /* Comfortable reading text for panel bodies. */
+  .reading {
+    font-size: 1rem;
+    line-height: 1.65;
+    color: #d3d9e8;
+  }
+
+  /* Parts list row */
+  .part-row {
+    position: relative;
+    display: flex;
+    width: 100%;
+    min-height: 48px;
+    align-items: center;
+    gap: 0.75rem;
+    border-radius: 14px;
+    padding: 0.45rem 0.75rem 0.45rem 0.6rem;
+    text-align: left;
+    color: #d3d9e8;
+    transition: background 0.18s ease, color 0.18s ease;
+  }
+  .part-row:hover {
+    background: rgba(255, 255, 255, 0.055);
+    color: #eef1f8;
+  }
+  .part-row[aria-current='true'] {
+    background: linear-gradient(90deg, rgba(255, 181, 71, 0.2), rgba(255, 181, 71, 0.06));
+    color: #eef1f8;
+  }
+  .part-row[aria-current='true']::before {
+    content: '';
+    position: absolute;
+    left: -0.5rem;
+    top: 10px;
+    bottom: 10px;
+    width: 3px;
+    border-radius: 99px;
+    background: var(--amber);
+    box-shadow: 0 0 12px rgba(255, 181, 71, 0.7);
+  }
+  .part-num {
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    width: 26px;
+    height: 26px;
+    border-radius: 999px;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--amber);
+    border: 1.5px solid rgba(255, 181, 71, 0.55);
+    background: rgba(255, 181, 71, 0.06);
+  }
+  .part-row[aria-current='true'] .part-num {
+    background: var(--amber);
+    border-color: var(--amber);
+    color: #1a1206;
+  }
+
   /* -------------------------------- buttons ------------------------------- */
   .btn {
     display: inline-flex;
@@ -177,7 +289,8 @@
   .eyebrow {
     font-family: var(--font-mono);
     font-size: 0.75rem;
-    letter-spacing: 0.18em;
+    font-weight: 500;
+    letter-spacing: 0.14em;
     text-transform: uppercase;
     color: var(--ink-2);
   }
@@ -275,13 +388,27 @@
     width: 44px;
     height: 5px;
     border-radius: 99px;
-    background: rgba(255, 255, 255, 0.28);
+    background: rgba(255, 255, 255, 0.35);
     margin: 0 auto;
   }
 
   .scroll-thin {
     scrollbar-width: thin;
-    scrollbar-color: rgba(255, 255, 255, 0.15) transparent;
+    scrollbar-color: rgba(255, 255, 255, 0.18) transparent;
+  }
+  .scroll-thin::-webkit-scrollbar {
+    width: 8px;
+  }
+  .scroll-thin::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.16);
+    border-radius: 99px;
+    border: 2px solid transparent;
+    background-clip: padding-box;
+  }
+  /* Soft fade at the edges of a scroll area. */
+  .scroll-fade {
+    -webkit-mask-image: linear-gradient(180deg, transparent 0, #000 12px, #000 calc(100% - 16px), transparent 100%);
+    mask-image: linear-gradient(180deg, transparent 0, #000 12px, #000 calc(100% - 16px), transparent 100%);
   }
   .no-scrollbar {
     scrollbar-width: none;
@@ -342,6 +469,9 @@
   .hotspot-ring {
     animation: none;
   }
+  .part-row {
+    transition: none;
+  }
 }
 
 @media print {
@@ -356,5 +486,38 @@
     background: white !important;
     color: black !important;
     border-color: #ccc !important;
+  }
+}
+
+@layer components {
+  .team-hero {
+    background:
+      radial-gradient(120% 140% at 100% 0%, rgba(255, 181, 71, 0.18), transparent 55%),
+      radial-gradient(90% 120% at 0% 100%, rgba(127, 231, 242, 0.12), transparent 60%),
+      rgba(12, 17, 34, 0.92);
+  }
+  .team-card {
+    background: linear-gradient(180deg, rgba(22, 29, 52, 0.95), rgba(12, 17, 34, 0.95));
+    box-shadow: 0 12px 30px -18px rgba(0, 0, 0, 0.8);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .team-card { transition: none; }
+    .team-card:hover { transform: none; }
+  }
+}
+
+@layer components {
+  .bio-backdrop {
+    background:
+      linear-gradient(90deg, rgba(4, 6, 14, 0.82) 0%, rgba(4, 6, 14, 0.55) 45%, rgba(4, 6, 14, 0.12) 100%);
+  }
+  @media (max-width: 767px) {
+    .bio-backdrop {
+      background: linear-gradient(180deg, rgba(4, 6, 14, 0.1) 0%, rgba(4, 6, 14, 0.75) 45%, rgba(4, 6, 14, 0.92) 100%);
+    }
+  }
+  .bio-epitaph {
+    background: linear-gradient(135deg, rgba(255, 181, 71, 0.16), rgba(255, 181, 71, 0.04));
+    border: 1px solid rgba(255, 181, 71, 0.3);
   }
 }

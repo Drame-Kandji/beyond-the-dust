@@ -410,6 +410,6 @@ export const opportunity: Vehicle = {
       'Il était une fois un petit robot qui rebondit sur Mars, emmailloté dans des airbags, et roula jusque dans un minuscule cratère. Il s’appelait Opportunity. Il devait travailler quatre-vingt-dix jours. Chaque matin, il ouvrait ses ailes solaires au Soleil et partait chercher des indices. Il trouva de petites sphères grises, surnommées myrtilles, qui murmuraient un secret : il y a longtemps, il y avait de l’eau ici. Il s’enlisa dans le sable, et ses amis sur Terre le libérèrent. Il parcourut plus qu’un marathon. Puis, un mois de juin, une tempête de poussière couvrit tout le ciel. La lumière s’éteignit, et Opportunity s’endormit. Il est toujours là, au bord d’un grand cratère, à rêver du Soleil.',
     ),
   },
-  model: { glb: 'models/opportunity.glb', scale: 1, defaultCamera: { position: [2.8, 1.7, 2.9], target: [0, 0.6, 0] } },
+  model: { glb: 'models/opportunity.glb', scale: 1, defaultCamera: { position: [2.8, 1.7, 2.9], target: [0, 0.6, 0] }, env: { blueberries: true } },
   sources: ['nasa-mer', 'nssdca'],
 };

@@ -1,8 +1,16 @@
 import type { VehicleId } from '../../data/types';
+import { Art_apollo11lm } from './art/apollo11lm';
+import { Art_sojourner } from './art/sojourner';
+import { Art_curiosity } from './art/curiosity';
+import { Art_perseverance } from './art/perseverance';
 
 /** Simple line-art silhouettes (original drawings, no NASA imagery). */
 export function VehicleArt({ id, className = '' }: { id: VehicleId; className?: string }) {
   const stroke = 'currentColor';
+  if (id === 'apollo11lm') return <Art_apollo11lm className={className} />;
+  if (id === 'sojourner') return <Art_sojourner className={className} />;
+  if (id === 'curiosity') return <Art_curiosity className={className} />;
+  if (id === 'perseverance') return <Art_perseverance className={className} />;
   if (id === 'lrv')
     return (
       <svg viewBox="0 0 200 120" className={className} fill="none" stroke={stroke} strokeWidth={2.2} strokeLinecap="round" strokeLinejoin="round" aria-hidden>

@@ -16,18 +16,25 @@ import { pathToFileURL } from 'node:url';
 const force = process.argv.includes('--force');
 const EDGE = process.env.EDGE_TTS || 'edge-tts';
 const VOICES = {
-  story: { en: 'en-US-AndrewMultilingualNeural', fr: 'fr-FR-RemyMultilingualNeural' }, // warm adult narrator
+  // Adult female voices only (team choice; contest rule: no voices of people under 18).
+  story: { en: 'en-US-EmmaMultilingualNeural', fr: 'fr-FR-DeniseNeural' }, // warm storyteller
   part: { en: 'en-US-AvaMultilingualNeural', fr: 'fr-FR-VivienneMultilingualNeural' }, // the machine's own voice
 };
 const out = join(tmpdir(), `btd-audio-${Date.now()}.mjs`);
 await build({ entryPoints: ['src/data/index.ts'], bundle: true, format: 'esm', platform: 'node', outfile: out, logLevel: 'silent' });
 const { VEHICLE_LIST } = await import(pathToFileURL(out).href);
+const outBio = join(tmpdir(), `btd-bio-${Date.now()}.mjs`);
+await build({ entryPoints: ['src/data/biography.ts'], bundle: true, format: 'esm', platform: 'node', outfile: outBio, logLevel: 'silent' });
+const { BIOGRAPHY, BIO_ORDER } = await import(pathToFileURL(outBio).href);
 mkdirSync('public/audio/parts', { recursive: true });
+mkdirSync('public/audio/bio', { recursive: true });
 
 const jobs = [];
 for (const v of VEHICLE_LIST)
   for (const lang of ['en', 'fr']) {
     jobs.push({ file: `public/audio/${v.id}_${lang}.mp3`, text: v.audio.transcript[lang], voice: VOICES.story[lang], rate: '-6%' });
+    // "My life" story slides (told before the parts), same storyteller voice.
+    for (const slide of BIO_ORDER) jobs.push({ file: `public/audio/bio/${v.id}_${slide}_${lang}.mp3`, text: BIOGRAPHY[v.id].slides[slide][lang], voice: VOICES.story[lang], rate: '-6%' });
     for (const p of v.parts) jobs.push({ file: `public/audio/parts/${v.id}_${p.id}_${lang}.mp3`, text: p.simple[lang], voice: VOICES.part[lang], rate: '-4%' });
   }
 
@@ -48,4 +55,5 @@ for (const j of jobs) {
   process.stdout.write(`\r${done} file(s) generated`);
 }
 rmSync(out, { force: true });
+rmSync(outBio, { force: true });
 console.log(`\n✓ ${jobs.length} narration files in public/audio`);

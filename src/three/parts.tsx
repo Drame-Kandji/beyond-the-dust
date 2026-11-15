@@ -25,6 +25,13 @@ export type Registry = {
 };
 
 const Ctx = createContext<Registry | null>(null);
+/** When set, only these procedural parts render (used to overlay scene items on a team .glb). */
+const FilterCtx = createContext<ReadonlySet<string> | null>(null);
+
+export function PartFilter({ only, children }: { only: string[]; children: ReactNode }) {
+  const set = useMemo(() => new Set(only), [only]);
+  return <FilterCtx.Provider value={set}>{children}</FilterCtx.Provider>;
+}
 const AMBER = new THREE.Color('#ffb547');
 const CYAN = new THREE.Color('#7fe7f2');
 
@@ -41,7 +48,10 @@ export function usePartRegistry(parts: PartData[]) {
         const mats: Entry['mats'] = [];
         const xrayOnly: THREE.Object3D[] = [];
         object.userData.partId = partId;
-        object.traverse((o) => {
+        const visit = (o: THREE.Object3D) => {
+          // Skip sub-trees already registered as another part (nested parts in .glb files).
+          if (o !== object && o.userData.partId && o.userData.partId !== partId) return;
+          o.children.forEach(visit);
           if (o.userData.xrayOnly) xrayOnly.push(o);
           const mesh = o as THREE.Mesh;
           if (!mesh.isMesh) return;
@@ -55,7 +65,8 @@ export function usePartRegistry(parts: PartData[]) {
             return c;
           });
           mesh.material = Array.isArray(mesh.material) ? cloned : cloned[0];
-        });
+        };
+        visit(object);
         const e: Entry = {
           partId,
           object,
@@ -169,11 +180,14 @@ export function usePointerHandlers(registry: Registry) {
 /** Wrap procedural geometry belonging to one part. */
 export function Part({ id, children, position, rotation }: { id: string; children: ReactNode; position?: Vec3; rotation?: Vec3 }) {
   const reg = useContext(Ctx);
+  const filter = useContext(FilterCtx);
   const ref = useRef<THREE.Group>(null);
+  const hidden = !!filter && !filter.has(id);
   useEffect(() => {
-    if (!reg || !ref.current) return;
+    if (!reg || !ref.current || hidden) return;
     return reg.register(id, ref.current);
-  }, [reg, id]);
+  }, [reg, id, hidden]);
+  if (hidden) return null;
   return (
     <group ref={ref} name={id} position={position} rotation={rotation}>
       {children}

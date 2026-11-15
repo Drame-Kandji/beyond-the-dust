@@ -7,7 +7,7 @@ export type Lang = 'en' | 'fr';
 export type L10n = { en: string; fr: string };
 export type Vec3 = [number, number, number];
 export type DestinationId = 'moon' | 'mars' | 'deep-space';
-export type VehicleId = 'lrv' | 'opportunity' | 'pioneer10';
+export type VehicleId = 'lrv' | 'opportunity' | 'pioneer10' | 'apollo11lm' | 'sojourner' | 'curiosity' | 'perseverance';
 export type ChapterId = 'who' | 'why' | 'how' | 'hardest' | 'discovered' | 'last-day' | 'today';
 
 export interface Fact {
@@ -106,7 +106,17 @@ export interface Vehicle {
   quiz: QuizQuestion[];
   faq: Faq[];
   audio: { story: Partial<Record<Lang, string>>; transcript: L10n };
-  model: { glb: string; scale: number; defaultCamera: { position: Vec3; target: Vec3 } };
+  model: {
+    glb: string;
+    scale: number;
+    defaultCamera: { position: Vec3; target: Vec3 };
+    /** Procedural parts still drawn when the .glb is shown (scene items that are not in the CAD file). */
+    overlay?: string[];
+    /** Environment tuning (all optional). */
+    env?: { clearRadius?: number; tracks?: boolean; blueberries?: boolean; landerSilhouette?: boolean; rockiness?: number };
+  };
+  /** Teacher page content (optional; falls back to built-in lessons). */
+  lesson?: { ideas: L10n[]; activity: L10n };
   sources: string[];
   loadingText: L10n;
 }

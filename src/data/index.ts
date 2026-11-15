@@ -2,11 +2,16 @@ import type { ComingSoon, Destination, DestinationId, Vehicle, VehicleId } from 
 import { lrv } from './vehicles/lrv';
 import { opportunity } from './vehicles/opportunity';
 import { pioneer10 } from './vehicles/pioneer10';
+import { apollo11lm } from './vehicles/apollo11lm';
+import { sojourner } from './vehicles/sojourner';
+import { curiosity } from './vehicles/curiosity';
+import { perseverance } from './vehicles/perseverance';
 
 const t = (en: string, fr: string) => ({ en, fr });
 
-export const VEHICLES: Record<VehicleId, Vehicle> = { lrv, opportunity, pioneer10 };
-export const VEHICLE_LIST: Vehicle[] = [lrv, opportunity, pioneer10];
+export const VEHICLES: Record<VehicleId, Vehicle> = { lrv, opportunity, pioneer10, apollo11lm, sojourner, curiosity, perseverance };
+/** Order = order in the hub lists (per destination). */
+export const VEHICLE_LIST: Vehicle[] = [apollo11lm, lrv, sojourner, opportunity, curiosity, perseverance, pioneer10];
 
 export const DESTINATIONS: Destination[] = [
   {
@@ -30,10 +35,8 @@ export const DESTINATIONS: Destination[] = [
 ];
 
 export const COMING_SOON: ComingSoon[] = [
-  { id: 'lm', destination: 'moon', name: 'Apollo Lunar Module descent stages', line: t('Launch pads left behind on the Moon.', 'Des rampes de lancement laissées sur la Lune.') },
   { id: 'alsep', destination: 'moon', name: 'ALSEP science stations', line: t('Seismometers and mirrors left to keep doing science.', 'Sismomètres et miroirs laissés pour continuer la science.') },
   { id: 'surveyor', destination: 'moon', name: 'Surveyor landers', line: t('Robots that proved soft landings were possible.', 'Des robots qui ont prouvé qu’on pouvait se poser en douceur.') },
-  { id: 'sojourner', destination: 'mars', name: 'Sojourner', line: t('The very first rover on Mars, in 1997.', 'Le tout premier rover sur Mars, en 1997.') },
   { id: 'viking', destination: 'mars', name: 'Viking 1 & 2', line: t('The first U.S. landers to work on Mars, 1976.', 'Les premiers atterrisseurs américains à fonctionner sur Mars, 1976.') },
   { id: 'phoenix', destination: 'mars', name: 'Phoenix & InSight', line: t('One dug for ice, one listened for marsquakes.', 'L’un creusait la glace, l’autre écoutait les séismes martiens.') },
   { id: 'ingenuity', destination: 'mars', name: 'Ingenuity', line: t('The first aircraft to fly on another planet.', 'Le premier aéronef à voler sur une autre planète.') },

@@ -12,3 +12,16 @@ promt.txt
 .agents/
 .aws/
 .codex/
+
+# SolidWorks sources (export to .glb for the web)
+*.SLDPRT
+*.SLDASM
+*.sldprt
+*.sldasm
+*.blend
+*.blend1
+models-src/
+
+# NASA / team source models (converted copies are committed with simple names)
+public/models/* *
+__pycache__/

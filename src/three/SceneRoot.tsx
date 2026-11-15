@@ -42,7 +42,7 @@ export default function SceneRoot({ vehicle, onReady }: { vehicle: Vehicle; onRe
           <AdaptiveDpr pixelated={false} />
         </NotInSession>
         <Suspense fallback={null}>
-          <Env />
+          <Env env={vehicle.model.env} />
           <VehicleModel vehicle={vehicle} />
         </Suspense>
         <CameraRig vehicle={vehicle} />

@@ -4,7 +4,7 @@
  * Usage: npm run docs
  */
 import { build } from 'esbuild';
-import { writeFileSync } from 'node:fs';
+import { existsSync, readFileSync, writeFileSync } from 'node:fs';
 import { pathToFileURL } from 'node:url';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
@@ -18,7 +18,7 @@ const { SOURCES } = await import(pathToFileURL(out).href).then(async () => {
   return import(pathToFileURL(o2).href);
 });
 
-const OWNER = { lrv: 'Siga', opportunity: 'Cheikhouna', pioneer10: 'Cheikhouna' };
+const OWNER = { lrv: 'Siga', opportunity: 'Cheikhouna', pioneer10: 'Cheikhouna', apollo11lm: 'Siga', sojourner: 'Mouhamed', curiosity: 'Mouhamed', perseverance: 'Mouhamed' };
 const rows = [];
 for (const v of VEHICLE_LIST) {
   const add = (what, value, sourceId, owner = OWNER[v.id]) => rows.push({ v: v.name.en, what, value, src: SOURCES[sourceId] || SOURCES[v.sources[0]], owner });
@@ -57,7 +57,11 @@ md += `
 
 Total d'éléments chiffrés à vérifier : **${rows.length}**.
 `;
-writeFileSync('FACT_CHECK.md', md);
+// Keep the hand-written sections (after the marker) when regenerating.
+const MARK = '<!-- Sections écrites à la main ci-dessous : conservées par `npm run docs`. -->';
+const old = existsSync('FACT_CHECK.md') ? readFileSync('FACT_CHECK.md', 'utf8') : '';
+const manual = old.includes(MARK) ? old.slice(old.indexOf(MARK)) : MARK + '\n';
+writeFileSync('FACT_CHECK.md', `${md.trimEnd()}\n\n${manual}`);
 
 let audio = `# Audio scripts — ready for ElevenLabs
 

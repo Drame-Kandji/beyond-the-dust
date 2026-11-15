@@ -5,6 +5,9 @@ import { Stars } from '@react-three/drei';
 import * as THREE from 'three';
 import { buildTerrain, heightAt, rng, trackFn, type TerrainSpec } from './terrain';
 import { useAppStore } from '../../store/useAppStore';
+import type { Vehicle } from '../../data/types';
+
+type EnvOpts = NonNullable<Vehicle['model']['env']>;
 
 function Rocks({ spec, count, color, minR, maxR, seed, scale = 1 }: { spec: TerrainSpec; count: number; color: string; minR: number; maxR: number; seed: number; scale?: number }) {
   const ref = useRef<THREE.InstancedMesh>(null);
@@ -57,12 +60,14 @@ function Mountains({ color, count, minD, maxD, h, seed }: { color: string; count
 }
 
 /* ---------------------------------- MOON --------------------------------- */
-export function MoonEnv() {
+export function MoonEnv({ env = {} }: { env?: EnvOpts }) {
+  const clear = env.clearRadius ?? 3.2;
   const spec = useMemo<TerrainSpec>(
-    () => ({ amp: 0.35, scale: 0.06, flatRadius: 3.2, craters: [{ x: -9, z: 6, r: 3.5 }, { x: 7, z: -11, r: 5 }, { x: 14, z: 9, r: 2.2 }, { x: -18, z: -14, r: 7 }, { x: 4, z: 18, r: 3 }] }),
-    [],
+    () => ({ amp: 0.35, scale: 0.06, flatRadius: clear, craters: [{ x: -9, z: 6, r: 3.5 }, { x: 7, z: -11, r: 5 }, { x: 14, z: 9, r: 2.2 }, { x: -18, z: -14, r: 7 }, { x: 4, z: 18, r: 3 }] }),
+    [clear],
   );
-  const geo = useMemo(() => buildTerrain(220, 180, spec, new THREE.Color('#8d8f94'), new THREE.Color('#b9bbbf'), trackFn(0.9, 0.16)), [spec]);
+  const tracks = env.tracks ?? true;
+  const geo = useMemo(() => buildTerrain(220, 180, spec, new THREE.Color('#8d8f94'), new THREE.Color('#b9bbbf'), tracks ? trackFn(0.9, 0.16) : undefined), [spec, tracks]);
   const scene = useThree((s) => s.scene);
   useEffect(() => {
     scene.background = new THREE.Color('#000000');
@@ -76,7 +81,7 @@ export function MoonEnv() {
       <mesh geometry={geo} receiveShadow>
         <meshStandardMaterial vertexColors roughness={1} />
       </mesh>
-      <Rocks spec={spec} count={420} color="#9a9ca1" minR={2.5} maxR={60} seed={7} />
+      <Rocks spec={spec} count={Math.round(420 * (env.rockiness ?? 1))} color="#9a9ca1" minR={Math.max(2.5, clear * 0.85)} maxR={60} seed={7} />
       <Mountains color="#6d6f74" count={22} minD={90} maxD={140} h={[10, 34]} seed={3} />
       <Stars radius={300} depth={60} count={1500} factor={3} saturation={0} fade speed={0} />
       {/* Earth, lit from the same side as the Sun */}
@@ -91,7 +96,7 @@ export function MoonEnv() {
         </mesh>
       </group>
       {/* Distant lunar module descent stage silhouette */}
-      <group position={[-28, 0, -20]} rotation={[0, 0.6, 0]}>
+      <group position={[-28, 0, -20]} rotation={[0, 0.6, 0]} visible={env.landerSilhouette ?? true}>
         <mesh position={[0, 1.6, 0]} castShadow>
           <boxGeometry args={[3, 1.5, 3]} />
           <meshStandardMaterial color="#c9973a" metalness={0.9} roughness={0.4} />
@@ -166,12 +171,14 @@ function DustParticles({ count, area, color, stormRef }: { count: number; area: 
   );
 }
 
-export function MarsEnv() {
+export function MarsEnv({ env = {} }: { env?: EnvOpts }) {
+  const clear = env.clearRadius ?? 2.4;
   const spec = useMemo<TerrainSpec>(
-    () => ({ amp: 0.55, scale: 0.045, flatRadius: 2.4, craters: [{ x: -12, z: -7, r: 4 }, { x: 10, z: 12, r: 6 }, { x: 22, z: -18, r: 9 }] }),
-    [],
+    () => ({ amp: 0.55, scale: 0.045, flatRadius: clear, craters: [{ x: -12, z: -7, r: 4 }, { x: 10, z: 12, r: 6 }, { x: 22, z: -18, r: 9 }] }),
+    [clear],
   );
-  const geo = useMemo(() => buildTerrain(220, 180, spec, new THREE.Color('#9c4a22'), new THREE.Color('#c97a45'), trackFn(0.6, 0.09)), [spec]);
+  const tracks = env.tracks ?? true;
+  const geo = useMemo(() => buildTerrain(220, 180, spec, new THREE.Color('#9c4a22'), new THREE.Color('#c97a45'), tracks ? trackFn(0.6, 0.09) : undefined), [spec, tracks]);
   const scene = useThree((s) => s.scene);
   const sky = useRef<THREE.ShaderMaterial>(null);
   const sun = useRef<THREE.DirectionalLight>(null);
@@ -216,9 +223,9 @@ export function MarsEnv() {
       <mesh geometry={geo} receiveShadow>
         <meshStandardMaterial vertexColors roughness={0.95} />
       </mesh>
-      <Rocks spec={spec} count={520} color="#7d3b1c" minR={1.8} maxR={55} seed={21} />
-      {/* hematite "blueberries" */}
-      <Rocks spec={spec} count={900} color="#3e3a44" minR={1.4} maxR={6} seed={5} scale={0.07} />
+      <Rocks spec={spec} count={Math.round(520 * (env.rockiness ?? 1))} color="#7d3b1c" minR={Math.max(1.8, clear * 0.8)} maxR={55} seed={21} scale={env.rockiness && env.rockiness > 1.5 ? 1.6 : 1} />
+      {/* hematite "blueberries" (Meridiani Planum only) */}
+      {(env.blueberries ?? false) && <Rocks spec={spec} count={900} color="#3e3a44" minR={1.4} maxR={6} seed={5} scale={0.07} />}
       <Mountains color="#a4552b" count={18} minD={70} maxD={130} h={[6, 18]} seed={9} />
       <DustParticles count={1400} area={24} color="#e9c49a" stormRef={storm} />
     </group>
@@ -241,7 +248,7 @@ void main(){
   gl_FragColor = vec4(col, 1.0);
 }`;
 
-export function DeepSpaceEnv() {
+export function DeepSpaceEnv(_props: { env?: EnvOpts }) {
   const scene = useThree((s) => s.scene);
   useEffect(() => {
     scene.background = new THREE.Color('#020309');
