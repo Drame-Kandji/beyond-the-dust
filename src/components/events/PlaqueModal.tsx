@@ -34,7 +34,7 @@ const INFO: Record<Zone, { title: { en: string; fr: string }; text: { en: string
   },
 };
 
-/** Simplified, original line drawing inspired by the Pioneer plaque (not a reproduction). */
+
 export function PlaqueModal() {
   const { t, l } = useT();
   const open = useAppStore((s) => s.plaqueOpen);

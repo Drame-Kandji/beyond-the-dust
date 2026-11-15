@@ -1,7 +1,8 @@
 import { AnimatePresence, motion } from 'motion/react';
-import { ArrowRight, Lock, Stamp } from 'lucide-react';
+import { ArrowRight, Lock, Stamp, Box, Map } from 'lucide-react';
 import { Starfield } from '../ui/Starfield';
 import { SolarMap } from './SolarMap';
+import { SolarMap3D } from './SolarMap3D';
 import { VehicleArt } from '../ui/VehicleArt';
 import { DESTINATIONS, VEHICLE_LIST, comingSoonFor, vehiclesFor } from '../../data';
 import type { DestinationId, Vehicle } from '../../data/types';
@@ -10,6 +11,7 @@ import { useT } from '../../i18n/useT';
 import { LanguageSwitch, SettingsMenu, SoundToggle } from '../layout/Settings';
 import { Footer } from '../layout/Footer';
 import { ping } from '../../hooks/ambient';
+import { useState, useEffect, Suspense } from 'react';
 
 const ACCENT: Record<DestinationId, string> = { moon: '#C9CCD3', mars: '#E07A3F', 'deep-space': '#7FE7F2' };
 
@@ -84,9 +86,26 @@ export function Hub() {
   const destination = useAppStore((s) => s.destination);
   const setDestination = useAppStore((s) => s.setDestination);
   const dest = DESTINATIONS.find((d) => d.id === destination)!;
+  const [is3DMode, setIs3DMode] = useState(true); // Mode 3D activé par défaut
+  const [is3DReady, setIs3DReady] = useState(false); // État de chargement 3D
+  
+  // Charger le mode 3D au montage du composant
+  useEffect(() => {
+    // Petit délai pour s'assurer que le composant est monté
+    const timer = setTimeout(() => {
+      setIs3DReady(true);
+    }, 100);
+    return () => clearTimeout(timer);
+  }, []);
+  
   const select = (d: DestinationId) => {
     ping(520);
     setDestination(d);
+  };
+  
+  const toggle3DMode = () => {
+    ping(440);
+    setIs3DMode(!is3DMode);
   };
   /** Radio-group keyboard pattern: arrows move the choice, only the checked radio is in the Tab order. */
   const onRadioKey = (e: React.KeyboardEvent<HTMLButtonElement>, i: number) => {
@@ -110,6 +129,14 @@ export function Hub() {
           Beyond <span className="text-amber-400">the</span> Dust
         </button>
         <div className="ml-auto flex items-center gap-1.5 sm:gap-2">
+          <button
+            onClick={toggle3DMode}
+            className="flex h-[44px] items-center gap-2 rounded-lg border border-white/10 bg-white/5 px-3 text-sm font-medium text-white transition hover:border-amber-400/50 hover:bg-amber-400/10"
+            title={is3DMode ? 'Passer en mode 2D' : 'Passer en mode 3D'}
+          >
+            {is3DMode ? <Box size={18} className="text-amber-400" /> : <Map size={18} />}
+            <span className="hidden sm:inline">{is3DMode ? '3D' : '2D'}</span>
+          </button>
           <LanguageSwitch />
           <SoundToggle />
           <SettingsMenu />
@@ -119,7 +146,40 @@ export function Hub() {
       <div className="relative z-10 flex flex-col lg:h-[calc(100dvh-64px)] lg:flex-row-reverse">
         {/* Map — right on desktop, top on mobile */}
         <section className="relative h-[40dvh] min-h-[260px] lg:h-auto lg:flex-[1.25]" aria-label={t('mapLabel')}>
-          <SolarMap selected={destination} onSelect={select} />
+          <AnimatePresence mode="wait">
+            {is3DMode && is3DReady ? (
+              <motion.div
+                key="3d"
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 1.05 }}
+                transition={{ duration: 0.5 }}
+                className="h-full w-full"
+              >
+                <Suspense fallback={
+                  <div className="flex h-full w-full items-center justify-center">
+                    <div className="text-center">
+                      <div className="mb-3 inline-block h-12 w-12 animate-spin rounded-full border-4 border-amber-400 border-t-transparent"></div>
+                      <div className="text-sm text-ink-300">Chargement de l'espace 3D...</div>
+                    </div>
+                  </div>
+                }>
+                  <SolarMap3D selected={destination} onSelect={select} />
+                </Suspense>
+              </motion.div>
+            ) : (
+              <motion.div
+                key="2d"
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 1.05 }}
+                transition={{ duration: 0.5 }}
+                className="h-full w-full"
+              >
+                <SolarMap selected={destination} onSelect={select} />
+              </motion.div>
+            )}
+          </AnimatePresence>
         </section>
 
         {/* Choice panel */}
