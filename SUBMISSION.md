@@ -1,6 +1,4 @@
-# Space Apps submission texts (English, ready to paste)
-
-> Submit before **Sunday 15 November 2026, 23:59 GMT**, and click **Submit for Judging** after every edit.
+# Space Apps submission texts 
 
 ## Project Name
 Beyond the Dust
