@@ -18,8 +18,11 @@ Ibrahima (telecom, radio data)
 
 **Fonts** (SIL Open Font License 1.1, via Fontsource) — Fraunces, DM Sans, JetBrains Mono
 
-**Visuals** — all 3D models, terrains, skies and line drawings (vehicle silhouettes, Pioneer plaque explainer) were
-created for this project in code. No NASA logos or mission insignia. No images of people under 18.
+**Visuals** — 3D models of the Apollo 11 Lunar Module, Pioneer 10 and the Mars 2020 Perseverance rover come from
+**NASA 3D Resources** (https://science.nasa.gov/3d-resources/), split into clickable parts by the team; the NASA and JPL
+logos printed on the Perseverance textures were painted out. Curiosity and Sojourner use the team's own Blender /
+SolidWorks models. The other machines, terrains, skies and line drawings (vehicle silhouettes, Pioneer plaque explainer)
+were created for this project in code. No NASA logos or mission insignia. No images of people under 18.
 
 **Sound** — ambient sounds and UI pings synthesised live with the Web Audio API.
 

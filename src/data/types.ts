@@ -7,7 +7,7 @@ export type Lang = 'en' | 'fr';
 export type L10n = { en: string; fr: string };
 export type Vec3 = [number, number, number];
 export type DestinationId = 'moon' | 'mars' | 'deep-space';
-export type VehicleId = 'lrv' | 'opportunity' | 'pioneer10' | 'apollo11lm' | 'sojourner' | 'curiosity';
+export type VehicleId = 'lrv' | 'opportunity' | 'pioneer10' | 'apollo11lm' | 'sojourner' | 'curiosity' | 'perseverance';
 export type ChapterId = 'who' | 'why' | 'how' | 'hardest' | 'discovered' | 'last-day' | 'today';
 
 export interface Fact {
@@ -110,6 +110,8 @@ export interface Vehicle {
     glb: string;
     scale: number;
     defaultCamera: { position: Vec3; target: Vec3 };
+    /** Procedural parts still drawn when the .glb is shown (scene items that are not in the CAD file). */
+    overlay?: string[];
     /** Environment tuning (all optional). */
     env?: { clearRadius?: number; tracks?: boolean; blueberries?: boolean; landerSilhouette?: boolean; rockiness?: number };
   };

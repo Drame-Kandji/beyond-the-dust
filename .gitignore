@@ -21,3 +21,7 @@ promt.txt
 *.blend
 *.blend1
 models-src/
+
+# NASA / team source models (converted copies are committed with simple names)
+public/models/* *
+__pycache__/

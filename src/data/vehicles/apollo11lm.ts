@@ -136,8 +136,8 @@ export const apollo11lm: Vehicle = {
       icon: 'Flame',
       name: t('Descent engine', 'Moteur de descente'),
       meshNames: ['engine', 'nozzle', 'bell', 'skirt', 'dps', 'moteur'],
-      anchor: [0.55, 0.85, 0.45],
-      camera: { position: [4.2, 0.6, 3.2], target: [0, 1.05, 0] },
+      anchor: [0.45, 0.7, 0.45],
+      camera: { position: [4.2, 0.6, 3.2], target: [0, 1.0, 0] },
       explode: [0, -0.6, 0],
       simple: t(
         "I'm a rocket engine that points down. I could push softly or strongly, like a gas pedal, so Eagle could slow down and float gently above the ground.",
@@ -160,8 +160,8 @@ export const apollo11lm: Vehicle = {
       icon: 'Anchor',
       name: t('Landing legs and footpads', 'Jambes et pieds d’atterrissage'),
       meshNames: ['leg', 'gear', 'strut', 'footpad', 'pad', 'jambe'],
-      anchor: [0, 1.45, 3.5],
-      camera: { position: [3.8, 1.9, 7.0], target: [0, 0.9, 3.4] },
+      anchor: [0.05, 1.5, 3.5],
+      camera: { position: [3.8, 1.9, 7.0], target: [0, 1.0, 3.4] },
       explode: [0, -0.25, 0],
       simple: t(
         "We are four spider legs with round feet, like big dinner plates. We spread out wide, like your arms when you balance, so Eagle wouldn't tip over.",
@@ -184,8 +184,8 @@ export const apollo11lm: Vehicle = {
       icon: 'Ruler',
       name: t('Contact probes', 'Sondes de contact'),
       meshNames: ['probe', 'sonde', 'contact'],
-      anchor: [-5.5, 0.25, -0.3],
-      camera: { position: [-7.8, 1.4, 1.8], target: [-5.1, 0.15, -0.1] },
+      anchor: [-4.7, 0.1, 0.05],
+      camera: { position: [-7.5, 1.4, 2.0], target: [-4.8, 0.1, 0.2] },
       explode: [0, 0, 0],
       simple: t(
         "I'm a long thin feeler hanging under a footpad, like a cat's whisker. When I touched the Moon, a light switched on inside: \"Contact light!\"",
@@ -209,8 +209,8 @@ export const apollo11lm: Vehicle = {
       icon: 'Footprints',
       name: t('Ladder and porch', 'Échelle et plateforme'),
       meshNames: ['ladder', 'porch', 'rung', 'echelle'],
-      anchor: [2.95, 2.25, 0.3],
-      camera: { position: [7.4, 2.8, 2.8], target: [3.2, 1.8, 0] },
+      anchor: [3.35, 2.2, 0.2],
+      camera: { position: [7.4, 2.8, 2.8], target: [3.2, 1.9, 0] },
       explode: [0.35, 0, 0],
       simple: t(
         "I'm the little porch and ladder on the front leg. Neil Armstrong climbed down me, jumped onto the footpad, and took the first human step on the Moon.",
@@ -233,8 +233,8 @@ export const apollo11lm: Vehicle = {
       icon: 'Frame',
       name: t('The plaque', 'La plaque'),
       meshNames: ['plaque', 'plate'],
-      anchor: [3.32, 1.8, 0],
-      camera: { position: [4.9, 3.2, 1.1], target: [3.27, 1.77, 0] },
+      anchor: [3.47, 1.75, 0],
+      camera: { position: [5.2, 2.4, 1.0], target: [3.43, 1.75, 0] },
       explode: [0.25, 0.1, 0],
       simple: t(
         "I'm a small metal sign on the leg behind the ladder. I'm a message for whoever visits one day: humans came here in peace.",
@@ -252,7 +252,7 @@ export const apollo11lm: Vehicle = {
       icon: 'Hexagon',
       name: t('Descent stage body', 'Corps de l’étage de descente'),
       meshNames: ['descent', 'body', 'stage', 'octagon', 'foil', 'corps'],
-      anchor: [1.62, 2.6, 1.62],
+      anchor: [1.58, 2.5, 1.58],
       camera: { position: [6.8, 4.2, 5.8], target: [0, 2.2, 0] },
       explode: [0, 0, 0],
       simple: t(
@@ -276,8 +276,8 @@ export const apollo11lm: Vehicle = {
       icon: 'Fuel',
       name: t('Propellant tanks', 'Réservoirs d’ergols'),
       meshNames: ['tank', 'propellant', 'fuel', 'oxidizer', 'reservoir'],
-      anchor: [-1.35, 2.5, -1.35],
-      camera: { position: [-5.6, 4.4, -4.8], target: [0, 2.3, 0] },
+      anchor: [-1.2, 3.42, -1.2],
+      camera: { position: [-5.6, 4.6, -4.8], target: [0, 2.4, 0] },
       explode: [0, 0.3, 0],
       simple: t(
         "We are big tanks hidden inside, like a car's fuel tank. Switch on X-ray to see us! Two of us held fuel and two held the oxidizer that makes it burn.",
@@ -300,8 +300,8 @@ export const apollo11lm: Vehicle = {
       icon: 'Package',
       name: t('Equipment bay (MESA)', 'Compartiment à matériel (MESA)'),
       meshNames: ['mesa', 'bay', 'stowage', 'equipment', 'quad'],
-      anchor: [1.95, 1.7, -1.95],
-      camera: { position: [5.6, 2.6, -4.8], target: [1.7, 2.0, -1.7] },
+      anchor: [1.62, 2.4, -1.62],
+      camera: { position: [5.6, 2.8, -4.8], target: [1.5, 2.3, -1.5] },
       explode: [0.3, 0, -0.3],
       simple: t(
         "I'm a storage cupboard folded into the side of the stage, like the trunk of a car. I held the tools, the sample boxes and the TV camera.",
@@ -320,7 +320,7 @@ export const apollo11lm: Vehicle = {
       icon: 'Rocket',
       name: t('Launch pad for the ascent stage', 'Rampe de lancement de l’étage de remontée'),
       meshNames: ['deck', 'top', 'interstage', 'launch', 'ascent'],
-      anchor: [0, 3.45, 0],
+      anchor: [0, 3.42, 0],
       camera: { position: [4.8, 6.8, 3.8], target: [0, 3.1, 0] },
       explode: [0, 0.5, 0],
       simple: t(
@@ -462,6 +462,7 @@ export const apollo11lm: Vehicle = {
   model: {
     glb: 'models/apollo11lm.glb',
     scale: 1,
+    overlay: ['propellant-tanks', 'easep-seismometer', 'laser-retroreflector'],
     defaultCamera: { position: [7.5, 5.4, 11.5], target: [0, 1.4, -1.0] },
     env: { clearRadius: 6, tracks: false, landerSilhouette: false },
   },

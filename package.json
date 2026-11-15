@@ -12,7 +12,9 @@
     "docs": "node scripts/gen-docs.mjs",
     "audio": "node scripts/gen-audio.mjs",
     "model": "node scripts/stl-to-glb.mjs",
-    "ar-models": "node scripts/export-ar-models.mjs"
+    "ar-models": "node scripts/export-ar-models.mjs",
+    "sw-models": "python3 scripts/solidworks/build_models.py public/models models-src/raw && node scripts/solidworks/finalize-glb.mjs models-src/raw/apollo11lm.raw.glb scripts/solidworks/apollo11lm-sw.glb && node scripts/solidworks/finalize-glb.mjs models-src/raw/sojourner.raw.glb public/models/sojourner.glb",
+    "nasa-models": "${BLENDER:-blender} -b --disable-autoexec --python scripts/blender-prepare-nasa-glb.py -- 'public/models/Apollo Lunar Module.glb' public/models/apollo11lm.glb apollo11lm scripts/solidworks/apollo11lm-sw.glb && ${BLENDER:-blender} -b --disable-autoexec --python scripts/blender-prepare-nasa-glb.py -- 'public/models/Pioneer 10.glb' public/models/pioneer10.glb pioneer10 && ${BLENDER:-blender} -b --disable-autoexec --python scripts/blender-prepare-nasa-glb.py -- 'public/models/Mars 2020 Perseverance Rover.glb' public/models/perseverance.glb perseverance"
   },
   "dependencies": {
     "@fontsource-variable/fraunces": "^5.3.0",

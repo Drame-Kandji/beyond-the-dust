@@ -7,7 +7,7 @@ import { useFrame } from '@react-three/fiber';
 import { useGLTF } from '@react-three/drei';
 import * as THREE from 'three';
 import type { Part, Vehicle } from '../data/types';
-import { PartRegistryProvider, usePartRegistry, usePointerHandlers, type Registry } from './parts';
+import { PartFilter, PartRegistryProvider, usePartRegistry, usePointerHandlers, type Registry } from './parts';
 import { LRVModel } from './procedural/LRVModel';
 import { OpportunityModel } from './procedural/OpportunityModel';
 import { Pioneer10Model } from './procedural/Pioneer10Model';
@@ -17,7 +17,12 @@ import { CuriosityModel } from './procedural/CuriosityModel';
 import { Hotspots } from './Hotspots';
 import { useAppStore } from '../store/useAppStore';
 
-const PROCEDURAL = { lrv: LRVModel, opportunity: OpportunityModel, pioneer10: Pioneer10Model, apollo11lm: Apollo11LMModel, sojourner: SojournerModel, curiosity: CuriosityModel };
+const PROCEDURAL = { lrv: LRVModel, opportunity: OpportunityModel, pioneer10: Pioneer10Model, apollo11lm: Apollo11LMModel, sojourner: SojournerModel, curiosity: CuriosityModel, perseverance: PerseverancePlaceholder };
+
+/** Perseverance has no procedural twin: show nothing while its real .glb loads. */
+function PerseverancePlaceholder() {
+  return null;
+}
 const DRACO = `${import.meta.env.BASE_URL}draco/`;
 
 /** Checks that a real glTF binary exists (dev servers may answer index.html for missing files). */
@@ -47,8 +52,11 @@ class GlbBoundary extends Component<{ fallback: ReactNode; children: ReactNode }
 
 export function matchPart(name: string, parts: Part[]): string | null {
   const n = name.toLowerCase();
+  // An exact part id always wins (e.g. 'ascent-stage-launchpad' must not match the 'stage' regex of another part).
+  const exact = parts.find((p) => p.id === n);
+  if (exact) return exact.id;
   for (const p of parts) {
-    if (n === p.id || p.meshNames.some((m) => new RegExp(m, 'i').test(n))) return p.id;
+    if (p.meshNames.some((m) => new RegExp(m, 'i').test(n))) return p.id;
   }
   return null;
 }
@@ -113,6 +121,11 @@ export function VehicleModel({ vehicle }: { vehicle: Vehicle }) {
           <GlbBoundary fallback={fallback}>
             <Suspense fallback={fallback}>
               <GlbModel url={glbUrl} vehicle={vehicle} registry={registry} />
+              {vehicle.model.overlay && (
+                <PartFilter only={vehicle.model.overlay}>
+                  <Procedural />
+                </PartFilter>
+              )}
             </Suspense>
           </GlbBoundary>
         ) : (

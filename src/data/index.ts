@@ -5,12 +5,13 @@ import { pioneer10 } from './vehicles/pioneer10';
 import { apollo11lm } from './vehicles/apollo11lm';
 import { sojourner } from './vehicles/sojourner';
 import { curiosity } from './vehicles/curiosity';
+import { perseverance } from './vehicles/perseverance';
 
 const t = (en: string, fr: string) => ({ en, fr });
 
-export const VEHICLES: Record<VehicleId, Vehicle> = { lrv, opportunity, pioneer10, apollo11lm, sojourner, curiosity };
+export const VEHICLES: Record<VehicleId, Vehicle> = { lrv, opportunity, pioneer10, apollo11lm, sojourner, curiosity, perseverance };
 /** Order = order in the hub lists (per destination). */
-export const VEHICLE_LIST: Vehicle[] = [apollo11lm, lrv, sojourner, opportunity, curiosity, pioneer10];
+export const VEHICLE_LIST: Vehicle[] = [apollo11lm, lrv, sojourner, opportunity, curiosity, perseverance, pioneer10];
 
 export const DESTINATIONS: Destination[] = [
   {

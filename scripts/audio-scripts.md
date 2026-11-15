@@ -64,6 +64,18 @@ _123 words_
 
 Il était une fois un robot grand comme une voiture qui tombait vers Mars. Il était trop lourd pour des airbags, alors une grue volante le déposa doucement au bout de câbles dans un cratère géant. Il s’appelait Curiosity. Au milieu du cratère se dressait une montagne faite de couches de roche, comme les pages d’un livre. Curiosity se mit à grimper et à lire. Il fora des pierres, les visa au laser et chauffa leur poussière dans ses petits laboratoires. Il apprit qu’il y a très longtemps, un lac brillait ici. Ses roues se trouèrent, alors il apprit à rouler en douceur. Ses amis sur Mars s’endormirent un à un. Mais Curiosity grimpe encore et, chaque jour, il appelle toujours la maison.
 
+## Perseverance — EN  →  `public/audio/perseverance_en.mp3`
+
+_157 words_
+
+Once upon a time, a robot as big as a car fell toward Mars, with a tiny helicopter folded under its belly. A flying crane lowered it on cables into a crater where, long ago, a lake shone and a river flowed. Its name was Perseverance. It zapped rocks with its laser, scanned them grain by grain, and listened to the wind with its microphones. Its little friend Ingenuity flew, the first flight on another world. The robot even made a little oxygen from the Martian air. When it found a very special rock, it cut out a core and sealed it in a tube, like a message in a bottle. The first tube came back empty, but the robot did not give up: it is called Perseverance, after all. Today it has climbed out of its crater, it has driven farther than any rover before it, and its tubes are waiting for the explorers of tomorrow.
+
+## Perseverance — FR  →  `public/audio/perseverance_fr.mp3`
+
+_159 words_
+
+Il était une fois un robot grand comme une voiture qui tombait vers Mars, avec un tout petit hélicoptère replié sous le ventre. Une grue volante le déposa au bout de câbles dans un cratère où, il y a très longtemps, brillait un lac et coulait une rivière. Il s’appelait Perseverance. Il visa les roches au laser, les scanna grain par grain et écouta le vent avec ses micros. Son petit ami Ingenuity s’envola : le premier vol sur un autre monde. Le robot fabriqua même un peu d’oxygène avec l’air martien. Quand il trouvait une roche très spéciale, il en découpait une carotte et la scellait dans un tube, comme un message dans une bouteille. Le premier tube revint vide, mais le robot ne renonça pas : après tout, il s’appelle Perseverance. Aujourd’hui, il est sorti de son cratère, il a roulé plus loin que tous les rovers avant lui, et ses tubes attendent les explorateurs de demain.
+
 ## Pioneer 10 — EN  →  `public/audio/pioneer10_en.mp3`
 
 _115 words_

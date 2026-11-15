@@ -132,8 +132,8 @@ export const sojourner: Vehicle = {
       icon: 'Sun',
       name: t('Solar panel', 'Panneau solaire'),
       meshNames: ['solar', 'panel', 'panneau', 'cell'],
-      anchor: [0.05, 0.275, 0.08],
-      camera: { position: [0.55, 0.8, 0.6], target: [0, 0.25, 0] },
+      anchor: [0.05, 0.33, 0.08],
+      camera: { position: [0.55, 0.85, 0.6], target: [0, 0.25, 0] },
       explode: [0, 0.16, 0],
       simple: t(
         "I'm the rover’s flat roof, covered in solar cells. I'm about the size of a big pizza box. Sunlight landing on me became electricity.",
@@ -156,8 +156,8 @@ export const sojourner: Vehicle = {
       icon: 'CircleDot',
       name: t('Six wheels', 'Six roues'),
       meshNames: ['wheel', 'roue', 'tire', 'tyre'],
-      anchor: [0.25, 0.065, 0.245],
-      camera: { position: [0.6, 0.3, 0.75], target: [0.1, 0.07, 0.18] },
+      anchor: [0.261, 0.075, 0.245],
+      camera: { position: [0.65, 0.3, 0.75], target: [0.15, 0.07, 0.2] },
       explode: [0, 0, 0.1],
       simple: t(
         'We are six small metal wheels, each one with its own motor. We have little teeth, called cleats, to grip the dusty ground, like the studs on football boots.',
@@ -180,8 +180,8 @@ export const sojourner: Vehicle = {
       icon: 'Spline',
       name: t('Rocker-bogie suspension', 'Suspension « rocker-bogie »'),
       meshNames: ['rocker', 'bogie', 'suspension', 'leg'],
-      anchor: [-0.125, 0.14, 0.175],
-      camera: { position: [0.1, 0.35, 0.85], target: [-0.05, 0.13, 0.15] },
+      anchor: [-0.1, 0.2, 0.255],
+      camera: { position: [0.1, 0.35, 0.9], target: [-0.05, 0.17, 0.2] },
       explode: [0, 0, 0.06],
       simple: t(
         'My legs bend like a seesaw. When one wheel climbs a rock, the others stay on the ground, so I don’t tip over.',
@@ -200,8 +200,8 @@ export const sojourner: Vehicle = {
       icon: 'Atom',
       name: t('APXS: rock "sniffer"', 'APXS : le « renifleur » de roches'),
       meshNames: ['apxs', 'spectro', 'alpha', 'xray'],
-      anchor: [-0.335, 0.075, -0.04],
-      camera: { position: [-0.85, 0.35, 0.4], target: [-0.3, 0.1, -0.04] },
+      anchor: [-0.352, 0.25, 0],
+      camera: { position: [-0.9, 0.4, 0.4], target: [-0.3, 0.24, 0] },
       explode: [-0.14, 0, 0],
       simple: t(
         "I'm the rover’s nose, on a little arm at the back. Sojourner backed up to a rock, I pressed against it, and I could tell what it was made of, like iron or silicon.",
@@ -221,8 +221,8 @@ export const sojourner: Vehicle = {
       icon: 'Camera',
       name: t('Rover cameras', 'Caméras du rover'),
       meshNames: ['camera', 'cam', 'lens', 'eye'],
-      anchor: [0.222, 0.205, 0.035],
-      camera: { position: [0.8, 0.38, 0.35], target: [0.2, 0.19, 0] },
+      anchor: [0.222, 0.263, 0.035],
+      camera: { position: [0.8, 0.38, 0.35], target: [0.2, 0.25, 0] },
       explode: [0.1, 0.04, 0],
       simple: t(
         'I have two little eyes at the front and one at the back. The front ones see in black and white; the back one sees in colour.',
@@ -241,8 +241,8 @@ export const sojourner: Vehicle = {
       icon: 'Scan',
       name: t('Hazard lasers', 'Lasers anti-obstacles'),
       meshNames: ['laser', 'stripe', 'hazard', 'striper'],
-      anchor: [0.222, 0.162, -0.07],
-      camera: { position: [0.8, 0.25, -0.3], target: [0.2, 0.15, -0.02] },
+      anchor: [0.215, 0.213, -0.06],
+      camera: { position: [0.8, 0.25, -0.3], target: [0.2, 0.21, 0] },
       explode: [0.1, -0.03, 0],
       simple: t(
         'We are tiny lasers at the front. We draw lines of light on the ground. If a line bends, there is a rock or a hole, and the rover stops, like feeling the way with a cane.',
@@ -262,8 +262,8 @@ export const sojourner: Vehicle = {
       icon: 'Thermometer',
       name: t('Warm Electronics Box', 'Boîte électronique chaude'),
       meshNames: ['body', 'web', 'box', 'chassis'],
-      anchor: [0.0, 0.19, 0.142],
-      camera: { position: [0.35, 0.45, 0.8], target: [0, 0.18, 0] },
+      anchor: [0.0, 0.24, 0.158],
+      camera: { position: [0.35, 0.45, 0.8], target: [0, 0.22, 0] },
       explode: [0, 0, 0],
       simple: t(
         'Mars nights are colder than any freezer. I’m the rover’s body, an insulated box like a lunch cooler, keeping its computer and batteries warm.',
@@ -282,8 +282,8 @@ export const sojourner: Vehicle = {
       icon: 'Antenna',
       name: t('Radio antenna (UHF modem)', 'Antenne radio (modem UHF)'),
       meshNames: ['uhf', 'whip', 'antenna', 'antenne'],
-      anchor: [-0.14, 0.5, 0.12],
-      camera: { position: [-0.6, 0.65, 0.8], target: [-0.14, 0.4, 0.12] },
+      anchor: [0.0, 0.33, 0.21],
+      camera: { position: [-0.3, 0.7, 0.8], target: [0, 0.3, 0.2] },
       explode: [0, 0.14, 0],
       simple: t(
         "I'm a thin whip antenna. I couldn’t call Earth myself: I sent my messages to the lander, like passing a note to a friend who has a phone.",
@@ -451,7 +451,8 @@ export const sojourner: Vehicle = {
   model: {
     glb: 'models/sojourner.glb',
     scale: 1,
-    defaultCamera: { position: [1.6, 1.45, 2.5], target: [-0.75, 0.35, -0.3] },
+    overlay: ['airbags', 'lander-petals', 'imp-camera', 'ramps'],
+    defaultCamera: { position: [1.25, 0.95, 1.75], target: [-0.45, 0.2, -0.2] },
     env: { clearRadius: 3.4, tracks: false, blueberries: false, rockiness: 2 },
   },
   lesson: {

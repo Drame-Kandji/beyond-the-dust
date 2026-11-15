@@ -50,18 +50,18 @@ export function AskPanel({ vehicle }: { vehicle: Vehicle }) {
         {msgs.map((m, i) => (
           <div key={i} className={`flex gap-2 ${m.who === 'me' ? 'justify-end' : ''}`}>
             {m.who === 'bot' && (
-              <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-white/5 text-amber-300">
+              <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full border border-white/10 bg-white/[0.06] text-amber-300">
                 <VehicleArt id={vehicle.id} className="h-6 w-7" />
               </span>
             )}
-            <p className={`max-w-[85%] rounded-2xl px-4 py-2.5 text-[0.98rem] leading-relaxed ${m.who === 'me' ? 'bg-amber-400 text-[#1a1206]' : 'border border-white/10 bg-white/[0.05]'}`}>{m.text}</p>
+            <p className={`max-w-[85%] rounded-2xl px-4 py-2.5 text-[1rem] leading-relaxed ${m.who === 'me' ? 'rounded-br-md bg-amber-400 font-medium text-[#1a1206]' : 'rounded-tl-md border border-white/10 bg-white/[0.06] text-ink-100'}`}>{m.text}</p>
           </div>
         ))}
         <div ref={end} />
       </div>
-      <div className="mt-4 flex flex-wrap gap-2">
+      <div className="mt-5 flex flex-wrap gap-2">
         {vehicle.faq.map((f) => (
-          <button key={f.q.en} className="btn py-1 text-sm" onClick={() => ask(l(f.q))}>
+          <button key={f.q.en} className="btn h-auto py-2 text-left text-[0.875rem] whitespace-normal text-ink-100" onClick={() => ask(l(f.q))}>
             {l(f.q)}
           </button>
         ))}
@@ -73,7 +73,7 @@ export function AskPanel({ vehicle }: { vehicle: Vehicle }) {
           ask(input);
         }}
       >
-        <input value={input} onChange={(e) => setInput(e.target.value)} placeholder={t('askPlaceholder')} aria-label={t('askPlaceholder')} className="min-h-[44px] flex-1 rounded-full border border-white/15 bg-white/[0.04] px-4 text-ink-100 placeholder:text-ink-500 focus:border-amber-400" />
+        <input value={input} onChange={(e) => setInput(e.target.value)} placeholder={t('askPlaceholder')} aria-label={t('askPlaceholder')} className="min-h-[48px] min-w-0 flex-1 rounded-full border border-white/15 bg-black/30 px-4 text-[1rem] text-ink-100 placeholder:text-ink-300 focus:border-amber-400" />
         <button className="btn btn-primary btn-icon" aria-label="Send">
           <Send size={18} />
         </button>
